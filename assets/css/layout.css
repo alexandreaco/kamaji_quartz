@@ -1,0 +1,37 @@
+
+
+/*	layout.css
+ *
+ *	Author: @alexandreaco
+ *	Date: 4/10/2014
+ * 
+ */
+ 
+#container {
+	width: 945px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 50px;
+}
+
+#header {
+	background: url('../images/Header.jpg');
+	width: 945px;
+	height: 124px;
+}
+
+.content {
+	background: url('../images/Body.jpg');
+	width: 945px;
+	height: 945px;
+}
+
+.mysite {
+	background: url('../images/webBody.jpg');
+}
+
+#footer {
+	background: url('../images/Footer.jpg');
+	width: 945px;
+	height: 100px;
+}
