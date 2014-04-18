@@ -1,13 +1,10 @@
 <?php
-
 	/*	model.php
 	 *
 	 *	Author: Erik Geil
 	 *	Date: 4/18/14
 	 * 
 	 */
-	 
-<?php
 	class Model{
 
 		private function connect() {
