@@ -92,7 +92,7 @@
 			return "The following database has been created:<br><br><b>$databaseName</b>";
 		}
 
-		function deleteDatabase($databaseName){
+		function deleteDatabase($databaseName, $path){
 			$mysqli = new mysqli("localhost", "root","");
 
 			if ($mysqli->connect_error)
@@ -106,7 +106,9 @@
 			$mysqli->query($query);
 			$mysqli->close();
 
-			rmdir("pics");
+			if(is_dir("$path/assets/profPic")){
+				rmdir("$path/assets/profPic");
+			}
 
 			return "The following database has been deleted:<br><br><b>$databaseName</b>";
 		}
