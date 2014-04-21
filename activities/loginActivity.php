@@ -96,11 +96,11 @@
 			//echo "<link rel='stylesheet' type='text/css/' href='css/style.css' />";
 			//echo "</head>";
 	 		
-			echo "<body>";
-			echo "<div id='container'>";
+			//echo "<body>";
+			//echo "<div id='container'>";
 				//<div id='header'></div>
 		
-			echo"	<div id='content'>";
+			//echo"	<div id='content'>";
 				echo "<div id='loginerrormessage'></div>";
 				
 				echo "<form name='input' action='login.php' method='post' id='loginform'>";
@@ -115,7 +115,7 @@
 				echo "
 				<a href='register.php'>New to Quartz?</a><br>
 				</div>";
-				echo "</div>"; //Content Div
+				//echo "</div>"; //Content Div
 				
 				//echo "<div id='footer'></div>";
 				//echo "</body>";
