@@ -50,27 +50,29 @@
 	 	// show
 	 	function show() {
 	 	
+			$displayname = "Bob";//$model->getDisplayname();
+			
+			$jobtitle = $this->model->getJobtitle($displayname);
+			$address = $this->model->getAddress($displayname);
+			$telephone = $this->model->getTelephone($displayname);
+			$fax = $this->model->getFax($displayname);
+			$officehours = $this->model->getOfficehours($displayname);
+			$biography =   $this->model->getBiography($displayname);
+			$research = $this->model->getResearch($displayname);
+			$publications = $this->model->getPublications($displayname);
+			$personalinfo = $this->model->getPersonal($displayname);
+		
 	 		$this->page->beginDoc();
-
-				echo "<head>
+			
+			
+						
+				echo "
 					
 					<script>
 					
 					function bodyLoad()
-					{ ";
-						$displayname = $model->getDisplayname();
-						$jobtitle = $model->getJobtitle();
-						$address = $model->getAddress();
-						$telephone = $model->getTelephone();
-						$fax = $model->getFax();
-						$officehours = $model->getOfficehours();
-						$biography =   $model->getBiography();
-						$research = $model->getResearch();
-						$publications = $model->getPublications();
-						$personalinfo = $model->getPersonalInfo();
-						
-						echo "
-							document.getElementById('welcome_title').innerHTML='Welcome, $displayname';";
+					{ 
+						document.getElementById('welcome_title').innerHTML='Welcome, $displayname';";
 							
 						$websiteOn = false; //MODELSTUB
 						if ($websiteOn)
@@ -165,7 +167,7 @@
 					
 					</script>
 				
-				</head>";
+				";
 	 		
 			
 			echo "<div id='content'>
