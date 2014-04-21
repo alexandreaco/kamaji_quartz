@@ -28,3 +28,9 @@ a, a:hover, a:active, a:visited {
 	color: red;
 	
 }
+
+.title {
+	text-align:left;
+	color: #FFFFFF;
+	font-weight:300;
+}
