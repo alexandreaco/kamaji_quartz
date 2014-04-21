@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 	/*	registerActivity.php
 	 *
 	 *	Author: Mike Bartlett
@@ -28,7 +28,6 @@
 	 
 	 	// run
 		function run() {
-			
 			$this->process();
 			$this->show();
 			
@@ -137,18 +136,23 @@
 	 	
 	 		$this->page->beginDoc();
 	 		
-	 		echo "<head>";
-			echo "<link rel='stylesheet' type='text/css' href='customCSS.css'>";
-			include 'header.php';
-			echo "</head>";
+	 		print("
+	 		 <head>
+			<link rel='stylesheet' type='text/css' href='assets/css/layout.css'>
+			<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+			</head>
+			");
 			
 			$name = isset($_POST['givenName'])?$_POST['givenName']:null;
 			//$name = $_POST['givenName'];
 			$email = isset($_POST['givenEmail'])?$_POST['givenEmail']:null;
-			echo "<body>";
-			echo "<div class='content'>";
-			echo "<form id='reg' name='input' action='register.php' method='post'>";
-			echo "
+			
+			print("
+			
+			
+			<div class='content'>
+			
+			<form id='reg' name='input' action='register.php' method='post'>
 			  <label class='reg' for='givenName'>Name:</label>
 			  <input type='text' name='givenName'>
 			  <br>
@@ -160,14 +164,14 @@
 			  <br>
 			  <label class='reg' for='givenPassword2'>Pass2:</label>
 			  <input type='password' name='givenPassword2'>
-			  <br>";
-			echo "<input type='submit' value='Submit'>";
-			echo "</form>";
-			echo "<div id='errormessage'></div>";
-			echo "</div>";
-			echo "</body>";
-			include 'footer.php';
-	 		
+			  <br>
+			<input type='submit' value='Submit'>
+			</form>
+			
+			<div id='errormessage'></div>
+			
+			</div>
+	 		");
 	 		$this->page->endDoc();
 	 		
 	 	
