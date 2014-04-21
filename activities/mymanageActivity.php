@@ -49,8 +49,16 @@
 	 	
 	 	// show
 	 	function show() {
-	 	
-			$displayname = "Bob";//$model->getDisplayname();
+			$displayname;
+			if( isset($_GET['user']))
+			{
+				$displayname = $_GET['user'];
+			}
+			else
+			{
+				$displayname = "Bob";
+				//Header to Login;
+			}
 			
 			$jobtitle = $this->model->getJobtitle($displayname);
 			$address = $this->model->getAddress($displayname);
