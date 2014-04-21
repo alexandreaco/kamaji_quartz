@@ -73,6 +73,36 @@
 	margin-top:70px;
 }
  /* end of registration */
+ 
+ /* start of login css*/
+ 
+ #loginform{
+	margin-top: 100px;
+	margin-bottom: 100px;
+	margin-left: 300px;
+	margin-right: 300px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-style: solid;
+	border-width: 3px;
+}
+
+#loginerrormessage{
+	margin-left: 300px;
+	margin-right: 300px;
+	color: red;
+	text-align: center;
+}
+
+#loginlinkbox{
+	padding-bottom: 15px;
+	}
+ 
+ /* end of login css*/
+ 
+ 
 
 .mysite {
 	background: url('../images/webBody.jpg');
