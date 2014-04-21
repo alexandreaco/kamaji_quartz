@@ -1,46 +1,33 @@
 <?php
-error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-	/*	registerActivity.php
-	 *
-	 *	Author: Mike Bartlett
-	 *	Date: 4/18/2014
-	 * 
-	 */
-
-	 
+ 
 	 class RegistrationActivity {
-	 
-	 	// data members
 	 	var $page;
 	 	var $model;
+		var $emptyFlag;
 	 
-	 
-	 	// constructor
+
 	 	function __construct() {
 	 		
 	 		$this->model = new Model();
-	 		
 	 		$this->page = new Page("Register");
-	 		
 	 		
 	 	}
 	 
 	 
-	 	// run
 		function run() {
+			
 			$this->process();
 			$this->show();
 			
 		}
 	 
 	 
-	 	// get input
 	 	function getInput() {
 	 	
 	 	}
 	 	
 	 	
-	 	// process
+	 	
 	 	function process() {
 	 	
 			if (isset($_POST["givenName"]) && $_POST["givenName"] != "")
@@ -50,11 +37,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 					$emailInUse = $this->model->checkEmail($_POST["givenEmail"]);
 					if($emailInUse)
 					{
-						echo "<script>
-								document.getElementById('errormessage').innerHTML = 'EMAIL IS ALREADY IN USE';
-								</script>";
-						//echo "EMAIL IS ALREADY IN USE";
-						//CREATE ERROR, REDO
+						$this->emptyFlag = "Error: Email already in use";
 					}
 					else
 					{
@@ -69,63 +52,42 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 								$stringsEqual = ($pass1 == $pass2);
 								if($stringsEqual)
 								{
-									//echo "VALID AND UNUSED ACCOUNT! WE'RE GOOD TO GO!<br>";
-									echo "<script>
-										document.getElementById('errormessage').innerHTML = 'VALID AND UNUSED ACCOUNT! GOOD TO GO!<br>';
-										</script>";
-									//HERE'S AN ACTUAL CALL TO THE MODEL API
-									//$this->model->createUser($_POST["givenName"],
-															//$_POST["givenEmail"],
-															//$_POST["givenPassword"]);
+									
+									$this->emptyFlag = "";
+									
+									
+									$this->model->createUser($_POST["givenName"],
+															 $_POST["givenEmail"],
+															 $_POST["givenPassword"]);
+									
 									$this->generateConfirmationEmail();
 								}
 								else
 								{
-									echo "<script>
-										document.getElementById('errormessage').innerHTML = 'PASSWORDS DONT MATCH';
-										</script>";
-									echo "PASSWORDS DON'T MATCH";
-									//$this->showRegisterForm();
+									$this->emptyFlag = "Error: Passwords don't match";
 								}
 							}
 							else
 							{
-								echo "<script>
-									document.getElementById('errormessage').innerHTML = 'PLEASE RETYPE THE PASSWORD';
-									</script>";
-								//echo "PLEASE RETYPE THE PASSWORD";
-								//SEND ERROR, CONFIRM PASSWORD
+								$this->emptyFlag = "Error: Please retype your password";
 							}
 						}
 						else
 						{
-							echo "<script>
-								document.getElementById('errormessage').innerHTML = 'PLEASE ENTER A PASSWORD';
-								</script>";
-							//echo "PLEASE ENTER A PASSWORD";
-							//SEND ERROR, ENTER PASSWORD
+							$this->emptyFlag = "Error: Please enter a password";
 						}
 					}
 				}
 				else
 				{
-					echo "<script>
-					document.getElementById('errormessage').innerHTML = 'PLEASE ENTER AN EMAIL';
-					</script>";
-					//echo "PLEASE ENTER AN EMAIL";
-					//SEND ERROR, NEED EMAIL
-					
+					$this->emptyFlag = "Error: Please enter an email";
 				}
 			}
 			else
 			{
 				if( isset($_POST['givenEmail']) || isset($_POST['givenPassword']) || isset($_POST['givenPassword2']))
 				{
-					echo "<script>
-							document.getElementById('errormessage').innerHTML = 'PLEASE ENTER A VALID NAME';
-							</script>";
-					//echo "PLEASE ENTER A VALID NAME";
-				//CREATE ERROR, NAME
+					$this->emptyFlag = "Error: Please enter a valid name";
 				}
 			}
 	 	}
@@ -136,58 +98,58 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 	 	
 	 		$this->page->beginDoc();
 	 		
-	 		print("
-	 		 <head>
-			<link rel='stylesheet' type='text/css' href='assets/css/layout.css'>
-			<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-			</head>
+	 		
+			if($this->emptyFlag != "") {
+			print("
+			<div id='error'>
+			$this->emptyFlag
+			</div>
 			");
+			}
 			
-			$name = isset($_POST['givenName'])?$_POST['givenName']:null;
-			//$name = $_POST['givenName'];
-			$email = isset($_POST['givenEmail'])?$_POST['givenEmail']:null;
 			
 			print("
-			
-			
-			<div class='content'>
-			
-			<form id='reg' name='input' action='register.php' method='post'>
-			  <label class='reg' for='givenName'>Name:</label>
-			  <input type='text' name='givenName'>
+			<div id='reg'>
+			<br> <br>
+			<form name='input' action='register.php' method='post'>
+			  Name: <input type='text' name='givenName'>
 			  <br>
-			  <label class='reg' for='givenEmail'>Email:</label>
-			  <input type='text' name='givenEmail' value=$email>
 			  <br>
-			  <label class='reg' for='givenPassword'>Pass:</label>
-			  <input type='password' name='givenPassword'>
+			  Email: <input type='text' name='givenEmail' value=$email> 
 			  <br>
-			  <label class='reg' for='givenPassword2'>Pass2:</label>
-			  <input type='password' name='givenPassword2'>
+			  <br>
+ 			  Password: <input type='password' name='givenPassword'>
+			  <br>
+			  <br>
+			  Retype Password: <input type='password' name='givenPassword2'>
+			  <br>
 			  <br>
 			<input type='submit' value='Submit'>
 			</form>
-			
-			<div id='errormessage'></div>
-			
 			</div>
 	 		");
-	 		$this->page->endDoc();
 	 		
-	 	
+	 		$this->page->endDoc();
 	 	}
+		
 		
 		function generateConfirmationEmail()
 		{
-			echo "<br>
-			Hooray! You've reached the confirmation email! <br>
-			<a href='ghostLogin.php'>Click Here to confirm your account and go to your MyManage Page!</a>
-			<br>
-			<a href='login.php'>You can also use this link at any time to Log-In normally</a>";
+			$to = $_POST["givenEmail"];
+    		$subject = "Quartz Registration Information";
+    		$message = "Please click ";
+    		$message .= "<a href='login.php'>here</a>";
+    		$message .= "to login.";
+    		$header = "From: webmaster@quartz.com";
+    		
+    		mail($to,$subject,$message, $header);
+		
+			print(
+			"
+			<div id='confirmationEmail'>
+			A confirmation email has been sent to your email address.  Please exit this page.
+			</div>
+			");
 		}
-	 
-	 
 	 }
-
-
 ?>
