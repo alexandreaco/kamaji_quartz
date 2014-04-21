@@ -40,9 +40,8 @@
 	*/
 }
 
-/* registration css */
 #reg {
-	background: url('images/Register.jpg');
+	background: url('../images/Register.jpg');
 	width: 650px;
 	height: 350px;
 	padding: 70px 0 0 50px;
@@ -52,27 +51,34 @@
 	margin-top:50px;
 	margin-left:auto;
 	margin-right:auto;
-	font-family:Tahoma; 
-	font-size: 11px; 
-
+	font-size: 17px; 
 }
 
-#reg input {
-	text-align:left;
-	width: 200px;
+#confirmationEmail {
+position: absolute;
+width: 600px;
+height: 41px;
+text-align: center;
+font-size: 16px;
+margin: auto;
+right: 0;
+left: 0;
+top: 180px;
+line-height: 41px;
 }
 
-#reg p {
-	margin-left: 150px;
+#error {
+background: url('../images/error.png');
+position: absolute;
+width: 300px;
+height: 41px;
+text-align: center;
+font-size: 16px;
+margin: auto;
+right: 0;
+left: 0;
+line-height: 41px;
 }
-
-#reg .buttons {
-	margin-bottom: -10px;
-	text-align:right;
-	margin-right: 50px;
-	margin-top:70px;
-}
- /* end of registration */
 
 .mysite {
 	background: url('../images/webBody.jpg');
