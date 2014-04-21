@@ -1,21 +1,18 @@
 <?php
-	$usestub = false;
 
-	if( $usestub ) {
-		include_once "modelstub.php";
-	} else {
-		include_once "model/model.php";
-	}
+	include_once "model/model.php";
 
 	class UninstallActivity {
+		var $page;
 		var $context;
 		var $model;
 		var $rootPass;
-		var $dbName = "quartz";
+		var $dbName;
 		var $emptyFlag;
 
 		function __construct(){
 			$this->model = new Model();
+			$this->page = new Page("Uninstall Quartz");
 
 			if (isset($_POST['submit'])) {
 				if ($_POST['uninstall']!="")
@@ -35,23 +32,22 @@
 		
 		
 		function getInput() {
+			$file = "assets/info.txt";
+			$fh = fopen($file, 'r');
+
+			$string = fgets($fh);
+			$string = str_replace("\n", "", $string);
+			$string = str_replace("\r", "", $string);
+
+			$this->dbName = $string;
 		}
 
 		function show() {
 			if($this->context=="showingform"){
-				print("<html>
-					<head>
-						<title>Uninstall Quartz</title>
-						<link rel='stylesheet' type='text/css' href='assets/css/layout.css'>
-						<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-					</head>
-					
-					
-					<div id='container'>
-					<body>
-						<div id='header'></div>
-					
-						<div class ='content'>
+
+				$this->page->beginDoc();
+
+				print("
 							<br><font color='FF0000'>$this->emptyFlag</font>
 							<h1>Thanks for using Quartz!</h1>
 							
@@ -73,35 +69,18 @@
 								<input type='radio' name='uninstall' value='yes'>	Yes<br>
 								<input type='radio' name='uninstall' value='no'>	No<br>
 								<p><input type='submit' name='submit'/></p>
-							</form>
-						</div>
-
-						<div id='footer'> </div>
-					</body>
-					</div>
-				</html>");
+							</form>");
+				$this->page->endDoc();
 			} else if ($this->context = "submitting") {
 				if ($_POST['uninstall'] =='yes') {
 				
-				print("<html>
-					<head>
-						<title>Uninstall Quartz</title>
-						<link rel='stylesheet' type='text/css' href='assets/css/layout.css'>
-						<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-					</head>
-					
-					<div id='container'>
-					<body>
-						<div id='header'></div>
-						<div class='content'>
-							<br>
-							<center>The Quartz database has successfully been deleted!<br><br> You may now exit your browser. </center>
-						</div>
+					$this->page->beginDoc();
+					print("
+								<br>
+								<center>The Quartz database has successfully been deleted!<br><br>
+								 You may now exit your browser. </center>");
 
-						<div id='footer'> </div>
-					</body>
-					</div>
-				</html>");
+					$this->page->endDoc();
 				
 				} else {
 				header("Location: admin.php");
@@ -113,18 +92,17 @@
 		function process(){
 			if($this->context=="submitting"){
 			if ($_POST['uninstall'] =='yes') {
-				//$model->deleteDatabase($this->dbname, "localhost://quartz");
-				
-				print("suCCess");
-			
+				$this->model->deleteDatabase($this->dbName);
+
+				unlink("assets/info.txt");			
 			}
 			}
 		}
 
 		function run() {
-			$this->show();
+			$this->getInput();
 			$this->process();
-			
+			$this->show();
 		}
 	}
 ?>

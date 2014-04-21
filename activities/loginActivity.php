@@ -92,15 +92,15 @@
 	 	
 	 		$this->page->beginDoc();
 	 		
-			//echo "<head>";
-			//echo "<link rel='stylesheet' type='text/css/' href='css/style.css' />";
-			//echo "</head>";
+			echo "<head>";
+			echo "<link rel='stylesheet' type='text/css/' href='css/style.css' />";
+			echo "</head>";
 	 		
-			//echo "<body>";
-			//echo "<div id='container'>";
-				//<div id='header'></div>
+			echo "<body>";
+			echo "<div id='container'>
+				<div id='header'></div>
 		
-			//echo"	<div id='content'>";
+				<div id='content'>";
 				echo "<div id='loginerrormessage'></div>";
 				
 				echo "<form name='input' action='login.php' method='post' id='loginform'>";
@@ -111,14 +111,13 @@
 				echo "<input type='submit' value='Submit'>";
 				echo "</form>";
 				echo "<div id='loginlinkbox'>
-				<a href='forgotpassword.php'>Forgot Password?</a><br>";
-				echo "
+				<a href='forgotpassword.php'>Forgot Password?</a><br>
 				<a href='register.php'>New to Quartz?</a><br>
 				</div>";
-				//echo "</div>"; //Content Div
+				echo "</div>"; //Content Div
 				
-				//echo "<div id='footer'></div>";
-				//echo "</body>";
+				echo "<div id='footer'></div>";
+				echo "</body>";
 			
 	 		$this->page->endDoc();
 	 		

@@ -1,5 +1,5 @@
 <?php
-	include "activities/uninstallActivity.php";
+	include "activitydefinitions.php";
 
 	$activity = new UninstallActivity();
 

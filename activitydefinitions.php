@@ -31,6 +31,12 @@
 	 
 	 // called by reset.php
 	 include 'activities/resetActivity.php';
+
+	 // called by install.php
+	 include 'activities/installActivity.php';
+
+	 // called by uninstall.php
+	 include 'activities/uninstallActivity.php';
 	 
 
 

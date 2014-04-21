@@ -1,10 +1,13 @@
 <?php
+
 	/*	model.php
 	 *
 	 *	Author: Erik Geil
-	 *	Date: 4/18/14
+	 *	Date: 4/23/14
 	 * 
 	 */
+	 
+	 
 	class Model{
 
 		private function connect() {
@@ -20,8 +23,13 @@
 			return $mysqli;
 		}
 
-		function createDatabase($databaseName){
-			$mysqli = new mysqli("localhost", "root","");
+		function createDatabase($databaseName,$server,$rootPass,$adminName,$adminPass){		
+			// Checks to see if the root pass is an empty string
+			if($rootPass=="0") {
+				$mysqli = new mysqli($server, "root","");
+			} else {
+				$mysqli = new mysqli($server, "root",$rootPass);
+			}
 
 			if ($mysqli->connect_error)
 			{
@@ -85,14 +93,18 @@
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
 
+			$query = "GRANT ALL ON $databaseName.* TO '$adminName'@'$server';";
+			$mysqli->query($query);
+
+			$query = "SET PASSWORD FOR '$adminName'@'$server' = PASSWORD('$adminPass');";
+			$mysqli->query($query);
+
 			$mysqli->close();
 
-			mkdir("./pics");
-
-			return "The following database has been created:<br><br><b>$databaseName</b>";
+			mkdir("./assets/profPics");
 		}
 
-		function deleteDatabase($databaseName, $path){
+		function deleteDatabase($databaseName){
 			$mysqli = new mysqli("localhost", "root","");
 
 			if ($mysqli->connect_error)
@@ -106,8 +118,8 @@
 			$mysqli->query($query);
 			$mysqli->close();
 
-			if(is_dir("$path/assets/profPic")){
-				rmdir("$path/assets/profPic");
+			if(is_dir("assets/profPics")){
+				rmdir("assets/profPics");
 			}
 
 			return "The following database has been deleted:<br><br><b>$databaseName</b>";
@@ -751,4 +763,6 @@
 
 		}
 	}
+
+
 ?>
