@@ -136,31 +136,31 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td><input type='text' value='$this->displayname' name='displayname' class='name' /></td>
+										<td><input type='text' value='$this->displayname' id='geninfo_displayname' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
-										<td><input type='text' value='$this->jobtitle' name='jobtitle' class='name' /></td>
+										<td><input type='text' value='$this->jobtitle' id='geninfo_jobtitle' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Address:</td>
-										<td><input type='text' value='$this->address' name='address' class='name' /></td>
+										<td><input type='text' value='$this->address' id='geninfo_address' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Telephone:</td>
-										<td><input type='text' value='$this->telephone' name='telephone' class='name' /></td>
+										<td><input type='text' value='$this->telephone' id='geninfo_telephone' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Fax:</td>
-										<td><input type='text' value='$this->fax' name='fax' class='name' /></td>
+										<td><input type='text' value='$this->fax' id='geninfo_fax' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Office Hours:</td>
-										<td><input type='text' value='$this->officehours' name='officehours' class='name' /></td>
+										<td><input type='text' value='$this->officehours' id='geninfo_officehours' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td><input type='text' value='$this->biography' name='biography' class='name' /></td>
+										<td><input type='text' value='$this->biography' id='geninfo_biography' class='name' /></td>
 									<tr>
 									<tr>
 										<td colspan='2'></td>
@@ -309,6 +309,19 @@
 				
 				//SEND TO MODEL
 				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
+				
+				var jobtitle = '&&jobtitle=' + document.getElementById('geninfo_jobtitle').value;
+				var address = '&&address=' + document.getElementById('geninfo_address').value;
+				var telephone = '&&telephone=' + document.getElementById('geninfo_telephone').value;
+				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
+				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
+				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
+				
+				var geninfo = jobtitle + address + telephone + fax + officehours + biography;
+				
+				sender = sender + geninfo;
+				
+				
 				var xmlhttp;
 
 				if (window.XMLHttpRequest)
@@ -327,7 +340,6 @@
 				xmlhttp.open('POST','http://localhost/GitHub/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(sender);
-				//document.write('Hello Marky Mark');
 				
 				//HIDE EDITORS
 				document.getElementById('research').style.display='none'
@@ -342,7 +354,22 @@
 				document.getElementById('course2').style.display='none';
 				document.getElementById('finalCourse1').style.display='block';
 				document.getElementById('finalCourse2').style.display='block';
+				
+				saveGenInfoChanges();
 			}
+			
+			function saveGenInfoChanges()
+			{
+				var jobtitle = 'jobtitle=' + document.getElementById('geninfo_jobtitle').value;
+				var address = '&&address=' + document.getElementById('geninfo_address').value;
+				var telephone = '&&telephone=' + document.getElementById('geninfo_telephone').value;
+				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
+				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
+				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
+				
+				var submitter = jobtitle + address + telephone + fax + officehours + biography;
+			}
+			
 			</script> ";
 			}
 			else //context == "saving"
