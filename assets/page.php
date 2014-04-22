@@ -89,6 +89,9 @@
 								<!--Stylesheet-->
 								<link rel='stylesheet' href='assets/css/style.css'>
 								<link rel='stylesheet' href='assets/css/layout.css'>
+								
+								<link rel='stylesheet' href='assets/css/my_site.css'>
+								<link rel='stylesheet' href='assets/css/admin_mymanage.css'>								
 				
 								<title>$this->title</title>
 			

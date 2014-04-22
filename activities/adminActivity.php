@@ -13,6 +13,7 @@
 	 	// data members
 	 	var $page;
 	 	var $model;
+	 	
 	 
 	 
 	 	// constructor
@@ -116,6 +117,11 @@
 		
 			</div> <!--/module-->";
 	 	
+	 	}
+	 	
+	 	// Model
+	 	private function retrieveActiveUsers() {
+	 		
 	 	}
 	 	
 	 	// Valid Users

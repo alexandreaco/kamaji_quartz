@@ -21,7 +21,8 @@
 
 .content {
 	background: url('../images/Body.jpg');
-	min-height:800px;
+	min-height: 800px;
+	position: relative;
 	
 	/* 	
 	added CSS

@@ -1,0 +1,168 @@
+/***** COLOR *******/
+
+body {
+	background-color: #EEEEEE;
+}
+
+
+
+/***** Typography *******/
+
+h1, h2, h3, h4, h5, h6, p, a, table, form, div {
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-weight: 300;
+	line-height: 1.6em;
+}
+
+form input, textarea {
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	line-height: 1.75em;
+	font-size: 15px;
+}
+
+a, a:hover, a:active, a:visited {
+	color: red;
+}
+
+
+/****** LAYOUT *******/
+
+#container {
+	width: 945px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 50px;
+}
+
+#header {
+	background: url('../images/Header.jpg');
+	width: 945px;
+	height: 124px;
+}
+
+#content {
+	background: url('../images/Body.jpg');
+	width: 845px;
+	margin: -20px 0;
+	padding: 10px 50px;
+}
+
+#footer {
+	background: url('../images/Footer.jpg');
+	width: 945px;
+	height: 100px;
+}
+
+
+/****** My Manage & Admin Pages *******/
+
+.photo p {
+	display:inline;
+	padding: 0 5px;
+}
+
+
+.module h2 {
+	display:inline-block;
+	margin-top:20px;
+}
+
+.link_lookalike {
+	background: none;
+	border:none;
+	color: red;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+
+.module table {
+	background-color: #DDDDDD;
+	padding: 15px;
+	margin: 10px 0;
+}
+
+.active_users table .email, 
+.valid_users table .email,
+.mail_server table .email,
+.recent_activity table .email {
+	min-width: 250px;
+}
+
+.active_users table .last, 
+.valid_users table .status,
+.mail_server table .purpose,
+.recent_activity table .action {
+	min-width: 200px;
+}
+
+.active_users table .reset, 
+.valid_users table .send,
+.mail_server table .send,
+recent_activity table .date {
+	min-width: 150px;
+}
+
+.active_users table .x, 
+.valid_users table .x, 
+.mail_server table .x {
+	min-width: 50px;
+}
+
+.valid_users #valid_email {
+	width: 250px;
+}
+
+.general_info table .label {
+	width: 150px;
+}
+
+.courses label {
+	display: inline-block;
+	width: 175px;
+}
+
+.courses input[type='text']
+{
+	width: 650px;
+}
+
+.courses input[type='text'].description {
+	width: 100%;
+	height: 5em;
+}
+
+.courses .course {
+	margin-bottom: 20px;
+}
+
+
+/****** Supplemental Style *******/
+
+
+.clear {
+	clear: both;
+	width: 100%;
+}
+
+.inline {
+	display:inline;
+}
+
+.inline_padding {
+	display:inline;
+	padding: 0 10px;
+}
+
+.module table.no_background {
+	background: none;
+}
+
+.right {
+	float:right;
+}
+
+.label {
+	font-weight: 500;
+}
+
