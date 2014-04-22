@@ -833,7 +833,7 @@
 		function activateAccount($id) {
 			$mysqli = $this->connect();
 
-			$query = "SELECT * FROM registration WHERE id='$id';";
+			$query = "SELECT * FROM registration WHERE regid='$id';";
 			$result = $mysqli->query($query);
 
 			if($result->num_rows == 0){
