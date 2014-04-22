@@ -91,22 +91,20 @@
 			
 			print("
 			<div id='reg'>
-			<br> <br>
+			<h2>Create Account</h2>
 			<form name='input' action='register.php' method='post'>
-			  Name: <input type='text' name='givenName'>
+			  <label>Name: </label><input type='text' name='givenName'>
 			  <br>
+			  <label>Email: </label><input type='text' name='givenEmail'> 
 			  <br>
-			  Email: <input type='text' name='givenEmail'> 
+ 			  <label>Password: </label><input type='password' name='givenPassword'>
 			  <br>
-			  <br>
- 			  Password: <input type='password' name='givenPassword'>
-			  <br>
-			  <br>
-			  Retype Password: <input type='password' name='givenPassword2'>
-			  <br>
+			  <label>Retype Password: </label><input type='password' name='givenPassword2'>
 			  <br>
 			<input type='submit' name='submit' value='Submit'>
 			</form>
+			<a href='forgotpassword.php'>Forgot Password</a><br>
+			<a href='login.php'>Log In</a><br>
 			</div>
 	 		");
 	 		

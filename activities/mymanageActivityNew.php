@@ -25,6 +25,9 @@
 		var $research;
 		var $publications;
 		var $personalinfo;
+		
+		var $course1title;
+		var $course2title;
 	 
 	 
 	 	// constructor
@@ -51,7 +54,7 @@
 	 
 	 	// get input
 	 	function getInput() {
-	 	
+			
 	 	}
 	 	
 	 	
@@ -193,6 +196,7 @@
 								<!-- model code will generate these divs -->
 
 								<div class='course' id='course1' style='display:none'>
+									<br>
 									<label for='course_name' class='label'>Course Name</label>
 									<input type='text' value='CS112 Introduction to Computer Science II' name='course_name' class='name' /><br />
 									<label for='course_site' class='label'>Course Website URL</label>
@@ -284,17 +288,26 @@
 				document.getElementById('personal_info').style.display='inline';
 			}
 			
+			function showCourseEdit()
+			{
+				document.getElementById('finalCourse1').style.display = 'none';
+				document.getElementById('finalCourse2').style.display = 'none';
+				document.getElementById('course1').style.display = 'inline';
+				document.getElementById('course2').style.display = 'inline';
+			}
+			
 			function saveChanges()
 			{
 				var research = document.getElementById('research').value;
 				var publications = document.getElementById('publications').value;
 				var personal = document.getElementById('personal_info').value;
 				
-				//SEND TO MODEL
+				
 				document.getElementById('finalResearch').innerHTML=research;
 				document.getElementById('finalPublications').innerHTML=publications;
 				document.getElementById('finalPersonalInfo').innerHTML=personal;
 				
+				//SEND TO MODEL
 				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
 				var xmlhttp;
 
@@ -320,6 +333,10 @@
 				document.getElementById('research').style.display='none'
 				document.getElementById('publications').style.display='none'
 				document.getElementById('personal_info').style.display='none'
+				//Done with saves for research, publications, and personal
+				
+				//SAVE COURSE CHANGES
+				
 				
 				//document.getElementById('course1').style.display='none';
 				//document.getElementById('course2').style.display='none';

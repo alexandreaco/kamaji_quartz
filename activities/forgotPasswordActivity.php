@@ -44,10 +44,13 @@ function show() {
 
 	print("
 			<div id='forgot'>
+			<h2>Forgot Password</h2>
 			<form name='input' action='forgotpassword.php' method='post' id='loginform'>
-			Email: <input type='text' name='email'>
-			<input type='submit' value='Submit'>
+			<label>Email: </label><input type='text' name='email'>
+			<input type='submit' value='Send'>
 			</form>
+			<a href='login.php'>Log In</a><br>
+			<a href='register.php'>Create Account</a><br>
 			</div>
 			");
 			
@@ -66,7 +69,7 @@ function show() {
 			}
 
 	print("
-			<div id='forgot'>
+			<div class='forgot'>
 			
 				<form name='input' action='forgotpassword.php' method='post' id='loginform'>
 				Email: <input type='text' name='email'><br>
