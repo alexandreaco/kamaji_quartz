@@ -97,8 +97,8 @@
 			<br><br>
 			<input type='submit' name='submit' value='Log In'>
 			</form>
-			<a href='forgotpassword.php'>Forgot Password?</a><br>
-			<a href='register.php'>New to Quartz?</a><br>
+			<a href='forgotpassword.php'>Forgot Password</a><br>
+			<a href='register.php'>Create Account</a><br>
 			</div>");
 			
 	 		$this->page->endDoc();

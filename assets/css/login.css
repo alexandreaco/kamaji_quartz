@@ -8,7 +8,9 @@
  
 
 
-.login {
+.login, 
+#forgot,
+#reg {
 	width: 500px;
 	display: block;
 	margin: 0 auto;
@@ -16,7 +18,9 @@
 	padding-bottom: 25px;
 }
 
-.login h2 {
+.login h2,
+#forgot h2,
+#reg h2 {
 	background: #464646;
 	margin-top: 0px;
 	color: #FFFFFF;
@@ -24,23 +28,31 @@
 	line-height: 2em;
 }
 
-.login form {
+.login form,
+#forgot form,
+#reg form {
 	padding: 0 30px;
 	color: #464646;
 }
 
-.login label {
+.login label,
+#forgot label,
+#reg label {
 	display: inline-block;
-	width: 25%;
+	width: 32%;
 	font-size: 16px;
 	line-height: 3em;
 }
 
-.login input[type="text"], .login input[type="password"] {
-	width: 73%;
+.login input[type="text"], .login input[type="password"],
+#forgot input[type="text"], #forgot input[type="password"],
+#reg input[type="text"], #reg input[type="password"] {
+	width: 66%;
 }	
 
-input[type="submit"] {
+.login input[type="submit"],
+#forgot input[type="submit"],
+#reg input[type="submit"] {
 	background: #cc2026;
 	border: none;
 	border-radius: 5px;
@@ -53,8 +65,21 @@ input[type="submit"] {
 	float: right;
 }
 
-.login a {
+.login a,
+#forgot a,
+#reg a {
 	margin-left: 30px;
 	color: #464646;
 	text-decoration: none;
+}
+
+
+#forgot form,
+#reg form {
+	margin-bottom: 50px;
+}
+
+#forgot input[type="submit"],
+#reg input[type="submit"] {
+	margin-top: 50px;
 }

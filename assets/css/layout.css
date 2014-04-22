@@ -42,6 +42,7 @@
 }
 
 
+/* 
 #reg {
 	background: url('../images/Register.jpg');
 	width: 650px;
@@ -55,6 +56,7 @@
 	margin-right:auto;
 	font-size: 17px; 
 }
+ */
 
 #confirmationEmail {
 position: absolute;
@@ -81,18 +83,6 @@ line-height: 41px;
 	color: #a94442;
 	background: #f2dede;
 	font-size: 1.25em;
-}
-
-#forgot {
-	background: url('../images/Changepassword.jpg');
-	width: 500px;
-	height: 150px;
-	padding: 110px 0 0 50px;
-	display: block;
-	position: relative;
-	top:100px;
-	margin: 0 auto;
-	font-size: 17px; 
 }
 
 
