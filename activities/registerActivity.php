@@ -58,11 +58,17 @@
 				$validEmail = $this->model->checkEmail($_POST["givenEmail"]);
 
 				if($validEmail){
-					$this->model->createUser($_POST["givenName"],
-											 $_POST["givenEmail"],
-											 $_POST["givenPassword"]);
-											
-					$this->generateConfirmationEmail();
+					if($this->password1==$this->password2){
+						$this->model->createUser($_POST["givenName"],
+												 $_POST["givenEmail"],
+												 $_POST["givenPassword"]);
+												
+						$this->generateConfirmationEmail();
+					} else {
+						$this->error = "Error: Passwords do not Match.";
+					}
+				} else {
+					$this->error = "Error: Please Enter Valid Email.";
 				}
 			}
 	 	}
