@@ -112,7 +112,7 @@
 
 				$this->page->endDoc();
 			} else if ($this->context = "submitting") {
-				
+
 				$this->page->beginDoc();
 
 				print("
