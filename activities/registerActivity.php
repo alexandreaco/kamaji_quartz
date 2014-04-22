@@ -79,8 +79,10 @@
 				$isValid = $this->model->activateAccount($id);
 
 				if($isValid == 1) {
-				} else {
+				} else if($isValid == 0){
 				  print("FAILED.");
+				} else {
+					print("SUPER FAILLLLLED");
 				}
 			}
 	 	}

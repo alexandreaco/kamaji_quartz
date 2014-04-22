@@ -833,8 +833,6 @@
 		function activateAccount($id) {
 			$mysqli = $this->connect();
 
-			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
-
 			$query = "SELECT * FROM registration WHERE id='$id';";
 			$result = $mysqli->query($query);
 
