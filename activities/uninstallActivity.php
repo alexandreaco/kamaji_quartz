@@ -33,15 +33,17 @@
 		
 		function getInput() {
 			$file = "assets/info.txt";
-			$fh = fopen($file, 'r');
+			if(file_exists($file)){
+				$fh = fopen($file, 'r');
 
-			$string = fgets($fh);
-			$string = str_replace("\n", "", $string);
-			$string = str_replace("\r", "", $string);
+				$string = fgets($fh);
+				$string = str_replace("\n", "", $string);
+				$string = str_replace("\r", "", $string);
 
-			$this->dbName = $string;
+				$this->dbName = $string;
 
-			fclose($fh);
+				fclose($fh);
+			}
 		}
 
 		function show() {
@@ -96,7 +98,9 @@
 			if ($_POST['uninstall'] =='yes') {
 				$this->model->deleteDatabase($this->dbName);
 
-				unlink("assets/info.txt");			
+				if(file_exists("assets/info.txt")){
+					unlink("assets/info.txt");			
+				}
 			}
 			}
 		}
