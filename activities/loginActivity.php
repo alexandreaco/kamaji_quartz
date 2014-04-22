@@ -89,12 +89,13 @@
 	 		}
 			print("
 			<div class='login'>
+			<h2>Login</h2>
 			<form name='input' action='login.php' method='post' id='loginform'>
-			Email: <input type='text' name='name'>
+			<label>Email: </label><input type='text' name='name'>
 			<br>
-			Password: <input type='password' name='password'>
+			<label>Password: </label><input type='password' name='password'>
 			<br><br>
-			<input type='submit' name='submit' value='Submit'>
+			<input type='submit' name='submit' value='Log In'>
 			</form>
 			<a href='forgotpassword.php'>Forgot Password?</a><br>
 			<a href='register.php'>New to Quartz?</a><br>

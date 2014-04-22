@@ -91,7 +91,8 @@
 								<link rel='stylesheet' href='assets/css/layout.css'>
 								
 								<link rel='stylesheet' href='assets/css/my_site.css'>
-								<link rel='stylesheet' href='assets/css/admin_mymanage.css'>								
+								<link rel='stylesheet' href='assets/css/admin_mymanage.css'>	
+								<link rel='stylesheet' href='assets/css/login.css'>							
 				
 								<title>$this->title</title>
 			
@@ -136,7 +137,9 @@
 				
 			} else {
 				$html = "<div id='container'>
-				<div id='header'></div>
+				<div id='header'>
+					<div id='login_btn'><a href='login.php'>Login</a></div>
+					</div>
 				<div class='content'>";
 			}
 	 		

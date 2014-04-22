@@ -1,0 +1,60 @@
+
+/*	login.css
+ *
+ *	Author: @alexandreaco
+ *	Date: 4/22/2014
+ * 
+ */
+ 
+
+
+.login {
+	width: 500px;
+	display: block;
+	margin: 0 auto;
+	border: 3px solid #464646;
+	padding-bottom: 25px;
+}
+
+.login h2 {
+	background: #464646;
+	margin-top: 0px;
+	color: #FFFFFF;
+	padding: 0 30px;
+	line-height: 2em;
+}
+
+.login form {
+	padding: 0 30px;
+	color: #464646;
+}
+
+.login label {
+	display: inline-block;
+	width: 25%;
+	font-size: 16px;
+	line-height: 3em;
+}
+
+.login input[type="text"], .login input[type="password"] {
+	width: 73%;
+}	
+
+input[type="submit"] {
+	background: #cc2026;
+	border: none;
+	border-radius: 5px;
+	color: #FFFFFF;
+	padding: 5px 15px 7px 15px;
+	font-weight: 300;
+	font-size: 1.25em;
+	border: 1px solid #EEEEEE;
+	margin: 5px 0;
+	float: right;
+}
+
+.login a {
+	margin-left: 30px;
+	color: #464646;
+	text-decoration: none;
+}
