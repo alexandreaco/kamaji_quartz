@@ -136,31 +136,31 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td>$this->displayname</td>
+										<td><input type='text' value='$this->displayname' name='displayname' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
-										<td>$this->jobtitle</td>
+										<td><input type='text' value='$this->jobtitle' name='jobtitle' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Address:</td>
-										<td>$this->address</td>
+										<td><input type='text' value='$this->address' name='address' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Telephone:</td>
-										<td>$this->telephone</td>
+										<td><input type='text' value='$this->telephone' name='telephone' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Fax:</td>
-										<td>$this->fax</td>
+										<td><input type='text' value='$this->fax' name='fax' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Office Hours:</td>
-										<td>$this->officehours</td>
+										<td><input type='text' value='$this->officehours' name='officehours' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td>$this->biography</td>
+										<td><input type='text' value='$this->biography' name='biography' class='name' /></td>
 									<tr>
 									<tr>
 										<td colspan='2'></td>
