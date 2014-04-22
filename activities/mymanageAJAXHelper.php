@@ -14,4 +14,5 @@ $model->setFax($_POST["user"],$_POST["fax"]);
 $model->setOfficeHours($_POST["user"],$_POST["officehours"]);
 $model->setBiography($_POST["user"],$_POST["biography"]);
 
+print (("Welcome, " . $_POST["user"]));
 ?>
