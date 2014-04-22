@@ -135,7 +135,7 @@
 			$to = $_POST["givenEmail"];
     		$subject = "Quartz Registration Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/login.php?activate=1&id=$id'>here</a>";
+    		$message .= "<a href='http://localhost:8888/kamaji_quartz/register.php?activate=1&id=$id'>here</a>";
     		$message .= " to login.";
     		$header = "From: webmaster@quartz.com";
     		$header .= 'MIME-Version: 1.0' . "\r\n";
