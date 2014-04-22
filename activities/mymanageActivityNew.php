@@ -64,16 +64,17 @@
 			}
 			else //context == "showingform"
 			{
-				$displayname = $_GET['user'];
-				$jobtitle = $this->model->getJobtitle($displayname);
-				$address = $this->model->getAddress($displayname);
-				$telephone = $this->model->getTelephone($displayname);
-				$fax = $this->model->getFax($displayname);
-				$officehours = $this->model->getOfficehours($displayname);
-				$biography =   $this->model->getBiography($displayname);
-				$research = $this->model->getResearch($displayname);
-				$publications = $this->model->getPublications($displayname);
-				$personalinfo = $this->model->getPersonal($displayname);
+				
+				$this->displayname = $_GET['user'];
+				$this->jobtitle = $this->model->getJobtitle($this->displayname);
+				$this->address = $this->model->getAddress($this->displayname);
+				$this->telephone = $this->model->getTelephone($this->displayname);
+				$this->fax = $this->model->getFax($this->displayname);
+				$this->officehours = $this->model->getOfficehours($this->displayname);
+				$this->biography =   $this->model->getBiography($this->displayname);
+				$this->research = $this->model->getResearch($this->displayname);
+				$this->publications = $this->model->getPublications($this->displayname);
+				$this->personalinfo = $this->model->getPersonal($this->displayname);
 			}
 		
 	 	}
@@ -88,7 +89,7 @@
 			{
 			echo "
 				<div id='mymanage'>
-				<h1 class='page_title' id='welcome_title'>Welcome, Default User</h1>
+				<h1 class='page_title' id='welcome_title'>Welcome, $this->displayname</h1>
 				<p>This is your Website Management Portal.<br /> Here you can edit course content and your site's information.</p>
 				<form id='mymanageform'>
 							<div class='module website_settings'>
@@ -285,7 +286,24 @@
 			
 			function saveAllChanges()
 			{
-				document.getElementById('welcome_title').innerHTML = 'Mark Twain';
+				var research = document.getElementById('research').value;
+				var publications = document.getElementById('publications').value;
+				var personal = document.getElementById('personal_info').value;
+				
+				//SEND TO MODEL
+				document.getElementById('finalResearch').innerHTML=research;
+				document.getElementById('finalPublications').innerHTML=publications;
+				document.getElementById('finalPersonalInfo').innerHTML=personal;
+				
+				//HIDE EDITORS
+				document.getElementById('research').style.display='none'
+				document.getElementById('publications').style.display='none'
+				document.getElementById('personal_info').style.display='none'
+				
+				//document.getElementById('course1').style.display='none';
+				//document.getElementById('course2').style.display='none';
+				//document.getElementById('finalCourse1').style.display='block';
+				//document.getElementById('finalCourse2').style.display='block';
 			}
 			</script> ";
 			}
