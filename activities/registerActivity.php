@@ -20,7 +20,7 @@
 	 		$this->page = new Page("Register");
 
 	 		if(isset($_GET['activate'])) {
-	 			$context = "activating";
+	 			$this->context = "activating";
 	 		} else {
 		 		if(isset($_POST['submit'])) {
 		 			if($_POST['givenName']!="" && $_POST['givenEmail']!="" && $_POST['givenPassword']!="" && $_POST['givenPassword2']!=""){
@@ -123,7 +123,7 @@
 			}  else if ($this->context == "submitting") {
 				print("Thank you for registering for Quartz.  An email has been sent with the link to 
 						complete the registration process");
-			}	else if ($this->context == "registered") {
+			}	else if ($this->context == "activating") {
 				print("Congratulations Dude!!! You have succesfully registered for Quartz.  
 						<a href='Location: 'http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
 			} 		
