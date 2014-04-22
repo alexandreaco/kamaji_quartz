@@ -117,7 +117,7 @@
 			  Name: <input type='text' name='givenName'>
 			  <br>
 			  <br>
-			  Email: <input type='text' name='givenEmail' value=$email> 
+			  Email: <input type='text' name='givenEmail'> 
 			  <br>
 			  <br>
  			  Password: <input type='password' name='givenPassword'>
