@@ -831,17 +831,12 @@
 		}
 
 		function activateAccount($id) {
-			$mysqli = $this->connect();
+				$mysqli = $this->connect();
 
-			// $query = "SELECT * FROM registration WHERE regid='$id';";
-			$query = "$SELECT * FROM registration WHERE regid='$id';";
-			$result = $mysqli->query($query);
+				// $query = "SELECT * FROM registration WHERE regid='$id';";
+				$query = "$SELECT * FROM registration WHERE regid='$id';";
+				$result = $mysqli->query($query);
 
-
-			if($result->num_rows == 0){
-				$mysqli->close();
-				return 0;
-			} else {
 				$row = $result->fetch_assoc();
 				$name = stripslashes($row["name"]);
 				$email = stripslashes($row["email"]);
