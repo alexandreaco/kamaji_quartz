@@ -115,10 +115,11 @@
 			$mysqli->query($query);
 
 			$query = "CREATE TABLE IF NOT EXISTS `registration`
-				(`id` text NOT NULL,
+				(`id` int NOT NULL auto_increment,
 				`name` text,
 				`email` text,
 				`password` text,
+				`regid` text,
 				PRIMARY KEY (`id`)
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
@@ -234,15 +235,13 @@
 					$mysqli->query($query);
 
 					$mysqli->close();
-					return "Created the User:<br><br>
-						   <b>Name: '$name'<br>
-						   Email: '$email'<br></b>";
+					return 1;
 				} else {
 					$mysqli->close();
-					return "ERROR: Entry already Exists with that Account Name.";
+					return 0;
 				}
 			} else {
-				return "Email has not been approved<br>.";
+				return 0;
 			}
 		}
 
@@ -823,7 +822,7 @@
 			$query = "INSERT INTO registration SET name='$name', 
 					  email='$email',
 					  password='$password',
-					  id ='$id';";
+					  regid ='$id';";
 
 			$mysqli->query($query);
 			$mysqli->close();
@@ -851,6 +850,8 @@
 				$this->createUser($name,$email,md5($password),'0');
 
 				$mysqli->close();
+
+				return 1;
 			}			
 		}
 	}
