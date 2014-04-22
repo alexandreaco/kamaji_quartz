@@ -831,23 +831,22 @@
 		}
 
 		function activateAccount($id) {
-				$mysqli = $this->connect();
+			$mysqli = $this->connect();
 
-				// $query = "SELECT * FROM registration WHERE regid='$id';";
-				$query = "$SELECT * FROM registration WHERE regid='$id';";
-				$result = $mysqli->query($query);
+			// $query = "SELECT * FROM registration WHERE regid='$id';";
+			$query = "$SELECT * FROM registration WHERE regid='$id';";
+			$result = $mysqli->query($query);
 
-				$row = $result->fetch_assoc();
-				$name = stripslashes($row["name"]);
-				$email = stripslashes($row["email"]);
-				$password = stripslashes($row["password"]);
-				
-				$this->createUser($name,$email,md5($password),'0');
+			$row = $result->fetch_assoc();
+			$name = stripslashes($row["name"]);
+			$email = stripslashes($row["email"]);
+			$password = stripslashes($row["password"]);
+			
+			$this->createUser($name,$email,md5($password),'0');
 
-				$mysqli->close();
+			$mysqli->close();
 
-				return 1;
-			}			
+			return 1;		
 		}
 	}
 
