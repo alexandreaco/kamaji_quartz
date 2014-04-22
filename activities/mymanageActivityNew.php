@@ -284,7 +284,7 @@
 				document.getElementById('personal_info').style.display='inline';
 			}
 			
-			function saveAllChanges()
+			function saveChanges()
 			{
 				var research = document.getElementById('research').value;
 				var publications = document.getElementById('publications').value;
@@ -294,6 +294,27 @@
 				document.getElementById('finalResearch').innerHTML=research;
 				document.getElementById('finalPublications').innerHTML=publications;
 				document.getElementById('finalPersonalInfo').innerHTML=personal;
+				
+				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
+				var xmlhttp;
+
+				if (window.XMLHttpRequest)
+				{
+					xmlhttp=new XMLHttpRequest();
+					
+				}
+
+				xmlhttp.onreadystatechange=function()
+				{
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+						document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open('POST','http://localhost/GitHub/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
+				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+				xmlhttp.send(sender);
+				//document.write('Hello Marky Mark');
 				
 				//HIDE EDITORS
 				document.getElementById('research').style.display='none'
