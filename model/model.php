@@ -114,6 +114,15 @@
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
 
+			$query = "CREATE TABLE IF NOT EXISTS `registration`
+				(`id` text NOT NULL,
+				`name` text,
+				`email` text,
+				`password` text,
+				PRIMARY KEY (`id`)
+				) ENGINE=MyISAM;";
+			$mysqli->query($query);
+
 			$query = "GRANT ALL ON 'dudebro'.* TO '$adminName'@'$server';";
 			$mysqli->query($query);
 
