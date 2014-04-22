@@ -1,6 +1,7 @@
 <?php
 
 include_once 'modelstub.php';
+
 $model = new ModelStub();
 
 echo "<head>";

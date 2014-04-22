@@ -1,5 +1,7 @@
 <?php
  
+ include_once "model/model.php";
+ 
 	 class RegistrationActivity {
 	 	var $page;
 	 	var $model;
