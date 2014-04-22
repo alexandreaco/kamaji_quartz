@@ -22,16 +22,15 @@ function show() {
 
 	if($this->emptyFlag != "") {
 			print("
-			<div id='error'>
+			<div id='forgotError'>
 			$this->emptyFlag
 			</div>
 			");
 			}
 
 	print("
-			<div id='reg'>
-			<br><font color='FF0000'>$this->emptyFlag</font>
-			<form name='input' action='forgotPasswordActivity.php' method='post' id='loginform'>
+			<div id='forgot'>
+			<form name='input' action='forgotpassword.php' method='post' id='loginform'>
 			Email: <input type='text' name='email'>
 			<input type='submit' value='Submit'>
 			</form>
@@ -45,18 +44,19 @@ function show() {
 function process() {
 	if (isset($_POST['email']))
 		{	
-			if ($_POST['email'] == "JILL@gmail.com")
+			if ($this->model->checkEmail($_POST['email']))
 				{
 					$this->generateEmail();
+					$this->emptyFlag = "";
 				}
 				else
 				{
-				$this->emptyFlag = "Error: The account you entered isn't registered with Quartz.";
+				$this->emptyFlag = "Error: The email entered isn't registered.";
 				}
 		} 
 		else
 		{
-		$this->emptyFlag = "Error: Please enter an email address.";
+		$this->emptyFlag = "";
 		}
 	}
 

@@ -97,6 +97,32 @@ left: 0;
 line-height: 41px;
 }
 
+#forgot {
+	background: url('../images/Changepassword.jpg');
+	width: 500px;
+	height: 150px;
+	padding: 110px 0 0 50px;
+	display: block;
+	position: relative;
+	top:100px;
+	margin: 0 auto;
+	font-size: 17px; 
+}
+
+
+#forgotError {
+background: url('../images/error.png');
+position: absolute;
+width: 300px;
+height: 41px;
+text-align: center;
+font-size: 14px;
+margin: auto;
+right: 0;
+left: 0;
+line-height: 41px;
+}
+
 .mysite {
 	background: url('../images/webBody.jpg');
 }
