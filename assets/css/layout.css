@@ -1,5 +1,4 @@
 
-
 /*	layout.css
  *
  *	Author: @alexandreaco
@@ -22,7 +21,7 @@
 
 .content {
 	background: url('../images/Body.jpg');
-	min-height:975px;
+	min-height:800px;
 	
 	/* 	
 	added CSS
@@ -39,6 +38,24 @@
 	end of added
 	*/
 }
+
+.login {
+	background: url('../images/Login.jpg');
+	width: 500px;
+	height: 190px;
+	padding: 70px 0 0 50px;
+	display: block;
+	psition:relative; 
+	top:59px; 
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+	font-family:Tahoma; 
+	font-size: 13px;
+	z-index: 1;
+
+}
+
 
 #reg {
 	background: url('../images/Register.jpg');
