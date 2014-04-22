@@ -107,7 +107,7 @@ else
 	{
 	if (isset($_POST['email']))
 	{
-	if (($this->model->checkEmail($_POST['email']) && $model->isValidLoginName($_POST['email']))
+	if (($this->model->checkEmail($_POST['email']) && $model->isValidLoginName($_POST['email'])))
 	{
 		if (isset($_POST['newpassword']) && isset($_POST['newpassword2']))
 		{
