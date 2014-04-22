@@ -91,7 +91,6 @@
 	 	
 	 		$this->page->beginDoc();
 	 		
-<<<<<<< HEAD
 	 		if($this->context == "showingform") {
 				if($this->emptyFlag != "") {
 				print("
@@ -128,37 +127,6 @@
 				print("Congratulations Dude!!! You have succesfully registered for Quartz.  
 						<a href='Location: 'http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
 			} 		
-=======
-	 		
-			if($this->emptyFlag != "") {
-			print("
-			<div id='error'>
-			$this->emptyFlag
-			</div>
-			");
-			}
-			
-			
-			print("
-			<div id='reg'>
-			<h2>Create Account</h2>
-			<form name='input' action='register.php' method='post'>
-			  <label>Name: </label><input type='text' name='givenName'>
-			  <br>
-			  <label>Email: </label><input type='text' name='givenEmail'> 
-			  <br>
- 			  <label>Password: </label><input type='password' name='givenPassword'>
-			  <br>
-			  <label>Retype Password: </label><input type='password' name='givenPassword2'>
-			  <br>
-			<input type='submit' name='submit' value='Submit'>
-			</form>
-			<a href='forgotpassword.php'>Forgot Password</a><br>
-			<a href='login.php'>Log In</a><br>
-			</div>
-	 		");
-	 		
->>>>>>> d8bc3fa43bcf5e8d731b815c838c1503d37ef687
 	 		$this->page->endDoc();
 	 	}
 		
