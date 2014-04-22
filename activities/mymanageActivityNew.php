@@ -338,10 +338,10 @@
 				//SAVE COURSE CHANGES
 				
 				
-				//document.getElementById('course1').style.display='none';
-				//document.getElementById('course2').style.display='none';
-				//document.getElementById('finalCourse1').style.display='block';
-				//document.getElementById('finalCourse2').style.display='block';
+				document.getElementById('course1').style.display='none';
+				document.getElementById('course2').style.display='none';
+				document.getElementById('finalCourse1').style.display='block';
+				document.getElementById('finalCourse2').style.display='block';
 			}
 			</script> ";
 			}
