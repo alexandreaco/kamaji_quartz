@@ -67,7 +67,13 @@
 
 
 				if($check =="Valid Credentials"){
-					header( 'Location: mymanage.php' ) ;
+					$status = $this->model->getAdminStatus($this->name);
+
+					if($status == '1'){
+						header( 'Location: admin.php');
+					} else {
+						header( 'Location: mymanage.php' ) ;
+					}
 				} else {
 					$this->error = $check;
 				}
@@ -78,19 +84,21 @@
 	 	function show() {
 	 		$this->page->beginDoc();
 
-	 			print("
-				<br><br><br><center><font color='FF0000'>$this->error</font></center>
-				<div class='login'>
-				<form name='input' action='login.php' method='post' id='loginform'>
-				Email: <input type='text' name='name'>
-				<br>
-				Password: <input type='password' name='password'>
-				<br><br>
-				<input type='submit' name='submit' value='Submit'>
-				</form>
-				<a href='forgotpassword.php'>Forgot Password?</a><br>
-				<a href='register.php'>New to Quartz?</a><br>
-				</div>");
+	 		if($this->error != ""){
+	 			print("<div id='error'>$this->error</font></center></div>");
+	 		}
+			print("
+			<div class='login'>
+			<form name='input' action='login.php' method='post' id='loginform'>
+			Email: <input type='text' name='name'>
+			<br>
+			Password: <input type='password' name='password'>
+			<br><br>
+			<input type='submit' name='submit' value='Submit'>
+			</form>
+			<a href='forgotpassword.php'>Forgot Password?</a><br>
+			<a href='register.php'>New to Quartz?</a><br>
+			</div>");
 			
 	 		$this->page->endDoc();
 	 	}

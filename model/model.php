@@ -23,6 +23,26 @@
 			return $mysqli;
 		}
 
+		function getAdminStatus($email){
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM users WHERE accountname='$accountname';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return '0';
+			} else {
+				$row = $result->fetch_assoc();
+				$status = stripslashes($row["adminstatus"]);
+				$mysqli->close();
+
+				return $status;
+			}
+		}
+
 		function createDatabase($databaseName,$server,$rootPass,$adminName,$adminPass){		
 			// Checks to see if the root pass is an empty string
 			if($rootPass=="0") {
@@ -58,6 +78,7 @@
 				`research` text,
 				`publications` text,
 				`personal` text,
+				`adminstatus` text,
 				PRIMARY KEY (`id`)
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
@@ -102,7 +123,7 @@
 			$mysqli->close();
 
 			$this->addEmail($adminName."@bu.edu");
-			$this->createUser("",$adminName."@bu.edu",$adminPass);
+			$this->createUser("",$adminName."@bu.edu",$adminPass,'1');
 
 			mkdir("./assets/profPics");
 		}
@@ -191,7 +212,7 @@
 			}
 		}
 
-		function createUser($name,$email,$password){
+		function createUser($name,$email,$password,$adminStatus){
 			$mysqli = $this->connect();
 
 			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
@@ -205,7 +226,8 @@
 					$query = "INSERT INTO users SET name='$name', 
 							  accountname='$accountname',
 							  email='$email',
-							  password=MD5('$password');";
+							  password=MD5('$password'),
+							  adminstatus=$adminStatus;";
 
 					$mysqli->query($query);
 
