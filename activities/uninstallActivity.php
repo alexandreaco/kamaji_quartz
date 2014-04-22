@@ -7,7 +7,6 @@
 		var $context;
 		var $model;
 		var $rootPass;
-		var $dbName;
 		var $emptyFlag;
 
 		function __construct(){
@@ -32,18 +31,18 @@
 		
 		
 		function getInput() {
-			$file = "assets/info.txt";
-			if(file_exists($file)){
-				$fh = fopen($file, 'r');
+			// $file = "assets/info.txt";
+			// if(file_exists($file)){
+			// 	$fh = fopen($file, 'r');
 
-				$string = fgets($fh);
-				$string = str_replace("\n", "", $string);
-				$string = str_replace("\r", "", $string);
+			// 	$string = fgets($fh);
+			// 	$string = str_replace("\n", "", $string);
+			// 	$string = str_replace("\r", "", $string);
 
-				$this->dbName = $string;
+			// 	$this->dbName = $string;
 
-				fclose($fh);
-			}
+			// 	fclose($fh);
+			// }
 		}
 
 		function show() {
@@ -96,7 +95,7 @@
 		function process(){
 			if($this->context=="submitting"){
 			if ($_POST['uninstall'] =='yes') {
-				$this->model->deleteDatabase($this->dbName);
+				$this->model->deleteDatabase();
 
 				if(file_exists("assets/info.txt")){
 					unlink("assets/info.txt");			

@@ -17,9 +17,9 @@
 		var $rootPass;
 		var $adminName;
 		var $adminPass;
-		var $dbName;
 		var $url;
 		var $subfolder;
+		var $emails;
 		var $emptyFlag;
 
 		function getInput() {
@@ -28,9 +28,9 @@
 				$this->rootPass = $_POST['rootpass'];
 				$this->adminName = $_POST['admin'];
 				$this->adminPass = $_POST['adminpass'];
-				$this->dbName = $_POST['dbname'];
 				$this->url = $_POST['serverhost'];
 				$this->subfolder = $_POST['rootpath'];
+				$this->emails = $_POST['emails'];
 			}
 		}
 
@@ -63,14 +63,14 @@
 						<br><br>
 						<u>Quartz Admin Password:</u> The password of the Quartz admin. If you are the admin, please input your desired 
 						password. If you are a professor installing Quartz, please contact your administrator for this information.<br><br>
-						<u>Quartz Database Name:</u> The main database name for Quartz. If you are the admin, choose a name. If you are a 
-						professor, contact your Quartz adminstrator for this information.<br><br>
 						<u>URL of your Webserver:</u> This requires the URL of the webserver on which Quartz runs. In the case you are 
 						running on WAMP/MAMP/LAMP and you Apache server runs on a different port than the default, write the server URL 
 						with the name of the different port number. (EX: If your server URL is http://localhost/ and it must run on 
 						port 81, write http://localhost:81/). If you are unsure of this information, contact your Quartz administrator.<br><br> 
 						<u>Name of Quartz's subfolder:</u> The subfolder where Quartz can be found.(EX: Quartz2012).
 						If you are unsure of this information ask your Quartz administrator.<br><br>
+						<u>Approved Emails:</u> A list of emails approved for the use of Quartz.  Include the full address for the email and
+						separate emails with ';'.<br><br>
 
 						<u>Does your server have the ability to send mail?</u> Field asks if your server has the capability to send an email 
 						directly. If you have LAMP/MAMP/WAMP select no. If you are unsure of this, ask your Quartz administrator. <br><br>
@@ -96,15 +96,16 @@
 							<br>
 							Quartz Admin Password: <input type = 'text' name = 'adminpass'><br>
 							<br>
-							Quartz Database Name: <input type='text' name = 'dbname'><br>
-							<br>
 							URL Of your Webserver: <input type= 'text' name = 'serverhost'><br>
 							<br>
 							Name of Quartz's subfolder: <input type='text' name='rootpath'><br>
 							<br>
+							Approved Emails: <input type='text' name='emails'><br>
+							<br>
 							Does your server have the ability to send mail?: <br>
 							<input type='radio' name='canmail' value='yes'>	Yes<br>
 							<input type='radio' name='canmail' value='no'>	No<br>
+
 							<p><input type='submit' name='submit'/></p>
 						</form>
 						</p>");
@@ -131,11 +132,10 @@
 
 		function process(){
 			if($this->context=="submitting"){
-				$this->model->createDatabase($this->dbName,$this->serverName,$this->rootPass,$this->adminName,$this->adminPass);
+				$this->model->createDatabase($this->serverName,$this->rootPass,$this->adminName,$this->adminPass, $this->emails);
 
 				$file = "assets/info.txt";
 				$fh = fopen($file, 'w');
-				fwrite($fh,$this->dbName."\r\n");
 				fwrite($fh,$this->serverName."\r\n");
 				fwrite($fh,$this->rootPass."\r\n");
 				fwrite($fh,$this->adminName."\r\n");
@@ -158,7 +158,7 @@
 
 			if (isset($_POST['submit'])) {
 				if ($_POST['serverurl']!="" && $_POST['rootpass']!="" && $_POST['admin']!="" && $_POST['adminpass']!=""
-					&& $_POST['dbname']!="" && $_POST['serverhost']!="" && $_POST['rootpath']!="")
+					&& $_POST['serverhost']!="" && $_POST['rootpath']!="")
 				{
 					$this->context = 'submitting';
 					$this->emptyFlag = "";

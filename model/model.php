@@ -11,7 +11,7 @@
 	class Model{
 
 		private function connect() {
-			$mysqli = new mysqli("localhost", "root","","quartz");
+			$mysqli = new mysqli("localhost", "root","","dudebro");
 
 			if ($mysqli->connect_error)
 			{
@@ -43,7 +43,7 @@
 			}
 		}
 
-		function createDatabase($databaseName,$server,$rootPass,$adminName,$adminPass){		
+		function createDatabase($server,$rootPass,$adminName,$adminPass, $emails){		
 			// Checks to see if the root pass is an empty string
 			if($rootPass=="0") {
 				$mysqli = new mysqli($server, "root","");
@@ -57,10 +57,10 @@
 			}
 
 			// Create the new database.
-			$query = "CREATE DATABASE IF NOT EXISTS $databaseName;";
+			$query = "CREATE DATABASE IF NOT EXISTS dudebro;";
 			$mysqli->query($query);
 
-			$query = "USE $databaseName;";
+			$query = "USE dudebro;";
 			$mysqli->query($query);
 
 			$query = "CREATE TABLE IF NOT EXISTS `users`
@@ -114,7 +114,7 @@
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
 
-			$query = "GRANT ALL ON $databaseName.* TO '$adminName'@'$server';";
+			$query = "GRANT ALL ON 'dudebro'.* TO '$adminName'@'$server';";
 			$mysqli->query($query);
 
 			$query = "SET PASSWORD FOR '$adminName'@'$server' = PASSWORD('$adminPass');";
@@ -125,28 +125,25 @@
 			$this->addEmail($adminName."@bu.edu");
 			$this->createUser("",$adminName."@bu.edu",$adminPass,'1');
 
+			$emailArray = explode(';', $emails);
+
+			foreach($emailArray as $email) {
+				$this->addEmail($email);
+			}
+
 			mkdir("./assets/profPics");
 		}
 
-		function deleteDatabase($databaseName){
-			$mysqli = new mysqli("localhost", "root","");
+		function deleteDatabase(){
+			$mysqli = $this->connect();
 
-			if ($mysqli->connect_error)
-			{
-				print("PHP unable to connect to MySQL server; error (" . $mysqli->connecterrno . "): "
-						. $mysqli->connect_error);
-					exit();
-			}
-
-			$query = "DROP DATABASE IF EXISTS $databaseName;";
+			$query = "DROP DATABASE IF EXISTS dudebro;";
 			$mysqli->query($query);
 			$mysqli->close();
 
 			if(is_dir("assets/profPics")){
 				rmdir("assets/profPics");
 			}
-
-			return "The following database has been deleted:<br><br><b>$databaseName</b>";
 		}
 
 		function addEmail($email){
@@ -162,11 +159,7 @@
 				$mysqli->query($query);
 
 				$mysqli->close();
-				return "The following email has been approved:<br><br>
-					   <b>'$email'<br></b>";
-			} else {
-				return "Email Already Approved.";
-			}				
+			}			
 		}
 
 		function removeEmail($email){
