@@ -44,10 +44,13 @@ function show() {
 
 	print("
 			<div id='forgot'>
+			<h2>Reset Password</h2>
 			<form name='input' action='reset.php' method='post' id='loginform'>
 			Email: <input type='text' name='email'>
 			<input type='submit' value='Submit'>
 			</form>
+			<a href='login.php'>Log In</a><br>
+			<a href='register.php'>Create Account</a><br>
 			</div>
 			");
 			

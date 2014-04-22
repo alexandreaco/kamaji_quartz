@@ -97,13 +97,8 @@
 			<br><br>
 			<input type='submit' name='submit' value='Log In'>
 			</form>
-<<<<<<< HEAD
-			<a href='reset.php'>Forgot Password?</a><br>
-			<a href='register.php'>New to Quartz?</a><br>
-=======
 			<a href='forgotpassword.php'>Forgot Password</a><br>
 			<a href='register.php'>Create Account</a><br>
->>>>>>> FETCH_HEAD
 			</div>");
 			
 	 		$this->page->endDoc();
