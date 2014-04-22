@@ -25,6 +25,9 @@
 		var $research;
 		var $publications;
 		var $personalinfo;
+		
+		var $course1title;
+		var $course2title;
 	 
 	 
 	 	// constructor
@@ -51,7 +54,7 @@
 	 
 	 	// get input
 	 	function getInput() {
-	 	
+			
 	 	}
 	 	
 	 	
@@ -133,31 +136,31 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td>$this->displayname</td>
+										<td><input type='text' value='$this->displayname' name='displayname' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
-										<td>$this->jobtitle</td>
+										<td><input type='text' value='$this->jobtitle' name='jobtitle' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Address:</td>
-										<td>$this->address</td>
+										<td><input type='text' value='$this->address' name='address' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Telephone:</td>
-										<td>$this->telephone</td>
+										<td><input type='text' value='$this->telephone' name='telephone' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Fax:</td>
-										<td>$this->fax</td>
+										<td><input type='text' value='$this->fax' name='fax' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Office Hours:</td>
-										<td>$this->officehours</td>
+										<td><input type='text' value='$this->officehours' name='officehours' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td>$this->biography</td>
+										<td><input type='text' value='$this->biography' name='biography' class='name' /></td>
 									<tr>
 									<tr>
 										<td colspan='2'></td>
@@ -193,6 +196,7 @@
 								<!-- model code will generate these divs -->
 
 								<div class='course' id='course1' style='display:none'>
+									<br>
 									<label for='course_name' class='label'>Course Name</label>
 									<input type='text' value='CS112 Introduction to Computer Science II' name='course_name' class='name' /><br />
 									<label for='course_site' class='label'>Course Website URL</label>
@@ -284,17 +288,26 @@
 				document.getElementById('personal_info').style.display='inline';
 			}
 			
+			function showCourseEdit()
+			{
+				document.getElementById('finalCourse1').style.display = 'none';
+				document.getElementById('finalCourse2').style.display = 'none';
+				document.getElementById('course1').style.display = 'inline';
+				document.getElementById('course2').style.display = 'inline';
+			}
+			
 			function saveChanges()
 			{
 				var research = document.getElementById('research').value;
 				var publications = document.getElementById('publications').value;
 				var personal = document.getElementById('personal_info').value;
 				
-				//SEND TO MODEL
+				
 				document.getElementById('finalResearch').innerHTML=research;
 				document.getElementById('finalPublications').innerHTML=publications;
 				document.getElementById('finalPersonalInfo').innerHTML=personal;
 				
+				//SEND TO MODEL
 				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
 				var xmlhttp;
 
@@ -320,11 +333,15 @@
 				document.getElementById('research').style.display='none'
 				document.getElementById('publications').style.display='none'
 				document.getElementById('personal_info').style.display='none'
+				//Done with saves for research, publications, and personal
 				
-				//document.getElementById('course1').style.display='none';
-				//document.getElementById('course2').style.display='none';
-				//document.getElementById('finalCourse1').style.display='block';
-				//document.getElementById('finalCourse2').style.display='block';
+				//SAVE COURSE CHANGES
+				
+				
+				document.getElementById('course1').style.display='none';
+				document.getElementById('course2').style.display='none';
+				document.getElementById('finalCourse1').style.display='block';
+				document.getElementById('finalCourse2').style.display='block';
 			}
 			</script> ";
 			}

@@ -17,6 +17,7 @@
 	background: url('../images/Header.jpg');
 	width: 945px;
 	height: 124px;
+	position: relative;
 }
 
 .content {
@@ -40,24 +41,8 @@
 	*/
 }
 
-.login {
-	background: url('../images/Login.jpg');
-	width: 500px;
-	height: 190px;
-	padding: 70px 0 0 50px;
-	display: block;
-	psition:relative; 
-	top:59px; 
-	margin-top:50px;
-	margin-left:auto;
-	margin-right:auto;
-	font-family:Tahoma; 
-	font-size: 13px;
-	z-index: 1;
 
-}
-
-
+/* 
 #reg {
 	background: url('../images/Register.jpg');
 	width: 650px;
@@ -71,6 +56,7 @@
 	margin-right:auto;
 	font-size: 17px; 
 }
+ */
 
 #confirmationEmail {
 position: absolute;
@@ -86,28 +72,17 @@ line-height: 41px;
 }
 
 #error {
-background: url('../images/error.png');
-position: absolute;
-width: 300px;
-height: 41px;
-text-align: center;
-font-size: 16px;
-margin: auto;
-right: 0;
-left: 0;
-line-height: 41px;
-}
-
-#forgot {
-	background: url('../images/Changepassword.jpg');
-	width: 500px;
-	height: 150px;
-	padding: 110px 0 0 50px;
 	display: block;
-	position: relative;
-	top:100px;
-	margin: 0 auto;
-	font-size: 17px; 
+	margin: 0 auto 30px auto;
+	width: 500px;
+	text-align: center;
+	line-height: 2em;
+	padding: 1em 2em;
+	border: 3px solid #ebccd1;
+	border-radius: 20px;
+	color: #a94442;
+	background: #f2dede;
+	font-size: 1.25em;
 }
 
 

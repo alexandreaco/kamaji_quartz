@@ -34,3 +34,17 @@ a, a:hover, a:active, a:visited {
 	color: #FFFFFF;
 	font-weight:300;
 }
+
+#login_btn {
+	position: absolute;
+	background: #434542;
+	right: 40px;
+	top: 10px;
+	padding: 2px 5px;
+	font-size: 0.9em;
+}
+
+#login_btn a {
+	color: #FFFFFF;
+}
+
