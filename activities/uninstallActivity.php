@@ -40,6 +40,8 @@
 			$string = str_replace("\r", "", $string);
 
 			$this->dbName = $string;
+
+			fclose($fh);
 		}
 
 		function show() {

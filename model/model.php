@@ -101,6 +101,9 @@
 
 			$mysqli->close();
 
+			$this->addEmail($adminName."@bu.edu");
+			$this->createUser("",$adminName."@bu.edu",$adminPass);
+
 			mkdir("./assets/profPics");
 		}
 
@@ -761,6 +764,32 @@
 
 		function getImage($email) {
 
+		}
+
+		function checkCredentials($email, $pass)
+		{
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM users WHERE accountname='$accountname';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "Invalid Username";
+			} else {
+
+				$row = $result->fetch_assoc();
+				$password = stripslashes($row["password"]);
+				$mysqli->close();
+
+				if(md5($pass) == $password) {
+					return "Valid Credentials";
+				} else {
+					return "Invalid Password";
+				}
+			}
 		}
 	}
 

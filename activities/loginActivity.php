@@ -11,24 +11,38 @@
 	 class LoginActivity {
 	 
 	 	// data members
+	 	var $context;
 	 	var $page;
 	 	var $model;
-	 
+	 	var $name;
+	 	var $password;
+	 	var $error;
 	 
 	 	// constructor
 	 	function __construct() {
 	 		
 	 		$this->model = new Model();
-	 		
 	 		$this->page = new Page("Login");
 	 		
-	 		
+	 		if(isset($_POST['submit'])){
+	 			if($_POST['name']!="" && $_POST['password']!=""){
+	 				$this->context = "submitting";
+	 				$this->error = "";
+	 			} else {
+	 				$this->context = "showingform";
+	 				$this->error = "ERROR: All fields required.";
+	 			}
+	 		} else {
+	 			$this->context = "showingform";
+	 			$this->error = "";
+	 		}
+
 	 	}
 	 
 	 
 	 	// run
 		function run() {
-			
+			$this->getInput();
 			$this->process();
 			$this->show();
 			
@@ -37,91 +51,48 @@
 	 
 	 	// get input
 	 	function getInput() {
-	 	
+	 		if($this->context == 'submitting'){
+	 			$this->name = $_POST["name"];
+	 			$this->password = $_POST["password"];
+	 		}
 	 	}
 	 	
 	 	
 	 	// process
 	 	function process() {
-	 	
-		if (!isset($_POST["submit"]))
-		{
-			if (isset($_POST["firstname"]))
-			{
-				$newName = $_POST["firstname"];
-				if (!($newName == "JILL@gmail.com")) //THIS WILL EVENTUALLY TAKE MODEL VALUES
-				{
-					//FUTURE: CREATE MODEL FUNCTION checkValidLogin($newName,$newPass) to compare
-					echo "<script>
-						document.getElementById('loginerrormessage').style.border ='3px solid';
-						document.getElementById('loginerrormessage').innerHTML = 'INVALID LOGIN';
-						</script>";
-				}
-				else
-				{
-					if (isset($_POST["password"]))
-					{
-						$newPass = $_POST["password"];
-						if (!($newPass == "JILLSPASSWORD")) //THIS WILL EVENTUALLY TAKE MODEL VALUES
-						{
-							echo "<script>
-									document.getElementById('loginerrormessage').style.border ='3px solid';
-									document.getElementById('loginerrormessage').innerHTML = 'INCORRECT PASSWORD';
-									</script>";
-						}
-						else
-						{
-							
-							echo "Valid Login.<br> Should change header location to the MyManage Page";
-							//Should change header to MyManage
-						}
-					}
+			//FUTURE: CREATE MODEL FUNCTION checkValidLogin($newName,$newPass) to compare
+			if($this->context == "submitting"){
+				$check = $this->model->checkCredentials($this->name,$this->password);
+
+
+
+				if($check =="Valid Credentials"){
+					header( 'Location: mymanage.php' ) ;
+				} else {
+					$this->error = $check;
 				}
 			}
 		}
-		else
-		{
-			echo "<p>No data submitted.</p>";
-		}
-		
-	 	}
-	 	
-	 	
+	 		 	
 	 	// show
 	 	function show() {
-	 	
 	 		$this->page->beginDoc();
-	 		
-			echo "<head>";
-			echo "<link rel='stylesheet' type='text/css/' href='css/style.css' />";
-			echo "</head>";
-	 		
-			echo "<body>";
-			echo "<div id='container'>
-				<div id='header'></div>
-		
-				<div id='content'>";
-				echo "<div id='loginerrormessage'></div>";
-				
-				echo "<form name='input' action='login.php' method='post' id='loginform'>";
-				echo "Email: <input type='text' name='firstname'>
+
+	 			print("
+				<br><br><br><center><font color='FF0000'>$this->error</font></center>
+				<div class='login'>
+				<form name='input' action='login.php' method='post' id='loginform'>
+				Email: <input type='text' name='name'>
 				<br>
 				Password: <input type='password' name='password'>
-				<br><br>";
-				echo "<input type='submit' value='Submit'>";
-				echo "</form>";
-				echo "<div id='loginlinkbox'>
+				<br><br>
+				<input type='submit' name='submit' value='Submit'>
+				</form>
 				<a href='forgotpassword.php'>Forgot Password?</a><br>
 				<a href='register.php'>New to Quartz?</a><br>
-				</div>";
-				echo "</div>"; //Content Div
-				
-				echo "<div id='footer'></div>";
-				echo "</body>";
+				</div>");
 			
 	 		$this->page->endDoc();
-	 		
-	 	
 	 	}
 	 
 	 
