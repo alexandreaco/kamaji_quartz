@@ -3,8 +3,13 @@
  include_once "model/model.php";
  
 	 class RegistrationActivity {
+	 	var $context;
 	 	var $page;
 	 	var $model;
+	 	var $name;
+	 	var $email;
+	 	var $password1;
+	 	var $password2;
 		var $emptyFlag;
 	 
 
@@ -12,12 +17,25 @@
 	 		
 	 		$this->model = new Model();
 	 		$this->page = new Page("Register");
+
+	 		if(isset($_POST['submit'])) {
+	 			if($_POST['givenName']!="" && $_POST['givenEmail']!="" && $_POST['givenPassword']!="" && $_POST['givenPassword2']!=""){
+	 				$this->context = "submitting";
+	 				$this->emptyFlag = "";
+	 			} else {
+	 				$this->context = "showingform";
+	 				$this->emptyFlag = "Error: All fields required.";
+	 			}
+	 		} else {
+	 			$this->context = "showingform";
+	 			$this->emptyFlag = "";
+	 		}
 	 		
 	 	}
 	 
 	 
 		function run() {
-			
+			$this->getInput();	
 			$this->process();
 			$this->show();
 			
@@ -25,71 +43,26 @@
 	 
 	 
 	 	function getInput() {
-	 	
+	 		if($this->context == 'submitting'){
+	 			$this->name = $_POST["givenName"];
+	 			$this->email = $_POST["givenEmail"];
+	 			$this->password1 = $_POST["givenPassword"];
+	 			$this->password2 = $_POST["givenPassword2"];
+	 		}
 	 	}
 	 	
 	 	
 	 	
 	 	function process() {
-	 	
-			if (isset($_POST["givenName"]) && $_POST["givenName"] != "")
-			{
-				if (isset($_POST["givenEmail"]) && $_POST["givenEmail"] != "")
-				{
-					$emailInUse = $this->model->checkEmail($_POST["givenEmail"]);
-					if($emailInUse)
-					{
-						$this->emptyFlag = "Error: Email already in use";
-					}
-					else
-					{
-						$pass1;
-						$pass2;
-						if(isset($_POST["givenPassword"]) && $_POST["givenPassword"] != "")
-						{
-							$pass1 = $_POST["givenPassword"];
-							if(isset($_POST["givenPassword2"]) && $_POST["givenPassword2"] != "")
-							{
-								$pass2 = $_POST["givenPassword2"];
-								$stringsEqual = ($pass1 == $pass2);
-								if($stringsEqual)
-								{
-									
-									$this->emptyFlag = "";
-									
-									
-									$this->model->createUser($_POST["givenName"],
-															 $_POST["givenEmail"],
-															 $_POST["givenPassword"]);
-									
-									$this->generateConfirmationEmail();
-								}
-								else
-								{
-									$this->emptyFlag = "Error: Passwords don't match";
-								}
-							}
-							else
-							{
-								$this->emptyFlag = "Error: Please retype your password";
-							}
-						}
-						else
-						{
-							$this->emptyFlag = "Error: Please enter a password";
-						}
-					}
-				}
-				else
-				{
-					$this->emptyFlag = "Error: Please enter an email";
-				}
-			}
-			else
-			{
-				if( isset($_POST['givenEmail']) || isset($_POST['givenPassword']) || isset($_POST['givenPassword2']))
-				{
-					$this->emptyFlag = "Error: Please enter a valid name";
+	 		if($this->context == "submitting") {
+				$validEmail = $this->model->checkEmail($_POST["givenEmail"]);
+
+				if($validEmail){
+					$this->model->createUser($_POST["givenName"],
+											 $_POST["givenEmail"],
+											 $_POST["givenPassword"]);
+											
+					$this->generateConfirmationEmail();
 				}
 			}
 	 	}
@@ -126,7 +99,7 @@
 			  Retype Password: <input type='password' name='givenPassword2'>
 			  <br>
 			  <br>
-			<input type='submit' value='Submit'>
+			<input type='submit' name='submit' value='Submit'>
 			</form>
 			</div>
 	 		");
@@ -135,8 +108,7 @@
 	 	}
 		
 		
-		function generateConfirmationEmail()
-		{
+		function generateConfirmationEmail(){
 			$to = $_POST["givenEmail"];
     		$subject = "Quartz Registration Information";
     		$message = "Please click ";
