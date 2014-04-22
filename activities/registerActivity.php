@@ -10,6 +10,7 @@
 	 	var $email;
 	 	var $password1;
 	 	var $password2;
+	 	var $id;
 		var $emptyFlag;
 	 
 
@@ -18,19 +19,22 @@
 	 		$this->model = new Model();
 	 		$this->page = new Page("Register");
 
-	 		if(isset($_POST['submit'])) {
-	 			if($_POST['givenName']!="" && $_POST['givenEmail']!="" && $_POST['givenPassword']!="" && $_POST['givenPassword2']!=""){
-	 				$this->context = "submitting";
-	 				$this->emptyFlag = "";
-	 			} else {
-	 				$this->context = "showingform";
-	 				$this->emptyFlag = "Error: All fields required.";
-	 			}
+	 		if(isset($_GET['activate'])) {
+	 			$context = "activating";
 	 		} else {
-	 			$this->context = "showingform";
-	 			$this->emptyFlag = "";
-	 		}
-	 		
+		 		if(isset($_POST['submit'])) {
+		 			if($_POST['givenName']!="" && $_POST['givenEmail']!="" && $_POST['givenPassword']!="" && $_POST['givenPassword2']!=""){
+		 				$this->context = "submitting";
+		 				$this->emptyFlag = "";
+		 			} else {
+		 				$this->context = "showingform";
+		 				$this->emptyFlag = "Error: All fields required.";
+		 			}
+		 		} else {
+		 			$this->context = "showingform";
+		 			$this->emptyFlag = "";
+		 		}
+			}
 	 	}
 	 
 	 
@@ -48,6 +52,8 @@
 	 			$this->email = $_POST["givenEmail"];
 	 			$this->password1 = $_POST["givenPassword"];
 	 			$this->password2 = $_POST["givenPassword2"];
+	 		} else if($this->context == "activating") {
+	 			$this->id = $_GET['id'];
 	 		}
 	 	}
 	 	
@@ -59,16 +65,22 @@
 
 				if($validEmail){
 					if($this->password1==$this->password2){
-						$this->model->createUser($_POST["givenName"],
-												 $_POST["givenEmail"],
-												 $_POST["givenPassword"]);
-												
-						$this->generateConfirmationEmail();
+						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);												
+						$this->generateConfirmationEmail($this->id);
+
 					} else {
-						$this->error = "Error: Passwords do not Match.";
+						$this->emptyFlag = "Error: Passwords do not Match.";
 					}
 				} else {
-					$this->error = "Error: Please Enter Valid Email.";
+					$this->emptyFlag = "Error: Please Enter Valid Email.";
+				}
+			} else if($this->context == "activating"){
+
+				$isValid = $this->model->activateAccount($id);
+
+				if($isValid == 1) {
+				} else {
+				  print("FAILED.");
 				}
 			}
 	 	}
@@ -79,46 +91,51 @@
 	 	
 	 		$this->page->beginDoc();
 	 		
-	 		
-			if($this->emptyFlag != "") {
-			print("
-			<div id='error'>
-			$this->emptyFlag
-			</div>
-			");
-			}
-			
-			
-			print("
-			<div id='reg'>
-			<br> <br>
-			<form name='input' action='register.php' method='post'>
-			  Name: <input type='text' name='givenName'>
-			  <br>
-			  <br>
-			  Email: <input type='text' name='givenEmail'> 
-			  <br>
-			  <br>
- 			  Password: <input type='password' name='givenPassword'>
-			  <br>
-			  <br>
-			  Retype Password: <input type='password' name='givenPassword2'>
-			  <br>
-			  <br>
-			<input type='submit' name='submit' value='Submit'>
-			</form>
-			</div>
-	 		");
-	 		
+	 		if($this->context == "showingform") {
+				if($this->emptyFlag != "") {
+				print("
+				<div id='error'>
+				$this->emptyFlag
+				</div>
+				");
+				}
+				
+				print("
+				<div id='reg'>
+				<br> <br>
+				<form name='input' action='register.php' method='post'>
+				  Name: <input type='text' name='givenName'>
+				  <br>
+				  <br>
+				  Email: <input type='text' name='givenEmail'> 
+				  <br>
+				  <br>
+	 			  Password: <input type='password' name='givenPassword'>
+				  <br>
+				  <br>
+				  Retype Password: <input type='password' name='givenPassword2'>
+				  <br>
+				  <br>
+				<input type='submit' name='submit' value='Submit'>
+				</form>
+				</div>
+		 		");
+			}  else if ($this->context == "submitting") {
+				print("Thank you for registering for Quartz.  An email has been sent with the link to 
+						complete the registration process");
+			}	else if ($this->context == "registered") {
+				print("Congratulations Dude!!! You have succesfully registered for Quartz.  
+						<a href='Location: 'http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
+			} 		
 	 		$this->page->endDoc();
 	 	}
 		
 		
-		function generateConfirmationEmail(){
+		function generateConfirmationEmail($id){
 			$to = $_POST["givenEmail"];
     		$subject = "Quartz Registration Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/login.php'>here</a>";
+    		$message .= "<a href='http://localhost:8888/kamaji_quartz/login.php?activate=1&id=$id'>here</a>";
     		$message .= " to login.";
     		$header = "From: webmaster@quartz.com";
     		$header .= 'MIME-Version: 1.0' . "\r\n";

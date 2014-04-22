@@ -781,8 +781,7 @@
 
 		}
 
-		function checkCredentials($email, $pass)
-		{
+		function checkCredentials($email, $pass){
 			$mysqli = $this->connect();
 
 			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
@@ -805,6 +804,45 @@
 					return "Invalid Password";
 				}
 			}
+		}
+
+		function storeRegistrationData($name,$email,$password){
+			$mysqli = $this->connect();
+
+			$id = md5($name.$email.$password);
+
+			$query = "INSERT INTO registration SET name='$name', 
+					  email='$email',
+					  password='$password',
+					  id ='$id';";
+
+			$mysqli->query($query);
+			$mysqli->close();
+
+			return $id;
+		}
+
+		function activateAccount($id) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM registration WHERE id='$id';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return 0;
+			} else {
+				$row = $result->fetch_assoc();
+				$name = stripslashes($row["name"]);
+				$email = stripslashes($row["email"]);
+				$password = stripslashes($row["password"]);
+				
+				$this->createUser($name,$email,md5($password),'0');
+
+				$mysqli->close();
+			}			
 		}
 	}
 
