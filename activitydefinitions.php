@@ -21,7 +21,7 @@
 	 include 'activities/loginActivity.php';
 	 
 	 // called my mymanage.php
-	 include 'activities/mymanageActivityNew.php';
+	 include 'activities/mymanageActivity.php';
 	 
 	 // called by mysite.php
 	 include 'activities/mysiteActivity.php';

@@ -13,6 +13,21 @@
 	 	// data members
 	 	var $page;
 	 	var $model;
+		var $context;
+		
+		var $displayname;
+		var $jobtitle;
+		var $address;
+		var $telephone;
+		var $fax;
+		var $officehours;
+		var $biography;
+		var $research;
+		var $publications;
+		var $personalinfo;
+		
+		var $course1title;
+		var $course2title;
 	 
 	 
 	 	// constructor
@@ -20,7 +35,9 @@
 	 		
 	 		$this->model = new Model();
 	 		
-	 		$this->page = new Page("My Manage");
+	 		$this->page = new Page("My Site");
+			
+			$this->context = "showingform";
 	 		
 	 		
 	 	}
@@ -37,156 +54,47 @@
 	 
 	 	// get input
 	 	function getInput() {
-	 	
+			
 	 	}
 	 	
 	 	
 	 	// process
 	 	function process() {
 	 	
+			if ($this->context == "saving")
+			{
+				$this->getInput();
+			}
+			else //context == "showingform"
+			{
+				
+				$this->displayname = $_GET['user'];
+				$this->jobtitle = $this->model->getJobtitle($this->displayname);
+				$this->address = $this->model->getAddress($this->displayname);
+				$this->telephone = $this->model->getTelephone($this->displayname);
+				$this->fax = $this->model->getFax($this->displayname);
+				$this->officehours = $this->model->getOfficehours($this->displayname);
+				$this->biography =   $this->model->getBiography($this->displayname);
+				$this->research = $this->model->getResearch($this->displayname);
+				$this->publications = $this->model->getPublications($this->displayname);
+				$this->personalinfo = $this->model->getPersonal($this->displayname);
+			}
+		
 	 	}
 	 	
 	 	
 	 	// show
 	 	function show() {
-			$displayname;
-			if( isset($_GET['user']))
-			{
-				$displayname = $_GET['user'];
-			}
-			else
-			{
-				$displayname = "Bob";
-				//Header to Login;
-			}
-			
-			$jobtitle = $this->model->getJobtitle($displayname);
-			$address = $this->model->getAddress($displayname);
-			$telephone = $this->model->getTelephone($displayname);
-			$fax = $this->model->getFax($displayname);
-			$officehours = $this->model->getOfficehours($displayname);
-			$biography =   $this->model->getBiography($displayname);
-			$research = $this->model->getResearch($displayname);
-			$publications = $this->model->getPublications($displayname);
-			$personalinfo = $this->model->getPersonal($displayname);
-		
+	 	
 	 		$this->page->beginDoc();
-			
-			
-						
-				echo "
-					
-					<script>
-					
-					function bodyLoad()
-					{ 
-						document.getElementById('welcome_title').innerHTML='Welcome, $displayname';";
-							
-						$websiteOn = false; //MODELSTUB
-						if ($websiteOn)
-						{
-							echo "document.getElementById('website_on').checked=true;";
-						}
-						else
-						{
-							echo "document.getElementById('website_off').checked=true;";
-						}
-						
-						//echo 'document.getElementById("profile_pic").src="Keklak.jpg"';
-						
-						echo "var generalInfoTable = document.getElementById('gen_info');";
-						echo "generalInfoTable.rows[0].cells[1].innerHTML='$displayname';";
-						echo "generalInfoTable.rows[1].cells[1].innerHTML='$jobtitle';";
-						echo "generalInfoTable.rows[2].cells[1].innerHTML='$address';";
-						echo "generalInfoTable.rows[3].cells[1].innerHTML='$telephone';";
-						echo "generalInfoTable.rows[4].cells[1].innerHTML='$fax';";
-						echo "generalInfoTable.rows[5].cells[1].innerHTML='$officehours';";
-						echo "generalInfoTable.rows[8].innerHTML='$biography';";
-						//KNOWN BUG: Can't make the Bio more than one line of text
-						
-						echo "document.getElementById('finalResearch').innerHTML='$research';";
-						echo "document.getElementById('finalPublications').innerHTML='$publications';";
-						echo "document.getElementById('finalPersonalInfo').innerHTML='$personalinfo';";
-						
-						echo "
-					}
-					
-					function showCourseEdit()
-					{
-						document.getElementById('course1').style.display='inline';
-						document.getElementById('course2').style.display='inline';
-						document.getElementById('finalCourse1').style.display='none';
-						document.getElementById('finalCourse2').style.display='none';
-						
-						var course3display = document.getElementById('course3').style.display;
-						if (course3='none')
-						{
-						}
-						else
-						{
-							document.getElementById('course3').style.display='inline';
-							document.getElementById('finalCourse3').style.display='none';
-						}
-					}
-					
-					function showResearchEdit()
-					{
-						document.getElementById('research').style.display='inline';
-					}
-					
-					function showPublicationsEdit()
-					{
-						document.getElementById('publications').style.display='inline';
-					}
-					
-					function showPersonalInfoEdit()
-					{
-						document.getElementById('personal_info').style.display='inline';
-					}
-					
-					function addCourse()
-					{
-						document.getElementById('finalCourse3').style.display='block';
-					}
-					
-					function saveChanges()
-					{
-						
-						var research = document.getElementById('research').value;
-						var publications = document.getElementById('publications').value;
-						var personal = document.getElementById('personal_info').value;
-						
-						//SEND TO MODEL
-						document.getElementById('finalResearch').innerHTML=research;
-						document.getElementById('finalPublications').innerHTML=publications;
-						document.getElementById('finalPersonalInfo').innerHTML=personal;
-						
-						//HIDE EDITORS
-						document.getElementById('research').style.display='none'
-						document.getElementById('publications').style.display='none'
-						document.getElementById('personal_info').style.display='none'
-						
-						document.getElementById('course1').style.display='none';
-						document.getElementById('course2').style.display='none';
-						document.getElementById('finalCourse1').style.display='block';
-						document.getElementById('finalCourse2').style.display='block';
-						
-					}
-					
-					</script>
-				
-				";
 	 		
-			
-			echo "<div id='content'>
-		
-				<!-- use php to generate user name in this h1 tag-->		
-				
-				<h1 class='page_title' id='welcome_title'>Welcome, Default User</h1>
+	 		if ($this->context == "showingform")
+			{
+			echo "
+				<div id='mymanage'>
+				<h1 class='page_title' id='welcome_title'>Welcome, $this->displayname</h1>
 				<p>This is your Website Management Portal.<br /> Here you can edit course content and your site's information.</p>
-				
-			<form onload='bodyLoad()'>
-						
+				<form id='mymanageform'>
 							<div class='module website_settings'>
 							
 								<h2 class='mod_title clear'>Website Settings</h2>
@@ -202,7 +110,7 @@
 							
 							
 							</div> <!--/module-->
-						
+							
 							<div class='module photo'>
 							
 								<h2 class='mod_title clear'>Photo</h2>
@@ -228,31 +136,31 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td></td>
+										<td><input type='text' value='$this->displayname' id='geninfo_displayname' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
-										<td></td>
+										<td><input type='text' value='$this->jobtitle' id='geninfo_jobtitle' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Address:</td>
-										<td></td>
+										<td><input type='text' value='$this->address' id='geninfo_address' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Telephone:</td>
-										<td></td>
+										<td><input type='text' value='$this->telephone' id='geninfo_telephone' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Fax:</td>
-										<td></td>
+										<td><input type='text' value='$this->fax' id='geninfo_fax' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Office Hours:</td>
-										<td></td>
+										<td><input type='text' value='$this->officehours' id='geninfo_officehours' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td></td>
+										<td><input type='text' value='$this->biography' id='geninfo_biography' class='name' /></td>
 									<tr>
 									<tr>
 										<td colspan='2'></td>
@@ -288,6 +196,7 @@
 								<!-- model code will generate these divs -->
 
 								<div class='course' id='course1' style='display:none'>
+									<br>
 									<label for='course_name' class='label'>Course Name</label>
 									<input type='text' value='CS112 Introduction to Computer Science II' name='course_name' class='name' /><br />
 									<label for='course_site' class='label'>Course Website URL</label>
@@ -323,10 +232,10 @@
 								<h2 class='mod_title'>Research</h2> <button type='button' class='link_lookalike' onclick='showResearchEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalResearch'>research information will go here</p>
+								<p id='finalResearch'>$this->research</p>
 								
 
-								<textarea rows='5' cols='115' id='research' style='display:none'>research information will go here</textarea>
+								<textarea rows='5' cols='115' id='research' style='display:none'>$this->research</textarea>
 
 						
 							</div> <!--/module-->
@@ -336,10 +245,10 @@
 								<h2 class='mod_title'>Publications</h2> <button type='button' class='link_lookalike' onclick='showPublicationsEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalPublications'>publications information will go here</p>
+								<p id='finalPublications'>$this->publications</p>
 								
 
-								<textarea rows='5' cols='115' id='publications' style='display:none'>publications will go here</textarea>
+								<textarea rows='5' cols='115' id='publications' style='display:none'>$this->publications</textarea>
 
 						
 							</div> <!--/module-->
@@ -350,10 +259,10 @@
 								<button type='button' class='link_lookalike' onclick='showPersonalInfoEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalPersonalInfo'>personal information will go here</p>
+								<p id='finalPersonalInfo'>$this->personalinfo</p>
 								
 
-								<textarea rows='5' cols='115' id='personal_info' style='display:none'>personal information will go here</textarea>
+								<textarea rows='5' cols='115' id='personal_info' style='display:none'>$this->personalinfo</textarea>
 
 						
 							</div> <!--/module-->
@@ -361,11 +270,112 @@
 							<button type='button' onclick='saveChanges()'>Save All Changes</button>
 							<button>Leave Without Saving</button>
 							
-							</form>";
-							
-							
-			echo    "</div> <!-- content -->";
+							</form>
+							</div>
+			<script>			
+			function showResearchEdit()
+			{
+				document.getElementById('research').style.display='inline';
+			}
 			
+			function showPublicationsEdit()
+			{
+				document.getElementById('publications').style.display='inline';
+			}
+			
+			function showPersonalInfoEdit()
+			{
+				document.getElementById('personal_info').style.display='inline';
+			}
+			
+			function showCourseEdit()
+			{
+				document.getElementById('finalCourse1').style.display = 'none';
+				document.getElementById('finalCourse2').style.display = 'none';
+				document.getElementById('course1').style.display = 'inline';
+				document.getElementById('course2').style.display = 'inline';
+			}
+			
+			function saveChanges()
+			{
+				var research = document.getElementById('research').value;
+				var publications = document.getElementById('publications').value;
+				var personal = document.getElementById('personal_info').value;
+				
+				
+				document.getElementById('finalResearch').innerHTML=research;
+				document.getElementById('finalPublications').innerHTML=publications;
+				document.getElementById('finalPersonalInfo').innerHTML=personal;
+				
+				//SEND TO MODEL
+				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
+				
+				var jobtitle = '&&jobtitle=' + document.getElementById('geninfo_jobtitle').value;
+				var address = '&&address=' + document.getElementById('geninfo_address').value;
+				var telephone = '&&telephone=' + document.getElementById('geninfo_telephone').value;
+				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
+				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
+				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
+				
+				var geninfo = jobtitle + address + telephone + fax + officehours + biography;
+				
+				sender = sender + geninfo;
+				
+				
+				var xmlhttp;
+
+				if (window.XMLHttpRequest)
+				{
+					xmlhttp=new XMLHttpRequest();
+					
+				}
+
+				xmlhttp.onreadystatechange=function()
+				{
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+						document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open('POST','http://localhost/GitHub/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
+				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+				xmlhttp.send(sender);
+				
+				//HIDE EDITORS
+				document.getElementById('research').style.display='none'
+				document.getElementById('publications').style.display='none'
+				document.getElementById('personal_info').style.display='none'
+				//Done with saves for research, publications, and personal
+				
+				//SAVE COURSE CHANGES
+				
+				
+				document.getElementById('course1').style.display='none';
+				document.getElementById('course2').style.display='none';
+				document.getElementById('finalCourse1').style.display='block';
+				document.getElementById('finalCourse2').style.display='block';
+				
+				saveGenInfoChanges();
+			}
+			
+			function saveGenInfoChanges()
+			{
+				var jobtitle = 'jobtitle=' + document.getElementById('geninfo_jobtitle').value;
+				var address = '&&address=' + document.getElementById('geninfo_address').value;
+				var telephone = '&&telephone=' + document.getElementById('geninfo_telephone').value;
+				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
+				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
+				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
+				
+				var submitter = jobtitle + address + telephone + fax + officehours + biography;
+			}
+			
+			</script> ";
+			}
+			else //context == "saving"
+			{
+			
+			}
 	 		
 	 		$this->page->endDoc();
 	 		
