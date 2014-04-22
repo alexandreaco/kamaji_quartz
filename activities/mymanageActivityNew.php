@@ -13,6 +13,18 @@
 	 	// data members
 	 	var $page;
 	 	var $model;
+		var $context;
+		
+		var $displayname;
+		var $jobtitle;
+		var $address;
+		var $telephone;
+		var $fax;
+		var $officehours;
+		var $biography;
+		var $research;
+		var $publications;
+		var $personalinfo;
 	 
 	 
 	 	// constructor
@@ -20,7 +32,9 @@
 	 		
 	 		$this->model = new Model();
 	 		
-	 		$this->page = new Page("My Manage");
+	 		$this->page = new Page("My Site");
+			
+			$this->context = "showingform";
 	 		
 	 		
 	 	}
@@ -44,149 +58,39 @@
 	 	// process
 	 	function process() {
 	 	
+			if ($this->context == "saving")
+			{
+				$this->getInput();
+			}
+			else //context == "showingform"
+			{
+				$displayname = $_GET['user'];
+				$jobtitle = $this->model->getJobtitle($displayname);
+				$address = $this->model->getAddress($displayname);
+				$telephone = $this->model->getTelephone($displayname);
+				$fax = $this->model->getFax($displayname);
+				$officehours = $this->model->getOfficehours($displayname);
+				$biography =   $this->model->getBiography($displayname);
+				$research = $this->model->getResearch($displayname);
+				$publications = $this->model->getPublications($displayname);
+				$personalinfo = $this->model->getPersonal($displayname);
+			}
+		
 	 	}
 	 	
 	 	
 	 	// show
 	 	function show() {
-			$displayname;
-			if( isset($_GET['user']))
-			{
-				$displayname = $_GET['user'];
-			}
-			else
-			{
-				$displayname = "Bob";
-				//Header to Login;
-			}
-			
-			$jobtitle = $this->model->getJobtitle($displayname);
-			$address = $this->model->getAddress($displayname);
-			$telephone = $this->model->getTelephone($displayname);
-			$fax = $this->model->getFax($displayname);
-			$officehours = $this->model->getOfficehours($displayname);
-			$biography =   $this->model->getBiography($displayname);
-			$research = $this->model->getResearch($displayname);
-			$publications = $this->model->getPublications($displayname);
-			$personalinfo = $this->model->getPersonal($displayname);
-		
+	 	
 	 		$this->page->beginDoc();
-			
-			
-						
-				echo "
-					
-					<script>
-					
-					function bodyLoad()
-					{ 
-						document.getElementById('welcome_title').innerHTML='Welcome, $displayname';";
-							
-						$websiteOn = false; //MODELSTUB
-						if ($websiteOn)
-						{
-							echo "document.getElementById('website_on').checked=true;";
-						}
-						else
-						{
-							echo "document.getElementById('website_off').checked=true;";
-						}
-						
-						//echo 'document.getElementById("profile_pic").src="Keklak.jpg"';
-						
-						echo "var generalInfoTable = document.getElementById('gen_info');";
-						echo "generalInfoTable.rows[0].cells[1].innerHTML='$displayname';";
-						echo "generalInfoTable.rows[1].cells[1].innerHTML='$jobtitle';";
-						echo "generalInfoTable.rows[2].cells[1].innerHTML='$address';";
-						echo "generalInfoTable.rows[3].cells[1].innerHTML='$telephone';";
-						echo "generalInfoTable.rows[4].cells[1].innerHTML='$fax';";
-						echo "generalInfoTable.rows[5].cells[1].innerHTML='$officehours';";
-						echo "generalInfoTable.rows[8].innerHTML='$biography';";
-						//KNOWN BUG: Can't make the Bio more than one line of text
-						
-						echo "document.getElementById('finalResearch').innerHTML='$research';";
-						echo "document.getElementById('finalPublications').innerHTML='$publications';";
-						echo "document.getElementById('finalPersonalInfo').innerHTML='$personalinfo';";
-						
-						echo "
-					}
-					
-					function showCourseEdit()
-					{
-						document.getElementById('course1').style.display='inline';
-						document.getElementById('course2').style.display='inline';
-						document.getElementById('finalCourse1').style.display='none';
-						document.getElementById('finalCourse2').style.display='none';
-						
-						var course3display = document.getElementById('course3').style.display;
-						if (course3='none')
-						{
-						}
-						else
-						{
-							document.getElementById('course3').style.display='inline';
-							document.getElementById('finalCourse3').style.display='none';
-						}
-					}
-					
-					function showResearchEdit()
-					{
-						document.getElementById('research').style.display='inline';
-					}
-					
-					function showPublicationsEdit()
-					{
-						document.getElementById('publications').style.display='inline';
-					}
-					
-					function showPersonalInfoEdit()
-					{
-						document.getElementById('personal_info').style.display='inline';
-					}
-					
-					function addCourse()
-					{
-						document.getElementById('finalCourse3').style.display='block';
-					}
-					
-					function saveChanges()
-					{
-						
-						var research = document.getElementById('research').value;
-						var publications = document.getElementById('publications').value;
-						var personal = document.getElementById('personal_info').value;
-						
-						//SEND TO MODEL
-						document.getElementById('finalResearch').innerHTML=research;
-						document.getElementById('finalPublications').innerHTML=publications;
-						document.getElementById('finalPersonalInfo').innerHTML=personal;
-						
-						//HIDE EDITORS
-						document.getElementById('research').style.display='none'
-						document.getElementById('publications').style.display='none'
-						document.getElementById('personal_info').style.display='none'
-						
-						document.getElementById('course1').style.display='none';
-						document.getElementById('course2').style.display='none';
-						document.getElementById('finalCourse1').style.display='block';
-						document.getElementById('finalCourse2').style.display='block';
-						
-					}
-					
-					</script>
-				
-				";
 	 		
-			
-			echo "<div id='content'>
-		
-				<!-- use php to generate user name in this h1 tag-->		
-				
+	 		if ($this->context == "showingform")
+			{
+			echo "
+				<div id='mymanage'>
 				<h1 class='page_title' id='welcome_title'>Welcome, Default User</h1>
 				<p>This is your Website Management Portal.<br /> Here you can edit course content and your site's information.</p>
-				
-			<form onload='bodyLoad()'>
-						
+				<form id='mymanageform'>
 							<div class='module website_settings'>
 							
 								<h2 class='mod_title clear'>Website Settings</h2>
@@ -202,7 +106,7 @@
 							
 							
 							</div> <!--/module-->
-						
+							
 							<div class='module photo'>
 							
 								<h2 class='mod_title clear'>Photo</h2>
@@ -228,31 +132,31 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td></td>
+										<td>$this->displayname</td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
-										<td></td>
+										<td>$this->jobtitle</td>
 									</tr>			
 									<tr>
 										<td class='label'>Address:</td>
-										<td></td>
+										<td>$this->address</td>
 									</tr>			
 									<tr>
 										<td class='label'>Telephone:</td>
-										<td></td>
+										<td>$this->telephone</td>
 									</tr>			
 									<tr>
 										<td class='label'>Fax:</td>
-										<td></td>
+										<td>$this->fax</td>
 									</tr>			
 									<tr>
 										<td class='label'>Office Hours:</td>
-										<td></td>
+										<td>$this->officehours</td>
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td></td>
+										<td>$this->biography</td>
 									<tr>
 									<tr>
 										<td colspan='2'></td>
@@ -323,10 +227,10 @@
 								<h2 class='mod_title'>Research</h2> <button type='button' class='link_lookalike' onclick='showResearchEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalResearch'>research information will go here</p>
+								<p id='finalResearch'>$this->research</p>
 								
 
-								<textarea rows='5' cols='115' id='research' style='display:none'>research information will go here</textarea>
+								<textarea rows='5' cols='115' id='research' style='display:none'>$this->research</textarea>
 
 						
 							</div> <!--/module-->
@@ -336,10 +240,10 @@
 								<h2 class='mod_title'>Publications</h2> <button type='button' class='link_lookalike' onclick='showPublicationsEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalPublications'>publications information will go here</p>
+								<p id='finalPublications'>$this->publications</p>
 								
 
-								<textarea rows='5' cols='115' id='publications' style='display:none'>publications will go here</textarea>
+								<textarea rows='5' cols='115' id='publications' style='display:none'>$this->publications</textarea>
 
 						
 							</div> <!--/module-->
@@ -350,10 +254,10 @@
 								<button type='button' class='link_lookalike' onclick='showPersonalInfoEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
-								<p id='finalPersonalInfo'>personal information will go here</p>
+								<p id='finalPersonalInfo'>$this->personalinfo</p>
 								
 
-								<textarea rows='5' cols='115' id='personal_info' style='display:none'>personal information will go here</textarea>
+								<textarea rows='5' cols='115' id='personal_info' style='display:none'>$this->personalinfo</textarea>
 
 						
 							</div> <!--/module-->
@@ -361,11 +265,34 @@
 							<button type='button' onclick='saveChanges()'>Save All Changes</button>
 							<button>Leave Without Saving</button>
 							
-							</form>";
-							
-							
-			echo    "</div> <!-- content -->";
+							</form>
+							</div>
+			<script>			
+			function showResearchEdit()
+			{
+				document.getElementById('research').style.display='inline';
+			}
 			
+			function showPublicationsEdit()
+			{
+				document.getElementById('publications').style.display='inline';
+			}
+			
+			function showPersonalInfoEdit()
+			{
+				document.getElementById('personal_info').style.display='inline';
+			}
+			
+			function saveAllChanges()
+			{
+				document.getElementById('welcome_title').innerHTML = 'Mark Twain';
+			}
+			</script> ";
+			}
+			else //context == "saving"
+			{
+			
+			}
 	 		
 	 		$this->page->endDoc();
 	 		
