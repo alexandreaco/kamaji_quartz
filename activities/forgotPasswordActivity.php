@@ -69,7 +69,7 @@ function run()
 	
 	function generateEmail()
 		{
-			$to = $_POST["givenEmail"];
+			$to = $_POST["email"];
     		$subject = "Quartz Forgot Password Information";
     		$message = "Please click ";
     		$message .= "<a href='reset.php'>here</a>";
