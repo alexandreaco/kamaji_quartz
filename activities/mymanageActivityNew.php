@@ -196,6 +196,7 @@
 								<!-- model code will generate these divs -->
 
 								<div class='course' id='course1' style='display:none'>
+									<br>
 									<label for='course_name' class='label'>Course Name</label>
 									<input type='text' value='CS112 Introduction to Computer Science II' name='course_name' class='name' /><br />
 									<label for='course_site' class='label'>Course Website URL</label>
