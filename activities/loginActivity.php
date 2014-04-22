@@ -96,7 +96,7 @@
 			<br><br>
 			<input type='submit' name='submit' value='Submit'>
 			</form>
-			<a href='forgotpassword.php'>Forgot Password?</a><br>
+			<a href='reset.php'>Forgot Password?</a><br>
 			<a href='register.php'>New to Quartz?</a><br>
 			</div>");
 			

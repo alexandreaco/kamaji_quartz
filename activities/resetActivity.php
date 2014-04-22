@@ -53,7 +53,8 @@ function show() {
 			
 	$this->page->endDoc();
 	}
-	else
+	
+	if($this->context == "submitting")
 	{
 	$this->page->beginDoc();
 
@@ -69,7 +70,6 @@ function show() {
 			<div id='forgot'>
 			
 				<form name='input' action='reset.php' method='post' id='loginform'>
-				Email: <input type='text' name='email'><br>
 				Enter New Password: <input type='password' name='newpassword'><br>
 				Confirm New Password: <input type='password' name='newpassword2'><br>
 				<input type='submit' value='Submit'>
@@ -84,13 +84,12 @@ function show() {
 
 function process() {
 
-if($this->context == "showingform"){
+if ($this->context == "showingform"){
 	if (isset($_POST['email']))
 		{	
 			if ($this->model->checkEmail($_POST['email']))
 				{
 					$this->generateEmail();
-					$this->emptyFlag = "";
 				}
 				else
 				{
@@ -103,7 +102,7 @@ if($this->context == "showingform"){
 		}
 }
 
-else 
+if ($this->context == "submitting") 
 	{
 	if (isset($_POST['email']))
 	{
@@ -117,9 +116,9 @@ else
 				{
 					print(
 					"
-					<div id='confirmationEmail'>
+					
 					Your new password has been set.
-					</div>
+					
 					");
 				}
 			}
@@ -138,6 +137,7 @@ else
 	$this->emptyFlag = "Error: The account isn't registered with Quartz.";
 	}
 	}
+	print("NO!");
 	}
 	
 }
@@ -154,7 +154,7 @@ function run()
 			$to = $_POST["email"];
     		$subject = "Quartz Forgot Password Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php'>here</a>";
+    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php?email=$to'>here</a>";
     		$message .= "to reset your password.";
     		$header = "From: webmaster@quartz.com";
     		
@@ -162,9 +162,9 @@ function run()
 		
 			print(
 			"
-			<div id='confirmationEmail'>
+			
 			An email containing a link to create a new password has been sent to you.
-			</div>
+			
 			");
 		}
 }
