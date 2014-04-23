@@ -221,7 +221,7 @@
 				
 					// get homepage data
 					
-					print "<h1>$this->username</h1>
+					print "<h1>$this->name</h1>
 								<em>$this->job_title</em> 
 								<hr />
 								<img src='$this->photo' alt='$this->username' id='photograph'>

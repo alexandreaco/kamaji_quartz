@@ -76,7 +76,7 @@ function show() {
 			<div id='forgot'>
 			<h2>Reset Password</h2>
 			<form name='input' action='reset.php' method='post' id='loginform'>
-			Email: <input type='text' name='email'>
+			<label>Email: </label><input type='text' name='email'>
 			<input type='submit' name='submit' value='Submit'>
 			</form>
 			<a href='login.php'>Log In</a><br>
@@ -112,10 +112,10 @@ function show() {
 
 	print("
 			<div id='forgot'>
-			
+				<h2>Reset Password</h2>
 				<form name='input' action='reset.php' method='post' id='loginform'>
-				Enter New Password: <input type='password' name='newpassword'><br>
-				Confirm New Password: <input type='password' name='newpassword2'><br>
+				<label>Enter New Password: </label><input type='password' name='newpassword'><br>
+				<label>Confirm New Password: </label><input type='password' name='newpassword2'><br>
 				<input type='submit' name='submiT' value='Submit'>
 				</form>
 				</div>
