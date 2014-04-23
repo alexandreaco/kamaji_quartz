@@ -17,20 +17,34 @@ function __construct()
 			$this->model = new Model();
 			$this->page = new Page("Forgot Password");
 			
-			if(isset($_GET['activate'])) {
+			if (isset($_GET['activate'])) {
 	 			$this->context = "activating";
-	 		} else {
-		 		if(isset($_POST['submit'])) {
-		 		if($_POST['email']!=""){
-		 				$this->context = "submitting";
-		 		} else {
-		 				$this->context = "showingform";
-		 				}
+	 		} else if (isset($_POST['submit'])) {
+		 		if ($this->model->checkEmail($_POST['email'])) {
+		 			$this->context = "submitting";
 		 		} else {
 		 			$this->context = "showingform";
-				}
+		 			$this->emptyFlag = "Error: The email entered isn't registered.";
+		 		}
+		 	} else if (isset($_POST['submiT'])) {
+		 		if (isset($_POST['newpassword']) && isset($_POST['newpassword2'])) {
+		 			if ($_POST['newpassword'] == $_POST['newpassword2'] && ($_POST['newpassword'] != "" )) {
+		 				$this->context = "reset"; 
+		 			} else {
+		 			$this->context == "activating";
+		 			
+		 			$this->emptyFlag = "Error: The passwords you entered do not match.";
+		 			print($this->emptyFlag);
+		 			}
+		 		} else {
+		 			$this->context == "activating";
+		 			print("TEST");
+		 			$this->emptyFlag = "Error: Please enter a password and confirm it.";
+		 		}
+		 	} else {
+		 		$this->context = "showingform";
 			}
-		}
+	}
 			
 	
 function getInput() {
@@ -47,16 +61,20 @@ function show() {
 	
 	if($this->context == "showingform"){
 
-	if($this->emptyFlag != "") {
-			print("<div id='error'>$this->emptyFlag</font></center></div>");
-			}
+		if($this->emptyFlag != "") {
+			print("
+			<div id='error'>
+			$this->emptyFlag
+			</div>
+			");
+		}
 
 	print("
 			<div id='forgot'>
 			<h2>Reset Password</h2>
 			<form name='input' action='reset.php' method='post' id='loginform'>
 			Email: <input type='text' name='email'>
-			<input type='submit' value='Submit'>
+			<input type='submit' name='submit' value='Submit'>
 			</form>
 			<a href='login.php'>Log In</a><br>
 			<a href='register.php'>Create Account</a><br>
@@ -66,6 +84,14 @@ function show() {
 	
 	else if($this->context == "submitting")
 	{
+		if($this->emptyFlag != "") {
+			print("
+			<div id='error'>
+			$this->emptyFlag
+			</div>
+			");
+		}
+
 		print("An email containing a link to create a new password has been sent to you.");
 	
 	}
@@ -73,10 +99,13 @@ function show() {
 	else if($this->context == "activating")
 	{
 
-	if($this->emptyFlag != "") {
-
-			print("<div id='error'>$this->emptyFlag</font></center></div>");
-			}
+		if($this->emptyFlag != "") {
+			print("
+			<div id='error'>
+			$this->emptyFlag
+			</div>
+			");
+		}
 
 	print("
 			<div id='forgot'>
@@ -84,10 +113,26 @@ function show() {
 				<form name='input' action='reset.php' method='post' id='loginform'>
 				Enter New Password: <input type='password' name='newpassword'><br>
 				Confirm New Password: <input type='password' name='newpassword2'><br>
-				<input type='submit' value='Submit'>
+				<input type='submit' name='submiT' value='Submit'>
 				</form>
 				</div>
 			");
+	} 
+	else if ($this->context == "reset")
+	{
+		if($this->emptyFlag != "") {
+			print("
+			<div id='error'>
+			$this->emptyFlag
+			</div>
+			");
+		}
+		
+	print("
+	Congratulations! You have succesfully changed your password.  
+		<a href='http://localhost:8888/kamaji_quartz/login.php'>Click Here</a> to log in.
+	
+	");
 	}
 	$this->page->endDoc();
 }
@@ -95,36 +140,21 @@ function show() {
 
 function process() {
 
-if ($this->context == "showingform"){
-	if (isset($_POST['email']))
-		{	
-			if ($this->model->checkEmail($_POST['email']))
-				{
-					$this->id = $this->model->storeEmail($this->email);
-					$this->generateConfirmationEmail($this->id);
-				}
-				else
-				{
-				$this->emptyFlag = "Error: The email entered isn't registered.";
-				}
-		} 
-		else
-		{
-		$this->emptyFlag = "";
-		}
-}
-
-else if ($this->context == "submitting")
+if ($this->context == "submitting")
 {
+	if ($this->model->checkEmail($_POST['email']))
+	{
+	$this->id = $this->model->storeEmail($this->email);
+	$this->generateConfirmationEmail($this->id);
+	} else
+	{
+	//$this->emptyFlag = "Error: The email entered isn't registered.";
+	}
 }
 
-else if ($this->context == "activating") 
-	{
-	if (isset($_POST['email']))
-	{
-	if (($this->model->checkEmail($_POST['email']) && $model->isValidLoginName($_POST['email'])))
-	{
-		if (isset($_POST['newpassword']) && isset($_POST['newpassword2']))
+else if ($this->context == "reset") 
+{
+	if (isset($_POST['newpassword']) && isset($_POST['newpassword2']))
 		{
 			if ($_POST['newpassword'] == $_POST['newpassword2'] && ($_POST['newpassword'] != "" ))
 			{
@@ -141,42 +171,29 @@ else if ($this->context == "activating")
 		$this->emptyFlag = "Error: Please enter a password and confirm it.";
 		}
 	}
-	else
-	{
-	$this->emptyFlag = "Error: The account isn't registered with Quartz.";
-	}
-	}
-	print("NO!");
-	}
-	
 }
+	
+
 
 function run() 
 	{
+	$this->getInput();
 	$this->process();
 	$this->show();
 	}
 		
 	
-	function generateConfirmationEmail($id){
+	function generateConfirmationEmail($id)
 		{
 			$to = $_POST["email"];
     		$subject = "Quartz Forgot Password Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php??activate=1&id=$id'>here</a>";
+    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php?activate=1&id=$id'>here</a>";
     		$message .= "to reset your password.";
     		$header = "From: webmaster@quartz.com";
     		
     		mail($to,$subject,$message, $header);
-		
-			print(
-			"
-			
-			An email containing a link to create a new password has been sent to you.
-			
-			");
-		}
+	}
 }
 
-}
 ?>
