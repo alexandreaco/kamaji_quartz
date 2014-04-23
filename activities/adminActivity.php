@@ -235,7 +235,10 @@
 					<label for='username'>Username:</label>
 					<p class='hidden_input' id='username' visible inline_padding'>John Keklak</p> 
 					<input class='hidden' id='input' type='text' value='John Keklak' />
-					<button type='submit' onclick='edit_username()' class='link_lookalike'>edit</button>
+					<button type='button' onclick='edit_username()' class='link_lookalike' id='edit'>edit</button>
+					
+					//call model to save changes 
+					<button type='button' onclick='save_username()' class='link_lookalike hidden' id='save'>save</button>					
 				</form>
 			
 				<a href='/Quartz/reset.php?user1@gmail.com' target='_blank'>reset password</a>
@@ -285,6 +288,9 @@
 		
 		// Recent Activity
 		private function getRecentActivity() {
+		
+			// $this->model->getRecentActivityEmails;
+			
 			
 			return "<div class='module recent_activity'>
 				<h2 class='mod_title'>Recent Activity</h2>
@@ -352,10 +358,44 @@
 				<script>
 					function edit_username() {
 						document.getElementById('input').style.display='inline';
+						document.getElementById('save').style.display='inline';
+						document.getElementById('username').style.display='none';
+						document.getElementById('edit').style.display='none';
 					}
 					
-				</script>
-			";
+					function save_username() {
+						document.getElementById('input').style.display='none';
+						document.getElementById('save').style.display='none';
+						
+						var newName = document.getElementById('input').value;
+						document.getElementById('username').innerHTML = newName;
+						
+						document.getElementById('username').style.display='inline-block';
+						document.getElementById('edit').style.display='inline';
+						
+						var sender = 'email=email newname=newName';
+						var xmlhttp;
+
+						if (window.XMLHttpRequest)
+						{
+							xmlhttp=new XMLHttpRequest();
+					
+						}
+
+						xmlhttp.onreadystatechange=function()
+						{
+							if (xmlhttp.readyState==4 && xmlhttp.status==200)
+							{
+								document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
+							}
+						}
+						xmlhttp.open('POST','localhost/kamaji_quartz/adminAJAX.php',true);
+						xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+						xmlhttp.send(sender);
+						}
+					
+						</script>
+					";
 		
 		}
 	 

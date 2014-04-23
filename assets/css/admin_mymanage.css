@@ -1,59 +1,12 @@
-/* 
-**** COLOR ******
-body {
-	background-color: #EEEEEE;
-}
 
 
-
-**** Typography ******
-h1, h2, h3, h4, h5, h6, p, a, table, form, div {
-	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-	font-weight: 300;
-	line-height: 1.6em;
-}
-
-form input, textarea {
-	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-	line-height: 1.75em;
-	font-size: 15px;
-}
-
-a, a:hover, a:active, a:visited {
-	color: red;
-}
-
-
-***** LAYOUT ******
-#container {
-	width: 945px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-bottom: 50px;
-}
-
-#header {
-	background: url('../images/Header.jpg');
-	width: 945px;
-	height: 124px;
-}
-
-#content {
-	background: url('../images/Body.jpg');
-	width: 845px;
-	margin: -20px 0;
-	padding: 10px 50px;
-}
-
-#footer {
-	background: url('../images/Footer.jpg');
-	width: 945px;
-	height: 100px;
-}
+/*	admin_mymanage.css
+ *
+ *	Author: @alexandreaco
+ *	Date: 4/22/2014
+ * 
  */
-
-
-/****** My Manage & Admin Pages *******/
+ 
 
 .photo p {
 	display:inline;
@@ -207,6 +160,12 @@ button.MM_greybtn{
 	display: none;
 }
 
-.visible {
-	display: block;
+
+form label {
+	display: inline;
+}
+
+.my_account p.hidden_input {
+	display: inline-block;
+	margin: 10px;
 }
