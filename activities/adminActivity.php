@@ -26,7 +26,7 @@
 	 	// constructor
 	 	function __construct() {
 	 		
-	 		session_start();
+		session_start();
 	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
 	 			header('Location: http://localhost/kamaji_quartz/login.php');
 		 	}
@@ -91,9 +91,6 @@
 			
 			// Quartz Version
 			print($this->getQuartzVersion());
-			
-			// Javascript functions
- 			//print($this->getJavascript());
  			
  	 		$this->page->endDoc();
  		
@@ -154,11 +151,11 @@
 	 	// Model
 	 	private function retrieveActiveUsers() {
 	 	
-	 		//$allEmails = $this->model->getEmails();
-	 		//$this->emails = explode("<br>". $allEmails); 
+	 		$allEmails = $this->model->getEmails();
+	 		$this->activeEmails = explode(";", $allEmails); 
 	 		
-	 		$this->activeEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
-	 		$this->numActiveUsers = count($this->activeEmails);
+// 	 		$this->activeEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
+// 	 		$this->numActiveUsers = count($this->activeEmails);
 	 	
 
 	 	}
@@ -216,11 +213,11 @@
 
 		// Model
 		private function retrieveValidUsers() {
-			//$allEmails = $this->model->getEmails();
-	 		//$this->emails = explode("<br>". $allEmails); 
+			$allEmails = $this->model->getEmails();
+	 		$this->validEmails = explode(";". $allEmails); 
 	 		
-	 		$this->validEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
-	 		$this->numValidUsers = count($this->validEmails);
+// 	 		$this->validEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
+// 	 		$this->numValidUsers = count($this->validEmails);
 		}
 	 
 	 	// My Account

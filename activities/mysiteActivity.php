@@ -30,6 +30,7 @@
 		
 		// Teaching View
 		var $numCourses;
+		var $courseNames;
 		var $courseTextArea;
 		
 		// Research View
@@ -79,7 +80,7 @@
 			
 			} else {
 			
-				// default to homepage in this demo
+				// default to homepage
 				$this->viewing = 'mysite_home';
 				
 			}
@@ -99,9 +100,13 @@
  
 		// get input
 		function getInput() {
+			
 			if($this->context = "User is logged in, site page is open") {
+				
 				$this->username = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $_SESSION["id"]);
+			
 			}
+			
 		}
 	
 	
@@ -123,62 +128,41 @@
 					$this->email = $this->model->getEmail($this->username);
 					$this->office_hours = $this->model->getOfficeHours($this->username);
 					$this->biography = $this->model->getBiography($this->username);
+					
 					// $this->photo = $this->model->getPhoto(); // return a link to the photo
-
-					// $this->username = "Username";
-					// $this->job_title = "Job Title";
-					// $this->address = "Address";
-					// $this->telephone = "Telephone";
-					// $this->fax = "Fax";
-					// $this->email = "Email";
-					// $this->office_hours = "Office Hours";
-					// $this->biography = "Biography";
 					$this->photo = "Photo"; // return a link to the photo
-
 
 				
 				} 
 				elseif ($this->viewing == 'mysite_teaching') {
 			
 					// get teaching data
-			
-					// $this->numCourses = $this->model->getNumCourses();
-// 			
-// 					$i = 0;
-// 			
-// 					while ($i < $this->numCourses)
-// 					{
-// 			
-// 						$url = $this->model->getCourseUrl($i);
-// 						$course_name = $this->model->getCourseName($i);
-// 						$description = $this->model->getCourseDescription($i);
-// 				
-// 						$this->courseTextArea = $this->courseTextArea . 
-// 							"<p>					
-// 								<a href='$url'>$course_name</a> - $description
-// 							</p>";
+					
 // 					
-// 						++$i;
-// 				
-// 					}
+//  					$allCourses = $this->model->getCourses();
+//  					$this->courseNames = explode(";", $allCourses);
+// 
+//  					$this->numCourses = count($this->courseNames);
 // 			
-// 					$i = 1;
-// 			
-// 					while ($i < $this->numCourses)
-// 					{
-// 			
-// 						$url = $this->model->getCourseUrl($i);
-// 						$course_name = $this->model->getCourseName($i);
-// 						$description = $this->model->getCourseDescription($i);
-// 				
-// 						$this->courseTextArea = $this->courseTextArea . 
-// 							"<p>					
-// 								<a href='$url'>$course_name</a> - $description
-// 							</p>";
+//  			
+//  					$count = 0;
+//  			
+//  					while ($count < $this->numCourses)
+//  					{
+//  			
+//  						$url = $this->model->getCourseUrl($this->courseNames[$count]);
+//  						$course_name = $this->model->getCourseName($this->courseNames[$count]);
+//  						$description = $this->model->getCourseDescription($this->courseNames[$count]);
+//  				
+//  						$this->courseTextArea .= 
+//  							"<p>					
+//  								<a href='$url'>$course_name</a> - $description
+//  							</p>";
 // 					
-// 						++$i;
-// 				
-// 					}
+//  						$count++;
+//  			
+//  					}
+
 
 						$this->courseTextArea = "Courses go here";
 			
@@ -187,22 +171,22 @@
 				elseif ($this->viewing == 'mysite_research'){
 					// get research data
 				
-// 					$this->research = $this->model->getResearch();
-					$this->research = "research goes here";
+					$this->research = $this->model->getResearch();
+// 					$this->research = "research goes here";
 				
 				}
 				elseif ($this->viewing == 'mysite_awards'){
 					// get awards data
 				
-// 					$this->awards = $this->model->getAwards();
-					$this->awards = "awards go here";
+					$this->awards = $this->model->getAwards();
+// 					$this->awards = "awards go here";
 				
 				}
 				elseif ($this->viewing == 'mysite_personal'){
 					// get personal data
 				
-// 					$this->personal = $this->model->getPersonal();
-					$this->personal = "personal goes here";
+					$this->personal = $this->model->getPersonal();
+// 					$this->personal = "personal goes here";
 				
 				}
 		

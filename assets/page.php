@@ -136,10 +136,18 @@
 			
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='login.php'>Login</a></div>
+					<div id='login_btn'><a href='mymanage.php'>My Manage</a></div>
 				</div>
 				<div class='content mysite'>";
 				
+			} elseif ($this->title == "My Manage") {
+			
+				$html = "<div id='container'>
+				<div id='header'>
+					<div id='login_btn'><a href='mysite.php'>View My Site</a></div>
+				</div>
+				<div class='content'>";
+			
 			} else {
 				$html = "<div id='container'>
 				<div id='header'>

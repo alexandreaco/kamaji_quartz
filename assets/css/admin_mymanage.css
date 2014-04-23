@@ -91,19 +91,32 @@ recent_activity table .date {
 /****** My Manage ****************/
 
 button.MM_redbtn{
-	background-color: red;
+	/* 
+background-color: red;
 	color: white;
 	width: 200px;
 	height: 50px;
 	border-radius:15px;
-	
+*/
 	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-	font-size: 18px;
+	line-height: 1.75em;
+ 	background: #cc2026;
+	border: none;
+	border-radius: 5px;
+	color: #FFFFFF;
+	padding: 5px 15px 7px 15px;
+	font-weight: 300;
+	font-size: 1.25em;
+	border: 1px solid #EEEEEE;
+	margin: 5px 10px 5px 0;
+	cursor: pointer;
+	
 }
 
 button.MM_greybtn{
-	background-color: grey;
+	/* 
+background-color: grey;
 	color: white;
 	width: 200px;
 	height: 50px;
@@ -112,6 +125,19 @@ button.MM_greybtn{
 	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-size: 18px;
+ */
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	line-height: 1.75em;
+ 	background: #CCCCCC;
+	border: none;
+	border-radius: 5px;
+	color: #464646;
+	padding: 5px 15px 7px 15px;
+	font-weight: 300;
+	font-size: 1.25em;
+	border: 1px solid #EEEEEE;
+	margin: 5px 0;
+	cursor: pointer;
 }
 
 
