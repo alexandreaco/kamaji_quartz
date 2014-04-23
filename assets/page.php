@@ -136,7 +136,8 @@
 			
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='mymanage.php'>My Manage</a></div>
+					<div id='login_btn'><a href='mymanage.php'>My Manage</a>
+					<a href='login.php?logout'>Logout</a></div>
 				</div>
 				<div class='content mysite'>";
 				
@@ -151,7 +152,8 @@
 			} else {
 				$html = "<div id='container'>
 				<div id='header'>
-					
+					<div id='login_btn'><a href=login.php'>Login</a>
+						<a href='login.php?logout'>Logout</a></div>
 					</div>
 				<div class='content'>";
 			}

@@ -32,6 +32,10 @@
 	 				$this->context = "showingform";
 	 				$this->error = "ERROR: All fields required.";
 	 			}
+	 		} elseif(isset($_GET['logout'])) {
+	 			
+	 			session_destroy();
+	 			
 	 		} else {
 	 			$this->context = "showingform";
 	 			$this->error = "";
