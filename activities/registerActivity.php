@@ -19,7 +19,7 @@
 	 		$this->model = new Model();
 	 		$this->page = new Page("Register");
 
-	 		if(isset($_GET['activate'])) {
+	 		if(isset($_GET['activate'])) {			//[RA.001]
 	 			$this->context = "activating";
 	 		} else {
 		 		if(isset($_POST['submit'])) {
@@ -65,7 +65,7 @@
 
 				if($validEmail){
 					if($this->password1==$this->password2){
-						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);												
+						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);			//[RA.002]									
 						$this->generateConfirmationEmail($this->id);
 
 					} else {
@@ -76,7 +76,7 @@
 				}
 			} else if($this->context == "activating"){
 
-				$isValid = $this->model->activateAccount($this->id);
+				$isValid = $this->model->activateAccount($this->id);		//[RA.003]
 
 				if($isValid == 1) {
 				} else if($isValid == 0){
@@ -92,8 +92,8 @@
 	 		$this->page->beginDoc();
 	 		
 	 		if($this->context == "showingform") {
-				if($this->emptyFlag != "") {
-				print("
+				if($this->emptyFlag != "") {			//[RA.004]
+				print("							
 				<div id='error'>
 				$this->emptyFlag
 				</div>
