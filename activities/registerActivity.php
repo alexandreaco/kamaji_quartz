@@ -80,10 +80,8 @@
 
 				if($isValid == 1) {
 				} else if($isValid == 0){
-				  print("FAILED.");
-				} else {
-					print("SUPER FAILLLLLED");
-				}
+				  header("Location: http://localhost/kamaji_quartz/login.php");
+				} 
 			}
 	 	}
 	 	
@@ -127,7 +125,7 @@
 						complete the registration process");
 			}	else if ($this->context == "activating") {
 				print("Congratulations Dude!!! You have succesfully registered for Quartz.  
-						<a href='Location: 'http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
+						<a href='http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
 			} 		
 	 		$this->page->endDoc();
 	 	}
