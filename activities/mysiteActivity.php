@@ -172,7 +172,6 @@
 					// get research data
 				
 					$this->research = $this->model->getResearch($_SESSION["id"]);
-// 					$this->research = "research goes here";
 				
 				}
 				
@@ -180,7 +179,6 @@
 					// get awards data
 				
 					$this->awards = $this->model->getAwards($_SESSION["id"]);
-// 					$this->awards = "awards go here";
 				
 				}
 				
@@ -188,7 +186,6 @@
 					// get personal data
 				
 					$this->personal = $this->model->getPersonal($_SESSION["id"]);
-// 					$this->personal = "personal goes here";
 				
 				}
 		

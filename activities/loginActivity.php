@@ -25,20 +25,32 @@
 	 		$this->page = new Page("Login");
 	 		
 	 		if(isset($_POST['submit'])){
+	 		
 	 			if($_POST['name']!="" && $_POST['password']!=""){
+	 			
 	 				$this->context = "submitting";							//[LA.001]
 	 				$this->error = "";
+	 				
 	 			} else {
+	 			
 	 				$this->context = "showingform";
 	 				$this->error = "ERROR: All fields required.";
+	 				
 	 			}
 	 		} elseif(isset($_GET['logout'])) {
+
+	 			if (session_status() == PHP_SESSION_NONE) {
+
+					session_destroy();
+
+				}
 	 			
-	 			session_destroy();
 	 			
 	 		} else {
+	 		
 	 			$this->context = "showingform";
 	 			$this->error = "";
+	 			
 	 		}
 
 	 	}
@@ -46,6 +58,7 @@
 	 
 	 	// run
 		function run() {
+		
 			$this->getInput();
 			$this->process();
 			$this->show();
@@ -55,22 +68,29 @@
 	 
 	 	// get input
 	 	function getInput() {
+	 	
 	 		if($this->context == 'submitting'){
+	 		
 	 			$this->name = $_POST["name"];
 	 			$this->password = $_POST["password"];
+	 			
 	 		}
 	 	}
 	 	
 	 	
 	 	// process
 	 	function process() {
+	 	
 			if($this->context == "submitting"){
+			
 				$check = $this->model->checkCredentials($this->name,$this->password);		//[LA.002]
 
 
 
 				if($check =="Valid Credentials"){
+				
 					session_start();
+					
 					$_SESSION["timeout"] = time();
 					$_SESSION["id"] = $this->name;											//[LA.003]
 
@@ -94,8 +114,10 @@
 	 		$this->page->beginDoc();
 
 	 		if($this->error != ""){
+	 		
 	 			print("<div id='error'>$this->error</font></center></div>");				//[LA.005]
 	 		}
+	 		
 			print("
 			<div class='login'>
 			<h2>Login</h2>
