@@ -26,6 +26,11 @@
 	 	// constructor
 	 	function __construct() {
 	 		
+	 		session_start();
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 			header('Location: http://localhost/kamaji_quartz/login.php');
+		 	}
+		 	// session_destroy();
 	 		$this->model = new Model();
 	 		
 	 		$this->page = new Page("Admin Dashboard");
@@ -180,7 +185,7 @@
 			while ($count < $this->numValidUsers) {
 				
 				$email = $this->validEmails[$count];
-				// $status = $this->model->getStatus($email);
+				//$status = $this->model->getStatus($email);
 				$status = "active";
 				
 				$this->validUserText .= "<tr>

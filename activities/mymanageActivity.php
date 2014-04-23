@@ -32,7 +32,12 @@
 	 
 	 	// constructor
 	 	function __construct() {
-	 		
+	 		session_start();
+
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 			header('Location: http://localhost/kamaji_quartz/login.php');
+		 	}
+		 	
 	 		$this->model = new Model();
 	 		
 	 		$this->page = new Page("My Manage");
@@ -68,7 +73,7 @@
 			else //context == "showingform"
 			{
 				
-				$this->displayname = $_GET['user'];
+				$this->displayname = $_SESSION['id'];
 				$this->jobtitle = $this->model->getJobtitle($this->displayname);
 				$this->address = $this->model->getAddress($this->displayname);
 				$this->telephone = $this->model->getTelephone($this->displayname);

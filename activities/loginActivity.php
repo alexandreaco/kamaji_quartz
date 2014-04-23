@@ -67,6 +67,10 @@
 
 
 				if($check =="Valid Credentials"){
+					session_start();
+					$_SESSION["timeout"] = time();
+					$_SESSION["id"] = $this->name;
+
 					$status = $this->model->getAdminStatus($this->name);
 
 					if($status == '1'){
@@ -74,6 +78,8 @@
 					} else {
 						header( 'Location: mymanage.php' ) ;
 					}
+
+					exit();
 				} else {
 					$this->error = $check;
 				}

@@ -18,6 +18,7 @@
 		
 		// Homepage View
 		var $username;
+		var $name;
 		var $job_title;
 		var $address;
 		var $telephone;
@@ -43,7 +44,12 @@
  
 		// constructor
 		function __construct() {
-		
+	 		session_start();
+
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 			header('Location: http://localhost/kamaji_quartz/login.php');
+		 	}
+
 			$this->model = new Model();
 		
 			$this->page = new Page("My Site");
@@ -84,7 +90,7 @@
  
 		// run
 		function run() {
-		
+			$this->getInput();
 			$this->process();
 			$this->show();
 		
@@ -93,7 +99,9 @@
  
 		// get input
 		function getInput() {
-	
+			if($this->context = "User is logged in, site page is open") {
+				$this->username = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $_SESSION["id"]);
+			}
 		}
 	
 	
@@ -106,26 +114,25 @@
 			
 				if ($this->viewing == 'mysite_home') {
 				
-					// get homepage data
-			
-					// $this->username = $this->model->getUsername();
-// 					$this->job_title = $this->model->getJobTitle();
-// 					$this->address = $this->model->getAddress();
-// 					$this->telephone = $this->model->getTelephone();
-// 					$this->fax = $this->model->getFax();
-// 					$this->email = $this->model->getEmail();
-// 					$this->office_hours = $this->model->getOfficeHours();
-// 					$this->biography = $this->model->getBiography();
-// 					$this->photo = $this->model->getPhoto(); // return a link to the photo
+					// get homepage data	
+					$this->name = $this->model->		
+ 					$this->job_title = $this->model->getJobTitle($this->username);
+					$this->address = $this->model->getAddress($this->username);
+					$this->telephone = $this->model->getTelephone($this->username);
+					$this->fax = $this->model->getFax($this->username);
+					$this->email = $this->model->getEmail($this->username);
+					$this->office_hours = $this->model->getOfficeHours($this->username);
+					$this->biography = $this->model->getBiography($this->username);
+					// $this->photo = $this->model->getPhoto(); // return a link to the photo
 
-					$this->username = "Username";
-					$this->job_title = "Job Title";
-					$this->address = "Address";
-					$this->telephone = "Telephone";
-					$this->fax = "Fax";
-					$this->email = "Email";
-					$this->office_hours = "Office Hours";
-					$this->biography = "Biography";
+					// $this->username = "Username";
+					// $this->job_title = "Job Title";
+					// $this->address = "Address";
+					// $this->telephone = "Telephone";
+					// $this->fax = "Fax";
+					// $this->email = "Email";
+					// $this->office_hours = "Office Hours";
+					// $this->biography = "Biography";
 					$this->photo = "Photo"; // return a link to the photo
 
 

@@ -189,12 +189,12 @@
 			$query = "SELECT * FROM emails";
 			$result = $mysqli->query($query);
 
-			$res = "Approved emails:<br><br>";
+			$res = "";
 			for($row = $result->fetch_assoc(); $row != FALSE; 
 						$row = $result->fetch_assoc())
 			{
 				$email = stripslashes($row["email"]);
-				$res .= "<b>'$email'</b><br>";
+				$res .= $email.";";
 			}
 			$mysqli->close();
 			return $res;
@@ -230,6 +230,15 @@
 							  accountname='$accountname',
 							  email='$email',
 							  password=MD5('$password'),
+							  jobTitle='Title',
+							  address='Default Address',
+							  telephone='(xxx)xxx-xxxx',
+							  fax='(xxx)xxx-xxxx',
+							  officeHours='Everyday',
+							  biography='This is a short biography.',
+							  research='This is my research.',
+							  publications='Here are my publications.',
+							  personal='About Me.',
 							  adminstatus=$adminStatus;";
 
 					$mysqli->query($query);
@@ -256,31 +265,23 @@
 			return "Deleted the following user from the database:<br><br><b>$accountname</b>";
 		}
 
-		function getUserByName($name){
+		function getName($email){
 			$mysqli = $this->connect();
 
-			$query = "SELECT * FROM users WHERE name='$name'";
-			$result = $mysqli->query($query);
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
 
-			$res = "";
+			$query = "SELECT * FROM users WHERE accountname='$accountname';";
+			$result = $mysqli->query($query);
 
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$name = stripslashes($row["name"]);
-
-					$email = stripslashes($row["email"]);
-					$res .= "<b>Name: '$name'<br>
-						   email: '$email'</b><br><br>";
-				}
-				$mysqli->close();
+				$row = $result->fetch_assoc();
+				$name = stripslashes($row["name"]);
+				return $name;
 			}
 
-			return $res;
 		}
 
 		function getUserByEmail($email){
@@ -541,24 +542,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$title = stripslashes($row["jobTitle"]);
-					$email = stripslashes($row["email"]);
-					$res .= "<b>Title: '$title'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$title = stripslashes($row["jobTitle"]);
 				$mysqli->close();
+				
+				return $title;
 			}
-
-			return $res;
 		}
 
 		function getAddress($email){
@@ -569,21 +562,14 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$address = stripslashes($row["address"]);
-					$res .= "<b>Address: '$address'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$address = stripslashes($row["address"]);
 				$mysqli->close();
+				return $address;
 			}
 
 			return $res;
@@ -597,24 +583,15 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$telephone = stripslashes($row["telephone"]);
-					$res .= "<b>Telephone #: '$telephone'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$telephone = stripslashes($row["telephone"]);
 				$mysqli->close();
-			}
 
-			return $res;
+				return $telephone;
+			}
 		}
 
 		function getFax($email) {
@@ -625,24 +602,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$fax = stripslashes($row["fax"]);
-					$res .= "<b>Fax #: '$fax'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$fax = stripslashes($row["fax"]);
 				$mysqli->close();
-			}
 
-			return $res;			
+				return $fax;
+			}
 		}
 
 		function getOfficeHours($email) {
@@ -653,24 +622,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$officeHours = stripslashes($row["officeHours"]);
-					$res .= "<b>Office Hours: '$officeHours'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$officeHours = stripslashes($row["officeHours"]);
 				$mysqli->close();
-			}
 
-			return $res;			
+				return $officeHours;
+			}
 		}
 
 		function getBiography($email) {
@@ -681,23 +642,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$biography = stripslashes($row["biography"]);
-					$res .= "<b>Biography: '$biography'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$biography = stripslashes($row["biography"]);
 				$mysqli->close();			
+
+				return $biography;
 			}
-			return $res;
 		}
 
 		function getResearch($email) {
@@ -708,23 +662,17 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$research = stripslashes($row["research"]);
-					$res .= "<b>Research: '$research'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$research = stripslashes($row["research"]);
 				$mysqli->close();			
+
+				return $research;
 			}
-			return $res;			
 		}
 
 		function getPublications($email) {
@@ -735,23 +683,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$publications = stripslashes($row["publications"]);
-					$res .= "<b>Publications: '$publications'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$publications = stripslashes($row["publications"]);
 				$mysqli->close();			
+
+				return $publications;
 			}
-			return $res;
 		}
 
 		function getPersonal($email){
@@ -762,23 +703,16 @@
 			$query = "SELECT * FROM users WHERE accountname='$accountname';";
 			$result = $mysqli->query($query);
 
-			$res = "";
-
 			if($result->num_rows == 0){
 				$mysqli->close();
-				$res .= "No User Found<br>";
+				return "";
 			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$email = stripslashes($row["email"]);
-					$personal = stripslashes($row["personal"]);
-					$res .= "<b>Personal: '$personal'<br>
-						   email: '$email'</b><br><br>";
-				}
+				$row = $result->fetch_assoc();
+				$personal = stripslashes($row["personal"]);
 				$mysqli->close();			
+
+				return $personal;
 			}
-			return $res;
 		}
 
 		function setImage($image,$email){

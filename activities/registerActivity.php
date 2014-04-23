@@ -124,7 +124,7 @@
 				print("Thank you for registering for Quartz.  An email has been sent with the link to 
 						complete the registration process");
 			}	else if ($this->context == "activating") {
-				print("Congratulations Dude!!! You have succesfully registered for Quartz.  
+				print("Congratulations! You have succesfully registered for Quartz.  
 						<a href='http://localhost/kamaji_quartz/login.php'>Click Here</a> to log in.");
 			} 		
 	 		$this->page->endDoc();
