@@ -1,13 +1,12 @@
-/***** COLOR *******/
-
+/* 
+**** COLOR ******
 body {
 	background-color: #EEEEEE;
 }
 
 
 
-/***** Typography *******/
-
+**** Typography ******
 h1, h2, h3, h4, h5, h6, p, a, table, form, div {
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-weight: 300;
@@ -25,8 +24,7 @@ a, a:hover, a:active, a:visited {
 }
 
 
-/****** LAYOUT *******/
-
+***** LAYOUT ******
 #container {
 	width: 945px;
 	margin-left: auto;
@@ -52,6 +50,7 @@ a, a:hover, a:active, a:visited {
 	width: 945px;
 	height: 100px;
 }
+ */
 
 
 /****** My Manage & Admin Pages *******/
@@ -166,3 +165,22 @@ recent_activity table .date {
 	font-weight: 500;
 }
 
+
+
+.my_account form label {
+	font-size: 16px;
+	font-weight: bold;
+	display: inline;
+}
+
+#input {
+	display: none;
+}
+
+.hidden {
+	display: none;
+}
+
+.visible {
+	display: block;
+}
