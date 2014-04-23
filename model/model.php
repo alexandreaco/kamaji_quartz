@@ -854,6 +854,46 @@
 				return 1;
 			}			
 		}
+
+		function storeEmail($email){
+			$mysqli = $this->connect();
+
+			$id = md5($email);
+
+			$query = "INSERT INTO registration SET name='', 
+					  email='$email',
+					  password='',
+					  regid ='$id';";
+
+			$mysqli->query($query);
+			$mysqli->close();
+
+			return $id;
+		}
+
+		function resetPassword($id, $password) {
+			$mysqli = $this->connect();
+
+			// $query = "SELECT * FROM registration WHERE regid='$id';";
+			$query = "SELECT * FROM registration WHERE regid='$id';";
+			$result = $mysqli->query($query);
+
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return 0;
+			} else {
+				$row = $result->fetch_assoc();
+				$name = stripslashes($row["name"]);
+				$email = stripslashes($row["email"]);
+				
+				$this->createPassword($email,md5($password));
+
+				$mysqli->close();
+
+				return 1;
+			}			
+		}
 	}
 
 
