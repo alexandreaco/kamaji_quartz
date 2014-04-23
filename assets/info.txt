@@ -2,5 +2,5 @@ localhost
 0
 admin
 adminpass
-http://localhost/
-quartz
+http://localhost:8888
+quartz_test

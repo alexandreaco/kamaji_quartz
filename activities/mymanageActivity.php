@@ -347,7 +347,7 @@
 						document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
 					}
 				}
-				xmlhttp.open('POST','http://localhost/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
+				xmlhttp.open('POST','http://localhost:8888/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(sender);
 				
