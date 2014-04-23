@@ -834,19 +834,25 @@
 			$mysqli = $this->connect();
 
 			// $query = "SELECT * FROM registration WHERE regid='$id';";
-			$query = "$SELECT * FROM registration WHERE regid='$id';";
+			$query = "SELECT * FROM registration WHERE regid='$id';";
 			$result = $mysqli->query($query);
 
-			$row = $result->fetch_assoc();
-			$name = stripslashes($row["name"]);
-			$email = stripslashes($row["email"]);
-			$password = stripslashes($row["password"]);
-			
-			$this->createUser($name,$email,md5($password),'0');
 
-			$mysqli->close();
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return 0;
+			} else {
+				$row = $result->fetch_assoc();
+				$name = stripslashes($row["name"]);
+				$email = stripslashes($row["email"]);
+				$password = stripslashes($row["password"]);
+				
+				$this->createUser($name,$email,md5($password),'0');
 
-			return 1;		
+				$mysqli->close();
+
+				return 1;
+			}			
 		}
 	}
 

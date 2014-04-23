@@ -1,0 +1,6 @@
+localhost
+0
+admin
+adminpass
+http://localhost/
+quartz

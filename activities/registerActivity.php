@@ -76,7 +76,7 @@
 				}
 			} else if($this->context == "activating"){
 
-				$isValid = $this->model->activateAccount($id);
+				$isValid = $this->model->activateAccount($this->id);
 
 				if($isValid == 1) {
 				} else if($isValid == 0){
