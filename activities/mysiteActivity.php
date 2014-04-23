@@ -128,8 +128,13 @@
 					$this->office_hours = $this->model->getOfficeHours($_SESSION["id"]);
 					$this->biography = $this->model->getBiography($_SESSION["id"]);
 					
-					// $this->photo = $this->model->getPhoto(); // return a link to the photo
-					$this->photo = "Photo"; // return a link to the photo
+					$this->photo = $this->model->getImage($_SESSION["id"]); 
+
+					// If no phot has been uploaded, default to this image
+					if ($this->photo == "") {
+					
+						$this->photo = "assets/images/default_img.jpg";
+					}
 
 				
 				} 
@@ -137,7 +142,6 @@
 				elseif ($this->viewing == 'mysite_teaching') {
 			
 					// get teaching data
-					
 					
  					$allCourses = $this->model->getCourses($_SESSION["id"]);
  					$this->courseNames = explode(";", $allCourses);
