@@ -303,6 +303,7 @@
 			
 			function saveChanges()
 			{
+				[MMA.000]
 				var research = document.getElementById('research').value;
 				var publications = document.getElementById('publications').value;
 				var personal = document.getElementById('personal_info').value;
@@ -326,7 +327,7 @@
 				
 				sender = sender + geninfo;
 				
-				
+				[MMA.000]
 				var xmlhttp;
 
 				if (window.XMLHttpRequest)
@@ -347,33 +348,17 @@
 				xmlhttp.send(sender);
 				
 				//HIDE EDITORS
-				document.getElementById('research').style.display='none'
-				document.getElementById('publications').style.display='none'
-				document.getElementById('personal_info').style.display='none'
-				//Done with saves for research, publications, and personal
-				
-				//SAVE COURSE CHANGES
-				
+				document.getElementById('research').style.display='none';
+				document.getElementById('publications').style.display='none';
+				document.getElementById('personal_info').style.display='none';
 				
 				document.getElementById('course1').style.display='none';
 				document.getElementById('course2').style.display='none';
 				document.getElementById('finalCourse1').style.display='block';
 				document.getElementById('finalCourse2').style.display='block';
 				
-				saveGenInfoChanges();
 			}
 			
-			function saveGenInfoChanges()
-			{
-				var jobtitle = 'jobtitle=' + document.getElementById('geninfo_jobtitle').value;
-				var address = '&&address=' + document.getElementById('geninfo_address').value;
-				var telephone = '&&telephone=' + document.getElementById('geninfo_telephone').value;
-				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
-				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
-				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
-				
-				var submitter = jobtitle + address + telephone + fax + officehours + biography;
-			}
 			
 			</script> ";
 			}

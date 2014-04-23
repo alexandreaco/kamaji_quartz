@@ -3,7 +3,7 @@
 include_once "../model/model.php";
 $model = new Model();
 
-$model->setResearch($_POST["user"],$_POST["research"]);
+$model->setResearch($_POST["user"],$_POST["research"]);			//[MMAH.001]
 $model->setPublications($_POST["user"],$_POST["publications"]);
 $model->setPersonal($_POST["user"],$_POST["personal"]);
 
@@ -14,5 +14,5 @@ $model->setFax($_POST["user"],$_POST["fax"]);
 $model->setOfficeHours($_POST["user"],$_POST["officehours"]);
 $model->setBiography($_POST["user"],$_POST["biography"]);
 
-print (("Welcome, " . $_POST["user"]));
+print (("Welcome, " . $_POST["user"]));		//[MMAH.002]
 ?>
