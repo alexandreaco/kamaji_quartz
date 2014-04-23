@@ -134,17 +134,17 @@
 			if($this->context=="submitting"){
 				$this->model->createDatabase($this->serverName,$this->rootPass,$this->adminName,$this->adminPass, $this->emails);
 
-				$file = "assets/info.txt";
-				$fh = fopen($file, 'w');
-				fwrite($fh,$this->serverName."\r\n");
+				$file = "assets/info.txt";							//[INA.001]
+				$fh = fopen($file, 'w');							//[INA.002]
+				fwrite($fh,$this->serverName."\r\n");				//[INA.003]
 				fwrite($fh,$this->rootPass."\r\n");
 				fwrite($fh,$this->adminName."\r\n");
 				fwrite($fh,$this->adminPass."\r\n");
 				fwrite($fh,$this->url."\r\n");
 				fwrite($fh,$this->subfolder."\r\n");
-				fclose($fh);
+				fclose($fh);										//[INA.004]
 				
-// 						$model->addRecentActivity("admin","Installed Quratz",date('n/j/Y'));		
+// 						$model->addRecentActivity("admin","Installed Quartz",date('n/j/Y'));		
 			}
 		}
 
