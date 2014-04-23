@@ -67,8 +67,15 @@
 			}
 			else //context == "showingform"
 			{
+				if (isset($_GET['user']))
+				{
+					$this->displayname = $_GET['user'];
+				}
+				else
+				{
+					$this->displayname = "Default User";
+				}
 				
-				$this->displayname = $_GET['user'];
 				$this->jobtitle = $this->model->getJobtitle($this->displayname);
 				$this->address = $this->model->getAddress($this->displayname);
 				$this->telephone = $this->model->getTelephone($this->displayname);
