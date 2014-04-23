@@ -78,6 +78,7 @@
 				`research` text,
 				`publications` text,
 				`personal` text,
+				`awards` text,
 				`adminstatus` text,
 				`image` text,
 				PRIMARY KEY (`id`)
@@ -464,6 +465,16 @@
 			$mysqli->close();	
 		}
 
+		function setAwards($email, $awards) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+			
+			$query = "UPDATE users SET awards='$awards' WHERE accountname='$accountname'";
+			$result = $mysqli->query($query);
+			$mysqli->close();	
+		}
+
 		function getJobtitle($email) {
 			$mysqli = $this->connect();
 
@@ -640,6 +651,26 @@
 				$mysqli->close();			
 
 				return $personal;
+			}
+		}
+
+		function getAwards($email){
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM users WHERE accountname='$accountname';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "";
+			} else {
+				$row = $result->fetch_assoc();
+				$awards = stripslashes($row["awards"]);
+				$mysqli->close();			
+
+				return $awards;
 			}
 		}
 

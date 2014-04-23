@@ -306,7 +306,7 @@
 			
 			function saveChanges()
 			{
-				[MMA.000]
+				//[MMA.000]
 				var research = document.getElementById('research').value;
 				var publications = document.getElementById('publications').value;
 				var personal = document.getElementById('personal_info').value;
@@ -330,7 +330,7 @@
 				
 				sender = sender + geninfo;
 				
-				[MMA.000]
+				//[MMA.000]
 				var xmlhttp;
 
 				if (window.XMLHttpRequest)
