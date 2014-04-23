@@ -16,6 +16,7 @@
 		var $context;
 		
 		var $displayname;
+		var $name;
 		var $jobtitle;
 		var $address;
 		var $telephone;
@@ -74,6 +75,7 @@
 			{
 				
 				$this->displayname = $_SESSION['id'];
+				$this->name = $this->model->getName($this->displayname);
 				$this->jobtitle = $this->model->getJobtitle($this->displayname);
 				$this->address = $this->model->getAddress($this->displayname);
 				$this->telephone = $this->model->getTelephone($this->displayname);
@@ -83,6 +85,7 @@
 				$this->research = $this->model->getResearch($this->displayname);
 				$this->publications = $this->model->getPublications($this->displayname);
 				$this->personalinfo = $this->model->getPersonal($this->displayname);
+				$this->photo = $this->model->getImage($this->displayname);
 			}
 		
 	 	}
@@ -97,7 +100,7 @@
 			{
 			echo "
 				<div id='mymanage'>
-				<h1 class='page_title' id='welcome_title'>Welcome, $this->displayname</h1>
+				<h1 class='page_title' id='welcome_title'>Welcome, $this->name</h1>
 				<p>This is your Website Management Portal.<br /> Here you can edit course content and your site's information.</p>
 				<form id='mymanageform'>
 							<div class='module website_settings'>
@@ -141,7 +144,7 @@
 								<table class='no_background' id='gen_info'>
 									<tr>
 										<td class='label'>Display Name:</td>
-										<td><input type='text' value='$this->displayname' id='geninfo_displayname' class='name' /></td>
+										<td><input type='text' value='$this->name' id='geninfo_displayname' class='name' /></td>
 									</tr>			
 									<tr>
 										<td class='label'>Job Title:</td>
@@ -343,7 +346,7 @@
 						document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
 					}
 				}
-				xmlhttp.open('POST','http://localhost/GitHub/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
+				xmlhttp.open('POST','http://localhost/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(sender);
 				
