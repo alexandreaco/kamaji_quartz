@@ -183,13 +183,13 @@
 							
 								<!-- model code will generate these divs -->
 								<div class='course' id='finalCourse1'>
-									<div class='label inline'>CS112 Introduction to Computer Science II</div>
+									<div class='label inline'><b>CS112 Introduction to Computer Science II</b></div>
 									<div class='url inline right'><a href='http://thiscoursesite.com' target='_blank'>http://thiscoursesite.com</a></div>
 									<div class='description'>An introduction to algorithms, data structures, and programming techniques</div>
 								</div>
 						
 								<div class='course' id='finalCourse2'>
-									<div class='label inline'>CS411 Software Engineering</div>
+									<div class='label inline'><b>CS411 Software Engineering</b></div>
 									<div class='url inline right'><a href='http://thiscoursesite.com' target='_blank'>http://thiscoursesite.com</a></div>
 									<div class='description'>An introduction to the fundamentals of software engineering</div>
 								</div>
@@ -328,6 +328,7 @@
 				
 				sender = sender + geninfo;
 				
+
 				
 				var xmlhttp;
 
