@@ -734,7 +734,7 @@
 				$email = stripslashes($row["email"]);
 				$password = stripslashes($row["password"]);
 				
-				$this->createUser($name,$email,md5($password),'0');
+				$this->createUser($name,$email,$password,'0');
 
 				$mysqli->close();
 

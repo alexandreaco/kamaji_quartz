@@ -20,35 +20,52 @@
 	 		$this->page = new Page("Register");
 
 	 		if(isset($_GET['activate'])) {			//[RA.001]
+	 		
 	 			$this->context = "activating";
+	 			
 	 		} else {
+	 		
 		 		if(isset($_POST['submit'])) {
+		 		
 		 			if($_POST['givenName']!="") {
+		 			
 		 				if ($this->model->checkEmail($_POST["givenEmail"])) {
+		 				
 		 					if ($_POST['givenPassword'] == $_POST['givenPassword2'] && $_POST['givenPassword']!=""){
+		 					
 		 						$this->context = "submitting";
 		 						$this->emptyFlag = "";
+		 					
 		 					} else {
+		 					
 		 						$this->context = "showingform";
 		 						$this->emptyFlag = "Error: Please verify your password.";
+		 					
 		 					}
 		 				} else {
+		 					
 		 					$this->context = "showingform";
 		 					$this->emptyFlag = "Error: Please enter a valid email.";
+		 				
 		 				}
 		 			} else {
+		 				
 		 				$this->context = "showingform";
 		 				$this->emptyFlag = "Error: Please enter all fields.";
+		 			
 		 			}
 		 		} else {
+		 			
 		 			$this->context = "showingform";
 		 			$this->emptyFlag = "";
+		 		
 		 		}
 			}
 	 	}
 	 
 	 
 		function run() {
+		
 			$this->getInput();	
 			$this->process();
 			$this->show();
@@ -57,12 +74,16 @@
 	 
 	 
 	 	function getInput() {
+	 	
 	 		if($this->context == 'submitting'){
+	 		
 	 			$this->name = $_POST["givenName"];
 	 			$this->email = $_POST["givenEmail"];
 	 			$this->password1 = $_POST["givenPassword"];
 	 			$this->password2 = $_POST["givenPassword2"];
+	 			
 	 		} else if($this->context == "activating") {
+	 		
 	 			$this->id = $_GET['id'];
 	 		}
 	 	}
@@ -70,11 +91,15 @@
 	 	
 	 	
 	 	function process() {
+	 	
 	 		if($this->context == "submitting") {
+	 		
 				$validEmail = $this->model->checkEmail($_POST["givenEmail"]);
 
 				if($validEmail){
+				
 					if($this->password1==$this->password2){
+					
 						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);			//[RA.002]		
 // 						$model->addRecentActivity($this->email,"Registered User",date('n/j/Y'));					
 						$this->generateConfirmationEmail($this->id);

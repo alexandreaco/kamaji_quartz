@@ -287,7 +287,7 @@
 		// Recent Activity
 		private function getRecentActivity() {
 		
-// 			$this->model->getRecentActivityEmails;
+// 			$this->model->getRecentActivityEmails();
 // 			
 // 			$count = 0;
 // 			
