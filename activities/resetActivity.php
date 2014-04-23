@@ -128,7 +128,7 @@ else if ($this->context == "activating")
 		{
 			if ($_POST['newpassword'] == $_POST['newpassword2'] && ($_POST['newpassword'] != "" ))
 			{
-				$this->model->resetPassword($this->id, $this->password1)
+				$this->model->resetPassword($this->id, $this->password1);
 				
 			}
 			else
