@@ -26,7 +26,7 @@
 	 		
 	 		if(isset($_POST['submit'])){
 	 			if($_POST['name']!="" && $_POST['password']!=""){
-	 				$this->context = "submitting";
+	 				$this->context = "submitting";							//[LA.001]
 	 				$this->error = "";
 	 			} else {
 	 				$this->context = "showingform";
@@ -60,18 +60,17 @@
 	 	
 	 	// process
 	 	function process() {
-			//FUTURE: CREATE MODEL FUNCTION checkValidLogin($newName,$newPass) to compare
 			if($this->context == "submitting"){
-				$check = $this->model->checkCredentials($this->name,$this->password);
+				$check = $this->model->checkCredentials($this->name,$this->password);		//[LA.002]
 
 
 
 				if($check =="Valid Credentials"){
 					session_start();
 					$_SESSION["timeout"] = time();
-					$_SESSION["id"] = $this->name;
+					$_SESSION["id"] = $this->name;											//[LA.003]
 
-					$status = $this->model->getAdminStatus($this->name);
+					$status = $this->model->getAdminStatus($this->name);					//[LA.004]
 
 					if($status == '1'){
 						header( 'Location: admin.php');
@@ -91,7 +90,7 @@
 	 		$this->page->beginDoc();
 
 	 		if($this->error != ""){
-	 			print("<div id='error'>$this->error</font></center></div>");
+	 			print("<div id='error'>$this->error</font></center></div>");				//[LA.005]
 	 		}
 			print("
 			<div class='login'>
