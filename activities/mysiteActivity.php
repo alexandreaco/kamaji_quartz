@@ -120,7 +120,7 @@
 				if ($this->viewing == 'mysite_home') {
 				
 					// get homepage data	
-					$this->name = $this->model->		
+					$this->name = $this->model->getName($_SESSION["id"]);
  					$this->job_title = $this->model->getJobTitle($_SESSION["id"]);
 					$this->address = $this->model->getAddress($_SESSION["id"]);
 					$this->telephone = $this->model->getTelephone($_SESSION["id"]);
@@ -172,7 +172,7 @@
 				elseif ($this->viewing == 'mysite_research'){
 					// get research data
 				
-					$this->research = $this->model->getResearch();
+					$this->research = $this->model->getResearch($_SESSION["id]");
 // 					$this->research = "research goes here";
 				
 				}
@@ -180,7 +180,7 @@
 				elseif ($this->viewing == 'mysite_awards'){
 					// get awards data
 				
-					$this->awards = $this->model->getAwards();
+					$this->awards = $this->model->getAwards($_SESSION["id]");
 // 					$this->awards = "awards go here";
 				
 				}
@@ -188,7 +188,7 @@
 				elseif ($this->viewing == 'mysite_personal'){
 					// get personal data
 				
-					$this->personal = $this->model->getPersonal();
+					$this->personal = $this->model->getPersonal($_SESSION["id]");
 // 					$this->personal = "personal goes here";
 				
 				}
