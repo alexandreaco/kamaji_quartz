@@ -6,40 +6,49 @@ class resetActivity {
 		var $context;
 		var $page;
 		var $model;
+		var $email;
 		var $emptyFlag;
+		var $password1;
+	 	var $password2;
+	 	var $id;
 
 function __construct()
 	{
 			$this->model = new Model();
 			$this->page = new Page("Forgot Password");
 			
+			if(isset($_GET['activate'])) {
+	 			$this->context = "activating";
+	 		} else {
+		 		if(isset($_POST['submit'])) {
+		 		if($_POST['email']!=""){
+		 				$this->context = "submitting";
+		 		} else {
+		 				$this->context = "showingform";
+		 				}
+		 		} else {
+		 			$this->context = "showingform";
+				}
+			}
+		}
 			
-			if(isset($_POST['submit'])){
-	 			if($_POST['email']!=""){
-	 				$this->context = "submitting";
-	 			} 
-	 		}
-	 		else {
-	 			$this->context = "showingform";
-	 		}
-	}
 	
 function getInput() {
-
+	if($this->context == 'submitting'){
+	 			$this->email = $_POST["email"];
+	} else if($this->context == "activating") {
+	 			$this->id = $_GET['id'];
+	}			
 }
 
 function show() {
 	
-	if($this->context == "showingform"){
-	
 	$this->page->beginDoc();
+	
+	if($this->context == "showingform"){
 
 	if($this->emptyFlag != "") {
-			print("
-			<div id='forgotError'>
-			$this->emptyFlag
-			</div>
-			");
+			print("<div id='error'>$this->emptyFlag</font></center></div>");
 			}
 
 	print("
@@ -53,20 +62,20 @@ function show() {
 			<a href='register.php'>Create Account</a><br>
 			</div>
 			");
-			
-	$this->page->endDoc();
 	}
 	
-	if($this->context == "submitting")
+	else if($this->context == "submitting")
 	{
-	$this->page->beginDoc();
+		print("An email containing a link to create a new password has been sent to you.");
+	
+	}
+	
+	else if($this->context == "activating")
+	{
 
 	if($this->emptyFlag != "") {
-			print("
-			<div id='forgotError'>
-			$this->emptyFlag
-			</div>
-			");
+
+			print("<div id='error'>$this->emptyFlag</font></center></div>");
 			}
 
 	print("
@@ -79,9 +88,8 @@ function show() {
 				</form>
 				</div>
 			");
-			
-	$this->page->endDoc();
 	}
+	$this->page->endDoc();
 }
 
 
@@ -92,7 +100,8 @@ if ($this->context == "showingform"){
 		{	
 			if ($this->model->checkEmail($_POST['email']))
 				{
-					$this->generateEmail();
+					$this->id = $this->model->storeEmail($this->email);
+					$this->generateConfirmationEmail($this->id);
 				}
 				else
 				{
@@ -105,7 +114,11 @@ if ($this->context == "showingform"){
 		}
 }
 
-if ($this->context == "submitting") 
+else if ($this->context == "submitting")
+{
+}
+
+else if ($this->context == "activating") 
 	{
 	if (isset($_POST['email']))
 	{
@@ -115,15 +128,8 @@ if ($this->context == "submitting")
 		{
 			if ($_POST['newpassword'] == $_POST['newpassword2'] && ($_POST['newpassword'] != "" ))
 			{
-				if ($model->setNewPassword($_POST['email'],$_POST['newpassword']))
-				{
-					print(
-					"
-					
-					Your new password has been set.
-					
-					");
-				}
+				$this->model->resetPassword($this->id, $this->password1)
+				
 			}
 			else
 			{
