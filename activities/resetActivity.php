@@ -158,12 +158,12 @@ function run()
 	}
 		
 	
-	function generateEmail()
+	function generateConfirmationEmail($id){
 		{
 			$to = $_POST["email"];
     		$subject = "Quartz Forgot Password Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php?email=$to'>here</a>";
+    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php??activate=1&id=$id''>here</a>";
     		$message .= "to reset your password.";
     		$header = "From: webmaster@quartz.com";
     		
