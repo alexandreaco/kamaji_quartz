@@ -37,8 +37,5 @@
 
 	 // called by uninstall.php
 	 include 'activities/uninstallActivity.php';
-	 
-	 // called by forgotPassword.php
-	 include 'activities/forgotPasswordActivity.php';
 
 ?>

@@ -92,8 +92,16 @@ a, a:hover, a:active, a:visited {
 
 #photograph {
 	position: absolute;
-	right: 30px;
-	top: 20px;
+	left: 430px;
+	top: 30px;
+}
+
+.mysite hr {
+	width: 400px;
+}
+.mysite h1,
+.mysite h3 {
+	font-weight: bold;
 }
 
 /****** My Manage & Admin Pages *******/
