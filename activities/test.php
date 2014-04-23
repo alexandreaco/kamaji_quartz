@@ -8,15 +8,17 @@
 	 */
 	 
 	 
-	 include_once '../assets/page.php';
-	 
-	 $page = new Page("test page");
-	 
-	 $page->beginDoc();
-	 
-	 print("<p>lots of content here!</p>");
-	 
-	 $page->endDoc();
+	 // include_once '../assets/page.php';
+// 	 
+// 	 $page = new Page("test page");
+// 	 
+// 	 $page->beginDoc();
+// 	 
+// 	 print("<p>lots of content here!</p>");
+// 	 
+// 	 $page->endDoc();
+
+print( date('n/j/Y'));
 
 
 ?>

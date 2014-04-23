@@ -134,6 +134,7 @@
 
 				
 				} 
+				
 				elseif ($this->viewing == 'mysite_teaching') {
 			
 					// get teaching data
@@ -175,6 +176,7 @@
 // 					$this->research = "research goes here";
 				
 				}
+				
 				elseif ($this->viewing == 'mysite_awards'){
 					// get awards data
 				
@@ -182,6 +184,7 @@
 // 					$this->awards = "awards go here";
 				
 				}
+				
 				elseif ($this->viewing == 'mysite_personal'){
 					// get personal data
 				

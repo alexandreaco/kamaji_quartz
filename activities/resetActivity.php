@@ -163,6 +163,8 @@ else if ($this->context == "reset")
 			{
 				$this->model->resetPassword($this->id, $this->password1);
 				
+// 						$model->addRecentActivity($this->id,"Reset Password",date('n/j/Y'));		
+				
 			}
 			else
 			{

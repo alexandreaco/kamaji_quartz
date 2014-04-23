@@ -143,6 +143,8 @@
 				fwrite($fh,$this->url."\r\n");
 				fwrite($fh,$this->subfolder."\r\n");
 				fclose($fh);
+				
+// 						$model->addRecentActivity("admin","Installed Quratz",date('n/j/Y'));		
 			}
 		}
 

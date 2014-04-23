@@ -75,7 +75,8 @@
 
 				if($validEmail){
 					if($this->password1==$this->password2){
-						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);			//[RA.002]									
+						$this->id = $this->model->storeRegistrationData($this->name,$this->email,$this->password1);			//[RA.002]		
+// 						$model->addRecentActivity($this->email,"Registered User",date('n/j/Y'));					
 						$this->generateConfirmationEmail($this->id);
 
 					} else {
