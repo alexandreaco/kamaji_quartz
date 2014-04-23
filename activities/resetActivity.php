@@ -28,20 +28,23 @@ function __construct()
 		 		}
 		 	} else if (isset($_POST['submiT'])) {
 		 		if (isset($_POST['newpassword']) && isset($_POST['newpassword2'])) {
-		 			if ($_POST['newpassword'] == $_POST['newpassword2'] && ($_POST['newpassword'] != "" )) {
-		 				$this->context = "reset"; 
+		 			if ($_POST['newpassword'] == $_POST['newpassword2']) {
+		 				if ($_POST['newpassword']!= "" && $_POST['newpassword2']!= "") {
+		 					$this->context = "reset"; 
+		 				} else {
+		 					$this->context = "activating";
+		 					$this->emptyFlag = "Error: Please enter a password and confirm it.";
+		 				}
 		 			} else {
-		 			$this->context == "activating";
-		 			
+		 			$this->context = "activating";
 		 			$this->emptyFlag = "Error: The passwords you entered do not match.";
-		 			print($this->emptyFlag);
 		 			}
 		 		} else {
-		 			$this->context == "activating";
-		 			print("TEST");
-		 			$this->emptyFlag = "Error: Please enter a password and confirm it.";
+		 			$this->context = "activating";
+		 			$this->emptyFlag = "Error: The passwords you entered do not match.";
 		 		}
-		 	} else {
+		 	}	
+		 	else {
 		 		$this->context = "showingform";
 			}
 	}
@@ -117,7 +120,7 @@ function show() {
 				</form>
 				</div>
 			");
-	} 
+	}
 	else if ($this->context == "reset")
 	{
 		if($this->emptyFlag != "") {
@@ -177,7 +180,7 @@ else if ($this->context == "reset")
 
 function run() 
 	{
-	$this->getInput();
+	//$this->getInput();
 	$this->process();
 	$this->show();
 	}
