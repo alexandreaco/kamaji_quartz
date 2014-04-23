@@ -145,7 +145,8 @@
 			
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='mysite.php'>View My Site</a></div>
+					<div id='login_btn'><a href='mysite.php'>View My Site</a>
+					<a href='login.php?logout'>Logout</a></div></div>
 				</div>
 				<div class='content'>";
 			
