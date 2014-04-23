@@ -135,6 +135,32 @@ recent_activity table .date {
 	margin-bottom: 20px;
 }
 
+/****** My Manage ****************/
+
+button.MM_redbtn{
+	background-color: red;
+	color: white;
+	width: 200px;
+	height: 50px;
+	border-radius:15px;
+	
+	
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-size: 18px;
+}
+
+button.MM_greybtn{
+	background-color: grey;
+	color: white;
+	width: 200px;
+	height: 50px;
+	border-radius:15px;
+	
+	
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-size: 18px;
+}
+
 
 /****** Supplemental Style *******/
 

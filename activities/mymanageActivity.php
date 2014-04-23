@@ -35,7 +35,7 @@
 	 		
 	 		$this->model = new Model();
 	 		
-	 		$this->page = new Page("My Site");
+	 		$this->page = new Page("My Manage");
 			
 			$this->context = "showingform";
 	 		
@@ -122,7 +122,7 @@
 
 							<form action='upload_file.php' method='post'
 							enctype='multipart/form-data'>
-							<input type='file' name='file' id='file'><br>
+							<input type='file' name='file' id='file'>
 							<input type='submit' name='submit' value='Submit'>
 							</form>
 						
@@ -160,10 +160,10 @@
 									</tr>			
 									<tr>
 										<td class='label' colspan='2'>Biography:</td>
-										<td><input type='text' value='$this->biography' id='geninfo_biography' class='name' /></td>
+										<td></td>
 									<tr>
 									<tr>
-										<td colspan='2'></td>
+										<td colspan='2'><input type='text' value='$this->biography' id='geninfo_biography' class='name' /></td>
 										<td></td>
 									<tr>
 								</table>
@@ -223,7 +223,7 @@
 									<textarea rows='5'  cols='115' name='course_description' class='description'> An introduction to the fundamentals of software engineering</textarea>
 								</div>
 								
-								<button type='button' onclick='addCourse()' id='add_course''>Add Course</button>
+								<!--button type='button' onclick='addCourse()' id='add_course''>Add Course</button-->
 						
 							</div> <!--/module-->
 					
@@ -267,8 +267,8 @@
 						
 							</div> <!--/module-->
 							
-							<button type='button' onclick='saveChanges()'>Save All Changes</button>
-							<button>Leave Without Saving</button>
+							<button type='button' onclick='saveChanges()' class='MM_redbtn'>Save All Changes</button>
+							<button class='MM_greybtn'>Leave Without Saving</button>
 							
 							</form>
 							</div>
