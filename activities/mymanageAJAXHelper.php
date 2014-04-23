@@ -1,6 +1,9 @@
 <?php
 
 include_once "../model/model.php";
+
+session_start();
+
 $model = new Model();
 
 $model->setResearch($_SESSION["id"],$_POST["research"]);			//[MMAH.001]
