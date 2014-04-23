@@ -23,12 +23,22 @@
 	 			$this->context = "activating";
 	 		} else {
 		 		if(isset($_POST['submit'])) {
-		 			if($_POST['givenName']!="" && $_POST['givenEmail']!="" && $_POST['givenPassword']!="" && $_POST['givenPassword2']!=""){
-		 				$this->context = "submitting";
-		 				$this->emptyFlag = "";
+		 			if($_POST['givenName']!="") {
+		 				if ($this->model->checkEmail($_POST["givenEmail"])) {
+		 					if ($_POST['givenPassword'] == $_POST['givenPassword2'] && $_POST['givenPassword']!=""){
+		 						$this->context = "submitting";
+		 						$this->emptyFlag = "";
+		 					} else {
+		 						$this->context = "showingform";
+		 						$this->emptyFlag = "Error: Please verify your password.";
+		 					}
+		 				} else {
+		 					$this->context = "showingform";
+		 					$this->emptyFlag = "Error: Please enter a valid email.";
+		 				}
 		 			} else {
 		 				$this->context = "showingform";
-		 				$this->emptyFlag = "Error: All fields required.";
+		 				$this->emptyFlag = "Error: Please enter all fields.";
 		 			}
 		 		} else {
 		 			$this->context = "showingform";
