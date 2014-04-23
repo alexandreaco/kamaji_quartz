@@ -317,7 +317,7 @@
 				document.getElementById('finalPersonalInfo').innerHTML=personal;
 				
 				//SEND TO MODEL
-				var sender = 'user=' + '$this->displayname' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
+				var sender = 'user=' + '$this->name' + '&&research=' + research + '&&publications=' + publications + '&&personal=' + personal;
 				
 				var jobtitle = '&&jobtitle=' + document.getElementById('geninfo_jobtitle').value;
 				var address = '&&address=' + document.getElementById('geninfo_address').value;
@@ -325,8 +325,9 @@
 				var fax = '&&fax=' + document.getElementById('geninfo_fax').value;
 				var officehours = '&&officehours=' + document.getElementById('geninfo_officehours').value;
 				var biography = '&&biography=' + document.getElementById('geninfo_biography').value;
+				var name = '&&name=' + document.getElementById('geninfo_displayname').value;
 				
-				var geninfo = jobtitle + address + telephone + fax + officehours + biography;
+				var geninfo = name + jobtitle + address + telephone + fax + officehours + biography;
 				
 				sender = sender + geninfo;
 				
