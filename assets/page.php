@@ -86,6 +86,9 @@
 	 		$html = "<head>
 	 							<meta charset='utf-8'>
 	 							
+	 							<!--Javascript-->
+	 							<script src='assets/js/script.js'></script>
+	 							
 								<!--Stylesheet-->
 								<link rel='stylesheet' href='assets/css/style.css'>
 								<link rel='stylesheet' href='assets/css/layout.css'>
@@ -132,13 +135,15 @@
 			if ($this->title == "My Site") {	// My Site
 			
 				$html = "<div id='container'>
-				<div id='header'></div>
+				<div id='header'>
+					<div id='login_btn'><a href='login.php'>Login</a></div>
+				</div>
 				<div class='content mysite'>";
 				
 			} else {
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='login.php'>Login</a></div>
+					
 					</div>
 				<div class='content'>";
 			}

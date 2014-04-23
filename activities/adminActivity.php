@@ -93,7 +93,7 @@
 			print($this->getQuartzVersion());
 			
 			// Javascript functions
- 			print($this->getJavascript());
+ 			//print($this->getJavascript());
  			
  	 		$this->page->endDoc();
  		
@@ -180,7 +180,7 @@
 							<td class='x'></td>							
 						</tr>
 					</thead>
-					<tbody>";
+					<tbody id='validUserTable'>";
 					
 			while ($count < $this->numValidUsers) {
 				
@@ -205,7 +205,7 @@
 				<form>
 					<input type='text' id='valid_email' />
 					<!-- Use the model's function to add new user to the list -->
-					<button type='submit' class='button' action='add_user_email_to_list_of_valid_users()'>Add User</button>
+					<button type='button' onclick='addValidUser()' class='button' >Add User</button>
 				</form>
 	
 	
@@ -237,7 +237,6 @@
 					<input class='hidden' id='input' type='text' value='John Keklak' />
 					<button type='button' onclick='edit_username()' class='link_lookalike' id='edit'>edit</button>
 					
-					//call model to save changes 
 					<button type='button' onclick='save_username()' class='link_lookalike hidden' id='save'>save</button>					
 				</form>
 			
@@ -324,17 +323,13 @@
 			
 			return "<div class='module backup_user_data'>
 			
-				<h2 class='mod_title'>Backup User Data</h2>
-			
-				<form>
-					<!--use javascript to hide/unhide the input box. the form will always be there, it just won't be visible unless you click 'edit'-->
-					<button action='select_file_location_from_computer'>Browse</button>
-					<!-- use javascript to change the content of this <p>tag to show the destination that the user selected-->
-					<p class='hidden_input visible inline_padding'>Choose Destination</p> 
-					<!-- use model function to backup all data-->
-					<button type='submit' action='backup_user_data()'>Backup</button>
-				</form>
-		
+				<h2 class='mod_title'>Backup User Data</h2>			
+					
+					<form action='upload_file.php' method='post'
+							enctype='multipart/form-data'>
+							<input type='file' name='file' id='file'>
+							<input type='submit' name='submit' value='Submit'>
+					</form>
 		
 				</div> <!--/module-->";
 		}
@@ -351,53 +346,7 @@
 				</div> <!--/module-->";
 		}
 		
-		// Javascript
-		private function getJavascript() {
 		
-			return "
-				<script>
-					function edit_username() {
-						document.getElementById('input').style.display='inline';
-						document.getElementById('save').style.display='inline';
-						document.getElementById('username').style.display='none';
-						document.getElementById('edit').style.display='none';
-					}
-					
-					function save_username() {
-						document.getElementById('input').style.display='none';
-						document.getElementById('save').style.display='none';
-						
-						var newName = document.getElementById('input').value;
-						document.getElementById('username').innerHTML = newName;
-						
-						document.getElementById('username').style.display='inline-block';
-						document.getElementById('edit').style.display='inline';
-						
-						var sender = 'email=email newname=newName';
-						var xmlhttp;
-
-						if (window.XMLHttpRequest)
-						{
-							xmlhttp=new XMLHttpRequest();
-					
-						}
-
-						xmlhttp.onreadystatechange=function()
-						{
-							if (xmlhttp.readyState==4 && xmlhttp.status==200)
-							{
-								document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
-							}
-						}
-						xmlhttp.open('POST','localhost/kamaji_quartz/adminAJAX.php',true);
-						xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-						xmlhttp.send(sender);
-						}
-					
-						</script>
-					";
-		
-		}
 	 
 	 }
 

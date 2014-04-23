@@ -35,7 +35,8 @@ a, a:hover, a:active, a:visited {
 	font-weight:300;
 }
 
-#login_btn {
+#login_btn,
+#admin_btn {
 	position: absolute;
 	background: #434542;
 	right: 40px;
@@ -44,7 +45,8 @@ a, a:hover, a:active, a:visited {
 	font-size: 0.9em;
 }
 
-#login_btn a {
+#login_btn a,
+#admin_btn a {
 	color: #FFFFFF;
 }
 
