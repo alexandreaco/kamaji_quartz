@@ -172,7 +172,7 @@
 				elseif ($this->viewing == 'mysite_research'){
 					// get research data
 				
-					$this->research = $this->model->getResearch($_SESSION["id]");
+					$this->research = $this->model->getResearch($_SESSION["id"]);
 // 					$this->research = "research goes here";
 				
 				}
@@ -180,7 +180,7 @@
 				elseif ($this->viewing == 'mysite_awards'){
 					// get awards data
 				
-					$this->awards = $this->model->getAwards($_SESSION["id]");
+					$this->awards = $this->model->getAwards($_SESSION["id"]);
 // 					$this->awards = "awards go here";
 				
 				}
@@ -188,7 +188,7 @@
 				elseif ($this->viewing == 'mysite_personal'){
 					// get personal data
 				
-					$this->personal = $this->model->getPersonal($_SESSION["id]");
+					$this->personal = $this->model->getPersonal($_SESSION["id"]);
 // 					$this->personal = "personal goes here";
 				
 				}

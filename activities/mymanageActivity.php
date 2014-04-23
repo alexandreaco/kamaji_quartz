@@ -34,7 +34,7 @@
 	 	function __construct() {
 	 		session_start();
 
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {
 	 			header('Location: http://localhost/kamaji_quartz/login.php');
 		 	}
 		 	
