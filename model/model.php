@@ -79,6 +79,7 @@
 				`publications` text,
 				`personal` text,
 				`adminstatus` text,
+				`image` text,
 				PRIMARY KEY (`id`)
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);
@@ -94,18 +95,13 @@
 				(`id` int NOT NULL auto_increment,
 				`accountname` text NOT NULL,
 				`course` text NOT NULL,
-				`title` text NOT NULL,
-				`description` text NOT NULL,
+				`title` text,
+				`description` text,
+				`url` text,
 				PRIMARY KEY (`id`)
 				) ENGINE=MyISAM;";
 			$mysqli->query($query);				
 
-			$query = "CREATE TABLE IF NOT EXISTS `images`
-				(`id` int NOT NULL auto_increment,
-				`accountname` text NOT NULL,
-				`image` text,
-				PRIMARY KEY (`id`)
-				) ENGINE=MyISAM;";
 			$query = "CREATE TABLE IF NOT EXISTS `activity`
 				(`id` int NOT NULL auto_increment,
 				`accountname` text NOT NULL,
@@ -178,9 +174,6 @@
 			$query = "DELETE FROM emails WHERE email='$email';";
 			$mysqli->query($query);
 			$mysqli->close();
-
-			return "The following email has been removed:<br><br>
-				   <b>'$email'<br></b>";
 		}
 
 		function getEmails() {
@@ -242,16 +235,9 @@
 							  adminstatus=$adminStatus;";
 
 					$mysqli->query($query);
-
-					$mysqli->close();
-					return 1;
-				} else {
-					$mysqli->close();
-					return 0;
 				}
-			} else {
-				return 0;
 			}
+			$mysqli->close();
 		}
 
 		function deleteUser($email){
@@ -262,7 +248,6 @@
 			$query = "DELETE FROM users WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();
-			return "Deleted the following user from the database:<br><br><b>$accountname</b>";
 		}
 
 		function getName($email){
@@ -281,33 +266,6 @@
 				$name = stripslashes($row["name"]);
 				return $name;
 			}
-
-		}
-
-		function getUserByEmail($email){
-			$mysqli = $this->connect();
-
-			$query = "SELECT * FROM users WHERE email='$email';";
-			$result = $mysqli->query($query);
-
-			$res = "";
-
-			if($result->num_rows == 0){
-				$mysqli->close();
-				$res .= "No User Found<br>";
-			} else {
-				$res .= "Found the following User:<br><br>";
-				for($row = $result->fetch_assoc(); $row != FALSE; $row = $result->fetch_assoc())
-				{
-					$name = stripslashes($row["name"]);
-					$email = stripslashes($row["email"]);
-					$res .= "<b>Name: '$name'<br>
-						   email: '$email'</b><br><br>";
-				}
-				$mysqli->close();
-			}
-
-			return $res;
 		}
 
 		function getAllUsers(){
@@ -316,15 +274,14 @@
 			$query = "SELECT * FROM users;";
 			$result = $mysqli->query($query);
 
-			$res = "Found the following Users:<br><br>";
+			$res = "";
 
 			for($row = $result->fetch_assoc(); $row != FALSE; 
 						$row = $result->fetch_assoc())
 			{
 				$name = stripslashes($row["name"]);
 				$email = stripslashes($row["email"]);
-				$res .= "<b>Name: '$name'<br>
-					   email: '$email'</b><br><br>";
+				$res .= $email.";";
 			}
 			$mysqli->close();
 
@@ -339,10 +296,6 @@
 			$query = "UPDATE users SET name='$newName' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();
-
-			return "User has been Updated:<br><br>
-				  <b>Name: '$newName'<br>
-				  Email: '$email'</b>";
 		}
 
 		function changeEmail($oldEmail,$newEmail){
@@ -354,8 +307,6 @@
 			$result = $mysqli->query($query);
 
 			$mysqli->close();
-			return "User has been Updated:<br><br>
-				  <b>Email: '$newEmail'</b>";		
 		}
 
 		function changePassword($email, $newPassword){
@@ -366,7 +317,6 @@
 			$query = "UPDATE users SET password='$newPassword' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Password has been Updated.";
 		}
 
 		function addCourse($email,$name,$title,$description){
@@ -387,12 +337,9 @@
 				$mysqli->query($query);
 
 				$mysqli->close();
-				return "The following Course has been Created:<br><br>
-					   <b>Course: '$name'<br>
-					   	Title: '$title'<br>
-					   	Description: '$description'</b>";
+				return TRUE;
 			} else {
-				return "Course Already Exists for the User.";
+				return FALSE;
 			}		
 		}
 
@@ -404,8 +351,6 @@
 			$mysqli->query($query);
 
 			$mysqli->close();
-			return "The following course has been removed:<br><br>
-				   <b>'$name'<br></b>";
 		}
 
 		function changeCourseTitle($email, $course, $newTitle){
@@ -417,9 +362,6 @@
 			$result = $mysqli->query($query);
 
 			$mysqli->close();	
-			return "Course has been Updated:<br><br>
-				  <b>Course: '$course'<br>
-				  Title: '$newTitle'<br></b>";
 		}
 
 		function changeCourseDescription($email, $course, $newDescription){
@@ -430,9 +372,6 @@
 			$query = "UPDATE courses SET description='$newDescription' WHERE course='$course' AND accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();
-			return "Course has been Updated:<br><br>
-				  <b>Course: '$course'<br>
-				  Description: '$newDescription'<br></b>";
 		}
 
 		function setJobtitle($email, $title) {
@@ -443,7 +382,6 @@
 			$query = "UPDATE users SET jobTitle='$title' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Job Title has been set to '$title'";
 		}
 
 		function setAddress($email, $address) {
@@ -454,7 +392,6 @@
 			$query = "UPDATE users SET address='$address' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Address has been set to '$address'";
 		}
 
 		function setTelephone($email, $telephone) {
@@ -465,7 +402,6 @@
 			$query = "UPDATE users SET telephone='$telephone' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Telephone has been set to '$telephone'";			
 		}
 
 		function setFax($email, $fax) {
@@ -476,7 +412,6 @@
 			$query = "UPDATE users SET fax='$fax' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Fax has been set to '$fax'";			
 		}
 
 		function setOfficeHours($email, $officeHours) {
@@ -487,7 +422,6 @@
 			$query = "UPDATE users SET officeHours='$officeHours' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Office Hours have been set to '$officeHours'";
 		}
 
 		function setBiography($email, $biography){
@@ -498,7 +432,6 @@
 			$query = "UPDATE users SET biography='$biography' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Biography has been set to: '$biography'";			
 		}
 
 		function setResearch($email, $research) {
@@ -509,7 +442,6 @@
 			$query = "UPDATE users SET research='$research' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Research has been set to: '$research'";				
 		}
 
 		function setPublications($email, $publications) {
@@ -520,7 +452,6 @@
 			$query = "UPDATE users SET publications='$publications' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Publications have been set to: '$publications'";
 		}
 
 		function setPersonal($email, $personal) {
@@ -531,7 +462,6 @@
 			$query = "UPDATE users SET personal='$personal' WHERE accountname='$accountname'";
 			$result = $mysqli->query($query);
 			$mysqli->close();	
-			return "Personal have been set to: '$personal'";
 		}
 
 		function getJobtitle($email) {
@@ -571,8 +501,6 @@
 				$mysqli->close();
 				return $address;
 			}
-
-			return $res;
 		}
 
 		function getTelephone($email) {
@@ -585,6 +513,7 @@
 
 			if($result->num_rows == 0){
 				$mysqli->close();
+				return "";
 			} else {
 				$row = $result->fetch_assoc();
 				$telephone = stripslashes($row["telephone"]);
@@ -664,7 +593,6 @@
 
 			if($result->num_rows == 0){
 				$mysqli->close();
-
 				return "";
 			} else {
 				$row = $result->fetch_assoc();
@@ -716,11 +644,37 @@
 		}
 
 		function setImage($image,$email){
+			$mysqli = $this->connect();
+
 			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email);
+
+			$path = "assets/profPics/".$accountname.".jpg";
+
+			move_uploaded_file($image, $path);
+
+			$query = "UPDATE images SET image='$path' WHERE accountname='$accountname'";
+			$result = $mysqli->query($query);
+			$mysqli->close();	
 		}
 
 		function getImage($email) {
+			$mysqli = $this->connect();
 
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email);
+
+			$query = "SELECT * FROM users WHERE accountname='$accountname';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "";
+			} else {
+				$row = $result->fetch_assoc();
+				$image = stripslashes($row["image"]);
+				$mysqli->close();			
+
+				return $image;
+			}
 		}
 
 		function checkCredentials($email, $pass){
@@ -767,7 +721,6 @@
 		function activateAccount($id) {
 			$mysqli = $this->connect();
 
-			// $query = "SELECT * FROM registration WHERE regid='$id';";
 			$query = "SELECT * FROM registration WHERE regid='$id';";
 			$result = $mysqli->query($query);
 
@@ -827,6 +780,85 @@
 
 				return 1;
 			}			
+		}
+
+		function getCourses($email) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM courses WHERE accountname='$accountname'";
+			$result = $mysqli->query($query);
+
+			$res = "";
+			for($row = $result->fetch_assoc(); $row != FALSE; 
+						$row = $result->fetch_assoc())
+			{
+				$course = stripslashes($row["course"]);
+				$res .= $course.";";
+			}
+			$mysqli->close();
+			return $res;
+		}
+
+		function getCourseDescription($email, $course) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM courses WHERE accountname='$accountname' AND course='$course';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "";
+			} else {
+				$row = $result->fetch_assoc();
+				$description= stripslashes($row["description"]);
+				$mysqli->close();			
+
+				return $description;
+			}
+		}
+
+		function getCourseURL($email, $course) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM courses WHERE accountname='$accountname' AND course='$course';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "";
+			} else {
+				$row = $result->fetch_assoc();
+				$url= stripslashes($row["url"]);
+				$mysqli->close();			
+
+				return $url;
+			}
+		}
+
+		function getCourseTitle($email, $course) {
+			$mysqli = $this->connect();
+
+			$accountname = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $email); 
+
+			$query = "SELECT * FROM courses WHERE accountname='$accountname' AND course='$course';";
+			$result = $mysqli->query($query);
+
+			if($result->num_rows == 0){
+				$mysqli->close();
+				return "";
+			} else {
+				$row = $result->fetch_assoc();
+				$title= stripslashes($row["title"]);
+				$mysqli->close();			
+
+				return $title;
+			}
 		}
 	}
 
