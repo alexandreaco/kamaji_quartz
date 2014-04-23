@@ -139,30 +139,30 @@
 			
 					// get teaching data
 					
-// 					
-//  					$allCourses = $this->model->getCourses();
-//  					$this->courseNames = explode(";", $allCourses);
-// 
-//  					$this->numCourses = count($this->courseNames);
-// 			
-//  			
-//  					$count = 0;
-//  			
-//  					while ($count < $this->numCourses)
-//  					{
-//  			
-//  						$url = $this->model->getCourseUrl($this->courseNames[$count]);
-//  						$course_name = $this->model->getCourseName($this->courseNames[$count]);
-//  						$description = $this->model->getCourseDescription($this->courseNames[$count]);
-//  				
-//  						$this->courseTextArea .= 
-//  							"<p>					
-//  								<a href='$url'>$course_name</a> - $description
-//  							</p>";
-// 					
-//  						$count++;
-//  			
-//  					}
+					
+ 					$allCourses = $this->model->getCourses($_SESSION["id"]);
+ 					$this->courseNames = explode(";", $allCourses);
+
+ 					$this->numCourses = count($this->courseNames);
+			
+ 			
+ 					$count = 0;
+ 			
+ 					while ($count < $this->numCourses)
+ 					{
+ 			
+ 						$url = $this->model->getCourseUrl($_SESSION["id"], $this->courseNames[$count]);
+ 						$course_name = $this->model->getCourseName($_SESSION["id"], $this->courseNames[$count]);
+ 						$description = $this->model->getCourseDescription($_SESSION["id"], $this->courseNames[$count]);
+ 				
+ 						$this->courseTextArea .= 
+ 							"<p>					
+ 								<a href='$url'>$course_name</a> $description
+ 							</p>";
+					
+ 						$count++;
+ 			
+ 					}
 
 
 						$this->courseTextArea = "Courses go here";

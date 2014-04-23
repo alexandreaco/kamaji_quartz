@@ -80,7 +80,6 @@
 	margin-bottom: 50px;
 }
 
-#forgot input[type="submit"],
-#reg input[type="submit"] {
+#forgot input[type="submit"] {
 	margin-top: 50px;
 }
