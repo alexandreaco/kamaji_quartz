@@ -46,7 +46,7 @@
 		// constructor
 		function __construct() {
 	 		session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {					//[MSA.001]
 	 			header('Location: http://localhost/kamaji_quartz/login.php');
 		 	}
 
@@ -57,7 +57,7 @@
 			$this->context = "User is logged in, site page is open";
 		
 // Decide which page to show
-	 		if (isset ($_GET['home'])) {
+	 		if (isset ($_GET['home'])) {									//[MSA.002]
 
 				$this->viewing = 'mysite_home';
 				
@@ -102,7 +102,7 @@
 			
 			if($this->context = "User is logged in, site page is open") {
 				
-				$this->username = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $_SESSION["id"]);
+				$this->username = preg_replace("#\@[\d\w\.-]*?\.\w{2,4}#i", "", $_SESSION["id"]);			//[MSA.003]
 			
 			}
 			
@@ -119,7 +119,7 @@
 				if ($this->viewing == 'mysite_home') {
 				
 					// get homepage data	
-					$this->name = $this->model->getName($_SESSION["id"]);
+					$this->name = $this->model->getName($_SESSION["id"]);							//[MSA.004]
  					$this->job_title = $this->model->getJobTitle($_SESSION["id"]);
 					$this->address = $this->model->getAddress($_SESSION["id"]);
 					$this->telephone = $this->model->getTelephone($_SESSION["id"]);
@@ -130,7 +130,7 @@
 					
 					$this->photo = $this->model->getImage($_SESSION["id"]); 
 
-					// If no phot has been uploaded, default to this image
+					// If no photo has been uploaded, default to this image
 					if ($this->photo == "") {
 					
 						$this->photo = "assets/images/default_img.jpg";
@@ -144,14 +144,14 @@
 					// get teaching data
 					
  					$allCourses = $this->model->getCourses($_SESSION["id"]);
- 					$this->courseNames = explode(";", $allCourses);
+ 					$this->courseNames = explode(";", $allCourses);						//[MSA.005]
 
- 					$this->numCourses = count($this->courseNames);
+ 					$this->numCourses = count($this->courseNames);						//[MSA.006]
 			
  			
  					$count = 0;
  			
- 					while ($count < $this->numCourses)
+ 					while ($count < $this->numCourses)									//[MSA.007]
  					{
  			
  						$url = $this->model->getCourseUrl($_SESSION["id"], $this->courseNames[$count]);
@@ -287,7 +287,7 @@
 	
 		}
 		
-		private function printNavigation() {
+		private function printNavigation() {												//[MSA.008]
 		
 			print("<div id='navigation'>
 								<ul>
