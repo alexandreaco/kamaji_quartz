@@ -121,13 +121,13 @@
 				
 					// get homepage data	
 					$this->name = $this->model->		
- 					$this->job_title = $this->model->getJobTitle($this->username);
-					$this->address = $this->model->getAddress($this->username);
-					$this->telephone = $this->model->getTelephone($this->username);
-					$this->fax = $this->model->getFax($this->username);
-					$this->email = $this->model->getEmail($this->username);
-					$this->office_hours = $this->model->getOfficeHours($this->username);
-					$this->biography = $this->model->getBiography($this->username);
+ 					$this->job_title = $this->model->getJobTitle($_SESSION["id"]);
+					$this->address = $this->model->getAddress($_SESSION["id"]);
+					$this->telephone = $this->model->getTelephone($_SESSION["id"]);
+					$this->fax = $this->model->getFax($_SESSION["id"]);
+					$this->email = $_SESSION["id"];
+					$this->office_hours = $this->model->getOfficeHours($_SESSION["id"]);
+					$this->biography = $this->model->getBiography($_SESSION["id"]);
 					
 					// $this->photo = $this->model->getPhoto(); // return a link to the photo
 					$this->photo = "Photo"; // return a link to the photo
