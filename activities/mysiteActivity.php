@@ -152,7 +152,7 @@
  					{
  			
  						$url = $this->model->getCourseUrl($_SESSION["id"], $this->courseNames[$count]);
- 						$course_name = $this->model->getCourseName($_SESSION["id"], $this->courseNames[$count]);
+ 						$course_name = $this->model->getCourseTitle($_SESSION["id"], $this->courseNames[$count]);
  						$description = $this->model->getCourseDescription($_SESSION["id"], $this->courseNames[$count]);
  				
  						$this->courseTextArea .= 
