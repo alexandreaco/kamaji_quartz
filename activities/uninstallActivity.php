@@ -14,7 +14,7 @@
 			$this->page = new Page("Uninstall Quartz");
 
 			if (isset($_POST['submit'])) {
-				if ($_POST['uninstall']!="")
+				if ($_POST['uninstall']!="")							
 				{
 					$this->context = 'submitting';
 					$this->emptyFlag = "";
@@ -95,10 +95,10 @@
 		function process(){
 			if($this->context=="submitting"){
 			if ($_POST['uninstall'] =='yes') {
-				$this->model->deleteDatabase();
+				$this->model->deleteDatabase();							//[UNA.001]
 
 				if(file_exists("assets/info.txt")){
-					unlink("assets/info.txt");			
+					unlink("assets/info.txt");							//[UNA.002]	
 				}
 			}
 			}
