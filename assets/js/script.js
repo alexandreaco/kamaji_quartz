@@ -84,7 +84,7 @@
 			
 		}
 		
-		xmlhttp.open('POST','http://localhost/kamaji_quartz/activities/adminAJAX_saveUsername.php',true);
+		xmlhttp.open('POST','activities/adminAJAX_saveUsername.php',true);
 		xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 		xmlhttp.send(sender);
 	}
