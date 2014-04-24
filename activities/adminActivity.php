@@ -35,7 +35,7 @@
 	 		$this->subfolder = $this->model->getSubfolder();
 
 			session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {		//[AA.001]
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {		//[AA.001]
 	 			header("Location: $this->server/$this->subfolder/login.php");
 			}
 			
