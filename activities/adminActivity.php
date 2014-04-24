@@ -134,7 +134,7 @@
 							<td class='email'>$email</td>
 							<td class='last'>$last</td>
 							<!-- link to password reset screen with email address in GET array. Populate email field with this. -->
-							<td class='reset'><a href='/Quartz/reset.php?$email' target='_blank'>reset password</a></td>
+							<td class='reset'><a href='$this->server/$this->subfolder/reset.php?$email' target='_blank'>reset password</a></td>
 							<td class='x'><button type='submit' action='delete_email_from_active_users()' class='link_lookalike''>x</button>
 						</tr>";
 						
@@ -146,7 +146,7 @@
 	 		$this->activeUserText .= "</tbody>
 				</table>
 			
-				<a href='/Quartz/register.php' class='button_link'>Add Users</a>
+				<a href='$this->server/$this->subfolder/register.php' class='button_link'>Add Users</a>
 		
 		
 			</div> <!--/module-->";
@@ -358,8 +358,16 @@
 		
 		// Quartz Version
 		private function getQuartzVersion() {									//[AA.007]
-			
-			return "<div class='module Quartz_Version'>
+			return 
+			"
+			<br>
+			<br>
+			<tr>
+			<td class='reset'><a href='$this->server/$this->subfolder/uninstall.php' target='_blank'>Uninstall Quartz</a></td>
+			</tr>
+			<br>
+			<br>
+			<div class='module Quartz_Version'>
 			
 				<!-- will the version number be hardcoded in? -->
 				<h2 class='mod_title'>Quartz Version 2.0</h2>
