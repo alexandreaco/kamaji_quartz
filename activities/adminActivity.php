@@ -24,17 +24,22 @@
 	 	
 	 	var $recentActivityText;
 	 
+	 	var $server;
+	 	var $subfolder;
 	 
 	 	// constructor
 	 	function __construct() {
 	 		
-		session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
-	 			header('Location: http://localhost/kamaji_quartz/login.php');
-		 	}
-		 	// session_destroy();
+
 	 		$this->model = new Model();
-	 		
+	 		$this->server = $this->model->getServer();
+	 		$this->subfolder = $this->model->getSubfolder();
+
+			session_start();
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {		//[AA.001]
+	 			header("Location: $this->server/$this->subfolder/login.php");
+			}
+			
 	 		$this->page = new Page("Admin Dashboard");
 	
 	 		
@@ -101,7 +106,7 @@
 	 	
 	 	
 	 	// Active Users
-	 	private function getActiveUsers() {
+	 	private function getActiveUsers() {										//[AA.002]
 	 	
 			$count = 0;
 			$this->activeUserText = "<div class='module active_users'>
@@ -119,10 +124,10 @@
 					</thead>
 					<tbody>";
 			
-	 		while ($count < $this->numActiveUsers) {
+	 		while ($count < $this->numActiveUsers) {							//[AA.003]
 	 			
 	 			$email = $this->activeEmails[$count];
-	 			$last = "1/1/2000";
+	 			$last = "1/1/2000";												//[AA.004]
 	 			
 
 	 			$newUserRow = "<tr>
@@ -154,7 +159,7 @@
 	 	private function retrieveActiveUsers() {
 	 	
 	 		$allEmails = $this->model->getEmails();
-	 		$this->activeEmails = explode(";", $allEmails); 
+	 		$this->activeEmails = explode(";", $allEmails); 						//[AA.005]
 	 		
 // 	 		$this->activeEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
 // 	 		$this->numActiveUsers = count($this->activeEmails);
@@ -216,7 +221,7 @@
 		// Model
 		private function retrieveValidUsers() {
 			$allEmails = $this->model->getEmails();
-	 		$this->validEmails = explode(";". $allEmails); 
+	 		$this->validEmails = explode(";", $allEmails); 
 	 		
 // 	 		$this->validEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
 // 	 		$this->numValidUsers = count($this->validEmails);
@@ -248,7 +253,7 @@
 		}
 		
 		// Mail Server
-		private function getMailServer() {
+		private function getMailServer() {							//[AA.006]
 		
 			return "<div class='module mail_server'>
 				<h2 class='mod_title'>Mail Server</h2>
@@ -351,7 +356,7 @@
 		}
 		
 		// Quartz Version
-		private function getQuartzVersion() {
+		private function getQuartzVersion() {									//[AA.007]
 			
 			return "<div class='module Quartz_Version'>
 			

@@ -3,4 +3,4 @@ localhost
 admin
 adminpass
 http://localhost/
-quartz
+kamaji_quartz
