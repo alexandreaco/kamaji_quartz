@@ -414,8 +414,10 @@
 	    function dudeBro() {
 	    	if(file_exists("assets/info.txt")) {
 	    		$file = "assets/info.txt";
-	    	} else {
+	    	} else if(file_exists("../assets/info.txt")) {
 	    		$file = "../assets/info.txt";
+	    	} else {
+	    		return "0";
 	    	}
 				
 			$fh = fopen($file, "r");
