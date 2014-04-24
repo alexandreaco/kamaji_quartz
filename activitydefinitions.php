@@ -37,4 +37,5 @@
 
 	 // called by uninstall.php
 	 include 'activities/uninstallActivity.php';
+
 ?>

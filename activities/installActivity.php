@@ -39,6 +39,7 @@
 				$this->page->beginDoc();
 
 				print("
+					<div id='install'>
 						<br><center><font color='FF0000'>$this->emptyFlag</font></center>
 						<h1><center>Welcome to Quartz!</center></h1>
 						<p style:'margin-left: auto; margin-right: auto;'>
@@ -88,19 +89,19 @@
 							<!--creating the form below that takes in user info-->
 
 						<form method='post' action= 'install.php' >
-							MySQL Server Name: <input type= 'text' name = 'serverurl'><br>
+							<label>MySQL Server Name: </label><input type= 'text' name = 'serverurl'><br>
 							<br>
-							MySQL Root User Password: <input type='text' name = 'rootpass'><br>
+							<label>MySQL Root User Password: </label><input type='text' name = 'rootpass'><br>
 							<br>
-							Quartz Admin Name: <input type = 'text' name = 'admin'><br>
+							<label>Quartz Admin Name: </label><input type = 'text' name = 'admin'><br>
 							<br>
-							Quartz Admin Password: <input type = 'text' name = 'adminpass'><br>
+							<label>Quartz Admin Password: </label><input type = 'text' name = 'adminpass'><br>
 							<br>
-							URL Of your Webserver: <input type= 'text' name = 'serverhost'><br>
+							<label>URL Of your Webserver: </label><input type= 'text' name = 'serverhost'><br>
 							<br>
-							Name of Quartz's subfolder: <input type='text' name='rootpath'><br>
+							<label>Name of Quartz's subfolder: </label><input type='text' name='rootpath'><br>
 							<br>
-							Approved Emails: <input type='text' name='emails'><br>
+							<label>Approved Emails: </label><input type='text' name='emails'><br>
 							<br>
 							Does your server have the ability to send mail?: <br>
 							<input type='radio' name='canmail' value='yes'>	Yes<br>
@@ -108,7 +109,8 @@
 
 							<p><input type='submit' name='submit'/></p>
 						</form>
-						</p>");
+						</p>
+						</div>");
 
 				$this->page->endDoc();
 			} else if ($this->context = "submitting") {

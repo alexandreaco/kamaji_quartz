@@ -50,3 +50,17 @@ a, a:hover, a:active, a:visited {
 	color: #FFFFFF;
 }
 
+
+#install label {
+	display: inline-block;
+	width: 200px;
+	font-size: 1em;
+}
+
+#install input[type="text"] {
+	width: 300px;
+}
+
+#install input[type="radio"] {
+	padding: 10px 0 5px 0;
+}
