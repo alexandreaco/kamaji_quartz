@@ -7,7 +7,9 @@
 	 * 
 	 */
 
- 
+
+	 include 'emailPhoto.php';
+
 	 class MySiteActivity {
  
 		// data members
@@ -130,11 +132,13 @@
 					$this->address = $this->model->getAddress($_SESSION["id"]);
 					$this->telephone = $this->model->getTelephone($_SESSION["id"]);
 					$this->fax = $this->model->getFax($_SESSION["id"]);
+					
+					$this->photo = "emailPhoto.php";
+		
 					$this->email = $_SESSION["id"];
 					$this->office_hours = $this->model->getOfficeHours($_SESSION["id"]);
 					$this->biography = $this->model->getBiography($_SESSION["id"]);
-					
-					$this->photo = $this->model->getImage($_SESSION["id"]); 
+					 
 
 					// If no photo has been uploaded, default to this image
 					if ($this->photo == "") {
