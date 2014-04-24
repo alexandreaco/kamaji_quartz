@@ -575,24 +575,33 @@ function setImage()
 
 function getImage()
 
-	This function 
+	This function retrieves the path to an image associated with the given email
 
 	Input
 
-		String email - 
+		String email - The email of the user that owns the image.
 
 	Output
-
+	
+		A string relative path that points to the user's photo.
+	
+	
+		
 function checkCredentials()
 
+	This function makes sure that the user provided valid credentials. First is makes sure that the email is associated with an account, and then checks the password.
+
 	Input
 
-		String email - 
-		String pass - 
+		String email - The user's email address
+		String pass -  The user's password
 
 	Output
 
+
 function storeRegistrationData()
+
+	This function stores the registration data for a user but does not validate the account. It mades a registration id to be used when comparing with the registration email
 
 	Input
 
@@ -601,8 +610,12 @@ function storeRegistrationData()
 		String password - Password of the user that will be created. 
 
 	Output
+	
+	
 
 function activateAccount()
+
+	This function activates a users account if the id provided is valid. It returs 1 if it is successfully activated, or 0 if it isn't
 
 	Input
 
@@ -610,15 +623,25 @@ function activateAccount()
 
 	Output
 
+
+
 function storeEmail()
+
+	This function adds a user to the registration table. It stores their email and a regid
 
 	Input
 
 		String email - email that will be stored in the database.  It will be retrieved when the password gets reset.
 
 	Output
+	
+		Returns an md5 hash of the email as a string
+
+
 
 function resetPassword()
+
+	This function resets a user's password	
 
 	Input
 
@@ -627,11 +650,88 @@ function resetPassword()
 		String password - The new password for the user.
 
 	Output
+	
+		Returns a 1 if the input username was valid and 0 if it was not.
+
+
 
 function getCourses()
+
+	This function accepts the Quartz user's email and returns a string containing all course names associated with that user.
 
 	Input
 
 		String email - The email of the user whose courses will be retrieved
 
 	Output
+	
+		Returns an empty string if no courses exist or a string containing all course names separated by a semicolon
+		
+		
+function getCourseDescription()
+
+	This function accepts a Quartz user's email and course name and returns the course description 
+	
+	Input
+		
+		String email - The email of the Quartz user whose page you are viewing
+		
+		String course - the name of the course 
+	
+	Output
+	
+		Returns empty string if no course exist or a string containing the description.
+		
+
+function getCourseURL()
+
+	This function accepts a Quart'z user's email and course name and returns the course URL
+	
+	Input
+		
+		String email - The email of the Quartz user whose page you are viewing
+		
+		String course - String course - the name of the course 
+		
+	Output
+		
+		Returns empty string if no course exist or a string containing the URL.
+		
+		
+function getCourseTitle() 
+
+	This function accepts a Quart'z user's email and course name and returns the course title
+	
+	Input
+		
+		String email - The email of the Quartz user whose page you are viewing
+		
+		String course - String course - the name of the course 
+		
+	Output
+		
+		Returns empty string if no course exist or a string containing the title.
+		
+
+function getServer()
+
+	This function returns the server that the user chose upon installation.
+	
+	Input
+		
+	Output
+		
+		Returns a string containing the root of the website
+		
+
+function getSubFolder() 
+
+	This function returns the subfolder that the user chose upon installation.
+	
+	Input
+	
+	Output
+		
+		Returns a string containing the subfolder containing the website
+		
+		
