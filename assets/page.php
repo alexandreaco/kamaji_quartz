@@ -18,7 +18,7 @@
 	 class Page {
 	 	
 	 	// data members
-	 	var $title;
+	 	var $title;											//[PG.001]
 	 	
 	 	
 	 	// constructor
@@ -59,7 +59,7 @@
 	 
 	 	
 	 	// get Open HTML
-	 	private function getOpenHTML() {	
+	 	private function getOpenHTML() {					//[PG.002]
 	 	
 	 		$html ="<!doctype html>
 							<html lang='en'>";
@@ -71,7 +71,7 @@
 	 	
 	 	
 	 	// get close HTML
-	 	private function getCloseHTML() {
+	 	private function getCloseHTML() {					//[PG.003]
 	 	
 	 		$html = "</HTML>";
 
@@ -81,7 +81,7 @@
 	 	}
 	 	
 	 	// get head	
-	 	private function getHead() {		 	// requires a page title
+	 	private function getHead() {		 	// requires a page title				//[PG.004]
 	 	
 	 		$html = "<head>
 	 							<meta charset='utf-8'>
@@ -108,7 +108,7 @@
 	 	
 	 	
 	 	// get open body
-	 	private function getOpenBody() {
+	 	private function getOpenBody() {						//[PG.005]
 	 	
 	 		$html = "<body>";
 	 		
@@ -119,7 +119,7 @@
 	 	
 	 	
 	 	// get close Body
-	 	private function getCloseBody() {
+	 	private function getCloseBody() {							//[PG.006]
 	 	
 	 		$html = "</body>";
 
@@ -130,7 +130,7 @@
 
 	 
 		// get begin content
-		private function getBeginContent() {
+		private function getBeginContent() {						//[PG.007]
 		
 			if ($this->title == "My Site") {	// My Site
 			
@@ -166,7 +166,7 @@
 		
 		
 		// get end content
-		private function getEndContent() {
+		private function getEndContent() {					//[PG.008]
 		
 			$html = "</div><!-- /content-->
 			<div id='footer'></div>

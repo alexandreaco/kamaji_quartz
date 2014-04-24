@@ -10,6 +10,7 @@ $model->setResearch($_SESSION["id"],$_POST["research"]);			//[MMAH.001]
 $model->setPublications($_SESSION["id"],$_POST["publications"]);
 $model->setPersonal($_SESSION["id"],$_POST["personal"]);
 
+$model->changeName($_SESSION["id"],$_POST["name"]);
 $model->setJobtitle($_SESSION["id"],$_POST["jobtitle"]);
 $model->setAddress($_SESSION["id"],$_POST["address"]);
 $model->setTelephone($_SESSION["id"],$_POST["telephone"]);

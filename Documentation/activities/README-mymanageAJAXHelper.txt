@@ -22,7 +22,7 @@ Output:
 - The AJAXHelper sets every given variable to the Model interface.
 
 [MMAH.001]
-- These lines take $_POST variables submitted by 'mymanageActivity.php' and communicates
+- These lines take $_SESSION variables submitted by 'mymanageActivity.php' and communicates
 to the model using a 'set()' function. This allows a user to set their personal
 information.
 
