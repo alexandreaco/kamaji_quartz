@@ -188,7 +188,7 @@
 				elseif ($this->viewing == 'mysite_awards'){
 					// get awards data
 				
-					$this->awards = $this->model->getAwards($_SESSION["id"]);
+					$this->awards = $this->model->getPublications($_SESSION["id"]);
 				
 				}
 				

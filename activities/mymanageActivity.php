@@ -253,7 +253,7 @@
 						
 							<div class='module publications'>
 							
-								<h2 class='mod_title'>Publications</h2> <button type='button' class='link_lookalike' onclick='showPublicationsEdit()'>edit</button>
+								<h2 class='mod_title'>Awards</h2> <button type='button' class='link_lookalike' onclick='showPublicationsEdit()'>edit</button>
 							
 								<!-- model code will generate these divs -->
 								<p id='finalPublications'>$this->publications</p>
