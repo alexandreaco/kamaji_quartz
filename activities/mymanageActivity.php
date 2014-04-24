@@ -349,11 +349,8 @@
 						document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
 					}
 				}
-<<<<<<< HEAD
+
 				xmlhttp.open('POST','$this->server/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
-=======
-				xmlhttp.open('POST','http://localhost:8888/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
->>>>>>> 63a47c90ba5b2c8171d42048f72bf9fee8ddd3d6
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(sender);
 				

@@ -29,20 +29,15 @@
 	 	// constructor
 	 	function __construct() {
 	 		
-<<<<<<< HEAD
+
 	 		$this->model = new Model();
 	 		$this->server = $this->model->getServer();
 
 			session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {		//[AA.001]
 	 			header("Location: $this->server/kamaji_quartz/login.php");
-=======
-		session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {				//[AA.001]
-	 			header('Location: http://localhost/kamaji_quartz/login.php');
->>>>>>> 63a47c90ba5b2c8171d42048f72bf9fee8ddd3d6
-		 	}
-
+			}
+			
 	 		$this->page = new Page("Admin Dashboard");
 	
 	 		
