@@ -125,7 +125,7 @@
 						On that page, there is an option to create a new account.
 						Choose that option and follow the instructions provided.<br><br>
 
-						<a href='$this->serverName/$this->subfolder/login.php'>Go to Quartz now!</a>
+						<a href='$this->url/$this->subfolder/login.php'>Go to Quartz now!</a>
 						</center>");
 
 				$this->page->endDoc();				
