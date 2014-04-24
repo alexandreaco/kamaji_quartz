@@ -1,5 +1,7 @@
 function connect()
 
+	This function connects to Quartz's master database and returns the connection.
+
 	Input
 
 		None
@@ -8,7 +10,11 @@ function connect()
 
 		returns a MySQL connection that can be used to perform MySQL operations.
 
+
+
 function getAdminStatus()
+	
+	This function is used to discover if a given user has admin privileges
 
 	Input
 
@@ -18,8 +24,12 @@ function getAdminStatus()
 
 		Returns a String that specifies that admin status of the given user.  A '1' signifies that the user has admin privileges.  A '0' signifies that the user does not have admin privileges.
 
+
+
 function createDatabase()
 
+	This function creates a database.  Uses the information provided from the install page. Also creates a directory for the admin photos.
+	
 	Input
 
 		String server - The name of the server where the MySql database will be created.
@@ -36,7 +46,11 @@ function createDatabase()
 
 		None
 
+
+
 function deleteDatabase()
+
+	Deletes Quartz's master database. Used for uninstall.
 
 	Input
 
@@ -46,7 +60,10 @@ function deleteDatabase()
 
 		None
 
+
 function addEmail()
+
+	Adds an email to a the list of approved users.
 
 	Input
 
@@ -56,7 +73,11 @@ function addEmail()
 
 		None
 
+
+
 function removeEmail()
+
+	Deletes a specified email from the list of approved emails.
 
 	Input
 
@@ -66,7 +87,11 @@ function removeEmail()
 
 		None
 
+
+
 function getEmails()
+
+	Returns all approved emails as a string separated by ";"s
 
 	Input
 
@@ -76,7 +101,11 @@ function getEmails()
 
 		Returns a single string containing all approved emails in the database.  The emails are separated by semicolons.
 
+
+
 function checkEmail()
+
+	This function returns true if the email is approved by the admin and false if it is not.
 
 	Input
 
@@ -86,7 +115,11 @@ function checkEmail()
 
 		Returns a Boolean value specifying whether the given email is found in the list of approved emails.
 
+
+
 function createUser()
+
+	This function adds a new user to the database. This populates Job Title, Address, Telephone, Fax, Office Hours, Biography, Research, Publications, and Personal information with default copy.
 
 	Input
 
@@ -101,8 +134,12 @@ function createUser()
 	Output
 
 		None
+		
+		
 
 function deleteUser()
+
+	Deletes a user from the database. Uses the user's email address to identify the user in the table. 
 
 	Input
 
@@ -111,8 +148,12 @@ function deleteUser()
 	Output
 
 		None
+		
+		
 
 function getName()
+
+	This function returns the username associated with a Quartz account based on the specified email address.
 
 	Input
 
@@ -122,7 +163,11 @@ function getName()
 
 		Returns a String that contains the name of the user.
 
+
+
 function getAllUsers()
+
+	This function retrieves all user emails form the database. It returns them as a string of emails separated by semicolons
 
 	Input
 
@@ -130,9 +175,13 @@ function getAllUsers()
 
 	Output
 
-		Returns a single String containing the emails of all registered users.  the emails are separated by semicolons.
+		Returns a single String containing the emails of all registered users.  The emails are separated by semicolons.
+
+
 
 function changeName()
+
+	Changes the display name of a Quartz user. The function finds the user by matching the email address
 
 	Input
 
@@ -143,7 +192,11 @@ function changeName()
 
 		None
 
+
+
 function changeEmail()
+
+	This function changes the email associated with the user and saves it in the database. This also updates the account name because it is based off of the email 
 
 	Input
 
@@ -154,8 +207,12 @@ function changeEmail()
 	Output
 
 		None
+		
+		
 
 function changePassword()
+
+	This function changes a user's password and updates it in the database. This is used when the user forgets their password and needs to create a new one.
 
 	Input
 
@@ -165,21 +222,29 @@ function changePassword()
 	Output
 
 		None
+		
+		
 
 function addCourse()
+
+	This function adds a course to the database. It requires a course name, url, and description.
 
 	Input
 
 		String email - Email of the user whose courese will be added
 		String name - Name of the users course.
-		String title - Title of the users course.
+		String url - url the course's website.
 		String description - Description of the users course
 
 	Output
 
 		Returns a boolean value that specifies whether or not the course was successfully added into the database.
 
+
+
 function deleteCourse()
+
+	This function deletes a course from the database.
 
 	Input
 
@@ -188,13 +253,16 @@ function deleteCourse()
 	Output
 
 		None
+		
 
 function changeCourseTitle()
+
+	This function changes the course title associated with a given course in the database.
 
 	Input
 
 		String email - The email of the user of the desired course.
-		String course - The course number (i.e. 'CS411').
+		String course - The course name
 		String newTitle - The new Title of the course.
 
 	Output
@@ -203,29 +271,39 @@ function changeCourseTitle()
 
 function changeCourseDescription()
 
+	This functions changes the course description associates with a given course in the database.
+
 	Input
 
 		String email - The email of the user of the course.
-		String course - The course number (i.e. 'CS411').
+		String course - The course name.
 		String newDescription - The new Description of the course.
 
 	Output
 
 		None
+		
+		
 
 function setJobtitle()
+
+	This function saves the job title in the database associated with a Quartz user's email.
 
 	Input
 
 		String email - Email of the user.
 
-		String title - The title of the user.
+		String title - The job title to be saved.
 
 	Output
 
 		None
+		
+		
 
 function setAddress()
+
+	This function saves the address in the database associated with a Quartz user's email.
 
 	Input
 
@@ -236,7 +314,11 @@ function setAddress()
 
 		None
 
+
+
 function setTelephone()
+
+	This function saves the telephone number in the database associated with a Quartz user's email.
 
 	Input
 
@@ -247,7 +329,11 @@ function setTelephone()
 
 		None
 
+
+
 function setFax()
+
+	This function saves the fax number in the database associated with a Quartz user's email.
 
 	Input
 
@@ -258,8 +344,12 @@ function setFax()
 
 		None
 
+
+
 function setOfficeHours()
 
+	This function saves the office hours in the database associated with a Quartz user's email.
+	
 	Input
 
 		String email - The Email of the User. 
@@ -269,7 +359,11 @@ function setOfficeHours()
 
 		None
 
+
+
 function setBiography()
+
+	This function saves the biography field in the database associated with a Quartz user's email.
 
 	Input
 
@@ -280,7 +374,11 @@ function setBiography()
 
 		None
 
+
+
 function setResearch()
+
+	This function saves the research field in the database associated with a Quartz user's email.
 
 	Input
 
@@ -291,7 +389,11 @@ function setResearch()
 
 		None
 
+
+
 function setPublications()
+
+	This function saves the publications field in the database associated with a Quartz user's email. This holds publications and awards.
 
 	Input
 
@@ -301,8 +403,12 @@ function setPublications()
 	Output
 
 		None
+		
+		
 
 function setPersonal()
+
+	This function saves the personal information field in the database associated with a Quartz user's email.
 
 	Input
 
@@ -312,8 +418,11 @@ function setPersonal()
 	Output
 
 		None
+		
 
 function getJobtitle()
+
+	This function retrieves the job title for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -323,7 +432,11 @@ function getJobtitle()
 
 		A String containing the Job Title of the User.  An empty String will be returned if no user is found.
 
+
+
 function getAddress()
+
+	This function retrieves the address for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -333,7 +446,11 @@ function getAddress()
 
 		A String containing the Address of the User.  An empty String will be returned if no user is found.
 
+
+
 function getTelephone()
+
+	This function retrieves the telephone number for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -343,7 +460,11 @@ function getTelephone()
 
 		A String containing the Telephone number of the User.  An empty String will be returned if no user is found.
 
+
+
 function getFax()
+
+	This function retrieves the fax number for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -353,7 +474,11 @@ function getFax()
 
 		A String containing the Fax number of the User.  An empty String will be returned if no user is found.
 
+
+
 function getOfficeHours()
+
+	This function retrieves the office hours for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -363,7 +488,11 @@ function getOfficeHours()
 
 		A String containing the Office Hours of the User.  An empty String will be returned if no user is found.
 
+
+
 function getBiography()
+
+	This function retrieves the biography field for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -373,7 +502,11 @@ function getBiography()
 
 		A String containing the Biography of the User.  An empty String will be returned if no user is found.
 
+
+
 function getResearch()
+
+	This function retrieves the research field for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -383,7 +516,11 @@ function getResearch()
 
 		A String containing the user's Research.  An empty String will be returned if no user is found.
 
+
+
 function getPublications()
+
+	This function retrieves the publications field for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -393,7 +530,11 @@ function getPublications()
 
 		A String containing the user's publications.  An empty String will be returned if no user is found.
 
+
+
 function getPersonal()
+
+	This function retrieves the personal information field for the email specified. If no user exists with the given email, it returns an empty string.
 
 	Input
 
@@ -403,7 +544,25 @@ function getPersonal()
 
 		A String containing the user's personal information.  An empty String will be returned if no user is found.
 
+
+
+function getAwards()
+
+	This function retrieves the awards field for the email specified. If no user exists with the given email, it returns an empty string.
+
+	Input
+
+		String email - The Email of the User.
+
+	Output
+
+		A String containing the user's personal information.  An empty String will be returned if no user is found.
+
+
+
 function setImage()
+
+	This function saves a specified image path to the database and associates it with the given email.
 
 	Input
 
@@ -411,8 +570,12 @@ function setImage()
 		String email - The email of the user that will be linked to the image.
 
 	Output
+	
+	
 
 function getImage()
+
+	This function 
 
 	Input
 

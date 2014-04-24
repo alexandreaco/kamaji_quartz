@@ -136,8 +136,10 @@
 			
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='mymanage.php'>My Manage</a>
-					<a href='login.php?logout'>Logout</a></div>
+					<div id='login_btn'>
+						<a href='mymanage.php'>My Manage</a>
+						<a href='login.php?logout'>Logout</a>
+					</div>
 				</div>
 				<div class='content mysite'>";
 				
@@ -145,8 +147,10 @@
 			
 				$html = "<div id='container'>
 				<div id='header'>
-					<div id='login_btn'><a href='mysite.php'>View My Site</a>
-					<a href='login.php?logout'>Logout</a></div></div>
+					<div id='login_btn'>
+						<a href='mysite.php'>View My Site</a>
+						<a href='login.php?logout'>Logout</a>
+					</div>
 				</div>
 				<div class='content'>";
 			
