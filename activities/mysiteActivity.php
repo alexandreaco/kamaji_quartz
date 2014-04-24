@@ -7,9 +7,6 @@
 	 * 
 	 */
 
-
-	 include 'emailPhoto.php';
-
 	 class MySiteActivity {
  
 		// data members
