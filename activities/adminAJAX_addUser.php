@@ -1,15 +1,13 @@
 <?php
 
 	// model
-	 include 'model/model.php';
+	include_once '../model/model.php';
 
+	session_start();
 
 	$model = new Model();
 	
 // 	$model->addUser($_POST["email"], $_POST["status"])
 // $model->addRecentActivity($_SESSION["id"],"Added new valid email",date('n/j/Y'));
-	$model->addUser($_POST["email"])
-	
-	print (("Welcome to Quartz " . $_POST["email"]));
-
+	$model->addEmail($_POST["email"]);
 ?>

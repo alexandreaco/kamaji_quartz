@@ -32,7 +32,7 @@
 		cellX.className += 'x';
 	
 		// AJAX to add valid user
-		var sender = 'email=email&&status=status';
+		var sender = 'email=' + email + '&&status=' + status;
 		var xmlhttp;
 
 		if (window.XMLHttpRequest) {
@@ -40,16 +40,8 @@
 			xmlhttp=new XMLHttpRequest();
 
 		}
-
-		xmlhttp.onreadystatechange=function() {
 		
-			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			
-				document.getElementById('welcome_title').innerHTML=xmlhttp.responseText;
-			}
-		}
-		
-		xmlhttp.open('POST','localhost/kamaji_quartz/adminAJAX_addUser.php',true);
+		xmlhttp.open('POST','activities/adminAJAX_addUser.php',true);
 		xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 		xmlhttp.send(sender);
 	}
@@ -92,7 +84,7 @@
 			
 		}
 		
-		xmlhttp.open('POST','localhost/kamaji_quartz/adminAJAX_saveUsername.php',true);
+		xmlhttp.open('POST','http://localhost/kamaji_quartz/activities/adminAJAX_saveUsername.php',true);
 		xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 		xmlhttp.send(sender);
 	}

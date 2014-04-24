@@ -7,7 +7,6 @@
 	 * 
 	 */
 
-	 
 	 class AdminActivity {
 	 
 	 	// data members
@@ -36,7 +35,7 @@
 	 		$this->subfolder = $this->model->getSubfolder();
 
 			session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {		//[AA.001]
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {		//[AA.001]
 	 			header("Location: $this->server/$this->subfolder/login.php");
 			}
 			
@@ -127,6 +126,7 @@
 	 		while ($count < $this->numActiveUsers) {							//[AA.003]
 	 			
 	 			$email = $this->activeEmails[$count];
+
 	 			$last = "1/1/2000";												//[AA.004]
 	 			
 
@@ -186,20 +186,22 @@
 					</thead>
 					<tbody id='validUserTable'>";
 					
-			while ($count < $this->numValidUsers) {
+			foreach($this->validEmails as $email) {
 				
-				$email = $this->validEmails[$count];
+				// $email = $this->validEmails[$count];
 				//$status = $this->model->getStatus($email);
-				$status = "active";
-				
-				$this->validUserText .= "<tr>
-							<td class='email'>$email</td>
-							<td class='status'>$status</td>
-							<!-- Figure out how we are going to send the email -->
-							<td class='send'><a href='/Quartz/send_email.php' target='_blank'>send email</a></td>
-							<td class='x'><button type='submit' action='delete_email_from_valid_users()' class='link_lookalike'>x</button>
-						</tr>";
-				$count++;
+				if($email != "") {
+					$status = "active";
+					
+					$this->validUserText .= "<tr>
+								<td class='email'>$email</td>
+								<td class='status'>$status</td>
+								<!-- Figure out how we are going to send the email -->
+								<td class='send'><a href='/Quartz/send_email.php' target='_blank'>send email</a></td>
+								<td class='x'><button type='submit' action='delete_email_from_valid_users()' class='link_lookalike'>x</button>
+							</tr>";
+					$count++;
+				}
 			}
 				
 					
@@ -222,7 +224,6 @@
 		private function retrieveValidUsers() {
 			$allEmails = $this->model->getEmails();
 	 		$this->validEmails = explode(";", $allEmails); 
-	 		
 // 	 		$this->validEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
 // 	 		$this->numValidUsers = count($this->validEmails);
 		}
