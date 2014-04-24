@@ -909,6 +909,24 @@
 
 		    return $server;
 	    }
+
+		function getSubfolder(){
+			$file = "assets/info.txt";
+			$fh = fopen($file, "r");
+
+			$count = 0;
+			$subfolder = "";
+
+		    while (($line = fgets($fh)) !== false) {
+		       	if($count == 5) {
+		       		$subfolder = trim($line);
+		       		break;
+		       	}
+		       	$count += 1;
+		    }
+
+		    return $subfolder;
+	    }
 	}
 
 

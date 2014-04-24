@@ -13,11 +13,14 @@
 	 	var $id;
 		var $emptyFlag;
 	 	var $server;
+	 	var $subfolder;
 
 	 	function __construct() {
 	 		
 	 		$this->model = new Model();
 	 		$this->server = $this->model->getServer();
+	 		$this->subfolder = $this->model->getSubfolder();
+
 	 		$this->page = new Page("Register");
 
 	 		if(isset($_GET['activate'])) {			//[RA.001]
@@ -117,7 +120,7 @@
 
 				if($isValid == 1) {
 				} else if($isValid == 0){
-				  header("Location: $this->server/kamaji_quartz/login.php");
+				  header("Location: $this->server/$this->subfolder/login.php");
 				} 
 			}
 	 	}
@@ -160,7 +163,7 @@
 						complete the registration process");
 			}	else if ($this->context == "activating") {
 				print("Congratulations! You have succesfully registered for Quartz.  
-						<a href='$this->server/kamaji_quartz/login.php'>Click Here</a> to log in.");
+						<a href='$this->server/$this->subfolder/login.php'>Click Here</a> to log in.");
 			} 		
 	 		$this->page->endDoc();
 	 	}
@@ -170,7 +173,7 @@
 			$to = $_POST["givenEmail"];
     		$subject = "Quartz Registration Information";
     		$message = "Please click ";
-    		$message .= "<a href='$this->server/kamaji_quartz/register.php?activate=1&id=$id'>here</a>";
+    		$message .= "<a href='$this->server/$this->subfolder/register.php?activate=1&id=$id'>here</a>";
     		$message .= " to login.";
     		$header = "From: webmaster@quartz.com";
     		$header .= 'MIME-Version: 1.0' . "\r\n";

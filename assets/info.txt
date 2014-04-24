@@ -2,5 +2,5 @@ localhost
 0
 admin
 adminpass
-http://localhost:8888
-quartz_test
+http://localhost/
+kamaji_quartz

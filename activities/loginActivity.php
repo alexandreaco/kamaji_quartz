@@ -17,11 +17,15 @@
 	 	var $name;
 	 	var $password;
 	 	var $error;
+	 	var $server;
+	 	var $subfolder;
 	 
 	 	// constructor
 	 	function __construct() {
 	 		
 	 		$this->model = new Model();
+	 		$this->server = $this->model->getServer();
+	 		$this->subfolder = $this->model->getSubfolder();
 	 		$this->page = new Page("Login");
 	 		
 	 		if(isset($_POST['submit'])){
@@ -128,8 +132,8 @@
 			<br><br>
 			<input type='submit' name='submit' value='Log In'>
 			</form>
-			<a href='reset.php'>Forgot Password</a><br>
-			<a href='register.php'>Create Account</a><br>
+			<a href='$this->server/$this->subfolder/reset.php'>Forgot Password</a><br>
+			<a href='$this->server/$this->subfolder/register.php'>Create Account</a><br>
 			</div>");
 			
 	 		$this->page->endDoc();

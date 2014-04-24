@@ -29,21 +29,22 @@
 		
 		var $course1title;
 		var $course2title;
+		
 		var $server;
+		var $subfolder
 	 
 	 
 	 	// constructor
 	 	function __construct() {
 
-
-		 	
 	 		$this->model = new Model();
 	 		$this->server = $this->model->getServer();
+	 		$this->subfolder = $this->model->getSubfolder();
 
 	 		session_start();
 
 	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {
-	 			header("Location: $this->server/kamaji_quartz/login.php");
+	 			header("Location: $this->server/$this->subfolder/login.php");
 		 	}		
 
 	 		$this->page = new Page("My Manage");
@@ -350,7 +351,7 @@
 					}
 				}
 
-				xmlhttp.open('POST','$this->server/kamaji_quartz/activities/mymanageAJAXHelper.php',true);
+				xmlhttp.open('POST','$this->server/$this->subfolder/activities/mymanageAJAXHelper.php',true);
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(sender);
 				
