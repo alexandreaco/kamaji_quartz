@@ -11,8 +11,14 @@
 	class Model{
 
 		private function connect() {
-			$mysqli = new mysqli("localhost", "root","","dudebro");
 
+			$pass = $this->dudeBro();
+
+			if ($pass == '0'){
+				$mysqli = new mysqli("localhost", "root","","dudebro");
+			} else {
+				$mysqli = new mysqli("localhost", "root",$pass,"dudebro");
+			}
 			if ($mysqli->connect_error)
 			{
 				print("PHP unable to connect to MySQL server; error (" . $mysqli->connecterrno . "): "
@@ -404,6 +410,29 @@
 			$result = $mysqli->query($query);
 			$mysqli->close();	
 		}
+
+	    function dudeBro() {
+	    	if(file_exists("assets/info.txt")) {
+	    		$file = "assets/info.txt";
+	    	} else {
+	    		$file = "../assets/info.txt";
+	    	}
+				
+			$fh = fopen($file, "r");
+
+			$count = 0;
+			$server = "";
+
+		    while (($line = fgets($fh)) !== false) {
+		       	if($count == 1) {
+		       		$server = trim($line);
+		       		break;
+		       	}
+		       	$count += 1;
+		    }
+
+		    return $server;
+	    }
 
 		function setFax($email, $fax) {
 			$mysqli = $this->connect();
@@ -927,6 +956,8 @@
 
 		    return $subfolder;
 	    }
+
+
 	}
 
 

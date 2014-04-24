@@ -31,7 +31,7 @@
 		var $course2title;
 		
 		var $server;
-		var $subfolder
+		var $subfolder;
 	 
 	 
 	 	// constructor
