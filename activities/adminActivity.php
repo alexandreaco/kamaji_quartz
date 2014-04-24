@@ -216,7 +216,7 @@
 		// Model
 		private function retrieveValidUsers() {
 			$allEmails = $this->model->getEmails();
-	 		$this->validEmails = explode(";". $allEmails); 
+	 		$this->validEmails = explode(";", $allEmails); 
 	 		
 // 	 		$this->validEmails = array("email@gmail.com", "email2@gmail.com", "email3@gmail.com");
 // 	 		$this->numValidUsers = count($this->validEmails);
