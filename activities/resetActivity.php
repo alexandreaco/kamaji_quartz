@@ -197,7 +197,7 @@ function run()
     		$message .= "to reset your password.";
     		$header = "From: webmaster@quartz.com";
     		
-    		mail($to,$subject,$message, $header);
+    		@mail($to,$subject,$message, $header);
 	}
 }
 
