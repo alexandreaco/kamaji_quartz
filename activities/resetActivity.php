@@ -11,10 +11,13 @@ class resetActivity {
 		var $password1;
 	 	var $password2;
 	 	var $id;
+	 	var $server;
 
 function __construct()
 	{
 			$this->model = new Model();
+			$this->server = $this->model->getServer();
+
 			$this->page = new Page("Forgot Password");
 			
 			if (isset($_GET['activate'])) {
@@ -133,7 +136,7 @@ function show() {
 		
 	print("
 	Congratulations! You have succesfully changed your password.  
-		<a href='http://localhost:8888/kamaji_quartz/login.php'>Click Here</a> to log in.
+		<a href='$this->server/kamaji_quartz/login.php'>Click Here</a> to log in.
 	
 	");
 	}
@@ -193,7 +196,7 @@ function run()
 			$to = $_POST["email"];
     		$subject = "Quartz Forgot Password Information";
     		$message = "Please click ";
-    		$message .= "<a href='http://localhost:8888/kamaji_quartz/reset.php?activate=1&id=$id'>here</a>";
+    		$message .= "<a href='$this->server/kamaji_quartz/reset.php?activate=1&id=$id'>here</a>";
     		$message .= "to reset your password.";
     		$header = "From: webmaster@quartz.com";
     		

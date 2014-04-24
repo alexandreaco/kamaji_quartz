@@ -891,6 +891,24 @@
 				return $title;
 			}
 		}
+
+		function getServer(){
+			$file = "assets/info.txt";
+			$fh = fopen($file, "r");
+
+			$count = 0;
+			$server = "";
+
+		    while (($line = fgets($fh)) !== false) {
+		       	if($count == 4) {
+		       		$server = trim($line);
+		       		break;
+		       	}
+		       	$count += 1;
+		    }
+
+		    return $server;
+	    }
 	}
 
 

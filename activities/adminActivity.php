@@ -24,17 +24,19 @@
 	 	
 	 	var $recentActivityText;
 	 
+	 	var $server;
 	 
 	 	// constructor
 	 	function __construct() {
 	 		
-		session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
-	 			header('Location: http://localhost/kamaji_quartz/login.php');
-		 	}
-		 	// session_destroy();
 	 		$this->model = new Model();
-	 		
+	 		$this->server = $this->model->getServer();
+
+			session_start();
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10 < time()) {
+	 			header("Location: $this->server/kamaji_quartz/login.php");
+		 	}
+
 	 		$this->page = new Page("Admin Dashboard");
 	
 	 		

@@ -41,21 +41,24 @@
 		
 		// Personal View
 		var $personal;
+
+		var $server;
 		
  
 		// constructor
 		function __construct() {
-	 		session_start();
-	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {					//[MSA.001]
-	 			header('Location: http://localhost/kamaji_quartz/login.php');
-		 	}
-
 			$this->model = new Model();
-		
+			$this->server = $this->model->getServer();
 			$this->page = new Page("My Site");
 		
+	 		session_start();
+	 		if(!isset($_SESSION['timeout']) || $_SESSION['timeout'] + 10*60 < time()) {					//[MSA.001]
+	 			header("Location: $this->server/kamaji_quartz/login.php");
+		 	}
+
 			$this->context = "User is logged in, site page is open";
-		
+
+
 // Decide which page to show
 	 		if (isset ($_GET['home'])) {									//[MSA.002]
 

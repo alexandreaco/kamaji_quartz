@@ -17,7 +17,6 @@ $model->setTelephone($_SESSION["id"],$_POST["telephone"]);
 $model->setFax($_SESSION["id"],$_POST["fax"]);
 $model->setOfficeHours($_SESSION["id"],$_POST["officehours"]);
 $model->setBiography($_SESSION["id"],$_POST["biography"]);
-
 // $model->addRecentActivity($_SESSION["id"],"Edited site content",date('n/j/Y'));
 
 print (("Welcome, " . $_POST["user"]));		//[MMAH.002]
